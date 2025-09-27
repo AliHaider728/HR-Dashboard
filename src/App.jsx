@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route ,useLocation } from "react-router-dom";
 import { ThemeProvider } from "./components/layout/theme-provider.jsx";
 import { Toaster } from "./components/ui/toaster.jsx";
 import Layout from "./components/layout/Layout.jsx";
@@ -118,12 +118,17 @@ import CallHistory from "./pages/applications/call-history.jsx";
 import TaskBoard from "./pages/projects/TaskBoard.jsx";
 import NotesApp from "./pages/applications/NotesApp.jsx";
 import AnalyticsDashboard from "./pages/applications/Analytics.jsx";
-
+import { useEffect } from "react";
 
 
 function App() {
+ const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
   return (
-    <ThemeProvider defaultTheme="light" storageKey="smarthr-theme">
+    
+    <ThemeProvider defaultTheme="light">
       <Layout>
         <Routes>
           <Route path="/" element={<AdminDashboard />} />
