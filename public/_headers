@@ -1,0 +1,9 @@
+/*  
+  Content-Type: text/plain
+*/
+/assets/*.js
+  Content-Type: application/javascript
+/assets/*.jsx
+  Content-Type: application/javascript
+/assets/*.css
+  Content-Type: text/css

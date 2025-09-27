@@ -1,0 +1,155 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 210 40% 15%;
+  --card: 0 0% 100%;
+  --card-foreground: 210 40% 15%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 210 40% 15%;
+  /* Updated primary color to SmartHR orange theme */
+  --primary: 16 100% 60%;
+  --primary-foreground: 0 0% 100%;
+  /* Updated secondary colors to match SmartHR design */
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 210 40% 15%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+  /* Updated accent color to SmartHR orange */
+  --accent: 16 100% 60%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 32% 91%;
+  --input: 220 13% 91%;
+  /* Updated ring color to orange */
+  --ring: 16 100% 60%;
+  /* Updated chart colors to match SmartHR theme */
+  --chart-1: 16 100% 60%;
+  --chart-2: 210 100% 56%;
+  --chart-3: 142 76% 36%;
+  --chart-4: 262 83% 58%;
+  --chart-5: 43 96% 56%;
+  --radius: 0.5rem;
+  --sidebar: 0 0% 100%;
+  --sidebar-foreground: 210 40% 15%;
+  --sidebar-primary: 16 100% 60%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 16 100% 60%;
+  --sidebar-accent-foreground: 0 0% 100%;
+  --sidebar-border: 214 32% 91%;
+  --sidebar-ring: 16 100% 60%;
+}
+
+.dark {
+  --background: 210 40% 8%;
+  --foreground: 0 0% 95%;
+  --card: 210 40% 10%;
+  --card-foreground: 0 0% 95%;
+  --popover: 210 40% 8%;
+  --popover-foreground: 0 0% 95%;
+  --primary: 0 0% 95%;
+  --primary-foreground: 210 40% 15%;
+  --secondary: 210 40% 15%;
+  --secondary-foreground: 0 0% 95%;
+  --muted: 210 40% 15%;
+  --muted-foreground: 215 20% 65%;
+  --accent: 210 40% 15%;
+  --accent-foreground: 0 0% 95%;
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 0 85% 97%;
+  --border: 210 40% 15%;
+  --input: 210 40% 15%;
+  --ring: 262 83% 58%;
+  --chart-1: 220 70% 50%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 30 80% 55%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
+  --sidebar: 210 40% 12%;
+  --sidebar-foreground: 0 0% 95%;
+  --sidebar-primary: 262 83% 58%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 210 40% 15%;
+  --sidebar-accent-foreground: 0 0% 95%;
+  --sidebar-border: 210 40% 15%;
+  --sidebar-ring: 262 83% 58%;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: "Open Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+}
+
+.font-heading {
+  font-family: "Montserrat", sans-serif;
+}
+
+.font-body {
+  font-family: "Open Sans", sans-serif;
+}
+
+/* Added SmartHR specific utility classes */
+.text-orange-primary {
+  color: hsl(16 100% 60%);
+}
+
+.bg-orange-primary {
+  background-color: hsl(16 100% 60%);
+}
+
+.border-orange-primary {
+  border-color: hsl(16 100% 60%);
+}
+
+.text-blue-primary {
+  color: hsl(210 100% 56%);
+}
+
+.bg-blue-primary {
+  background-color: hsl(210 100% 56%);
+}
+
+.text-green-primary {
+  color: hsl(142 76% 36%);
+}
+
+.bg-green-primary {
+  background-color: hsl(142 76% 36%);
+}
+
+.text-purple-primary {
+  color: hsl(262 83% 58%);
+}
+
+.bg-purple-primary {
+  background-color: hsl(262 83% 58%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
