@@ -1,5 +1,4 @@
- 
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
@@ -33,7 +32,7 @@ export default function Header({ onMenuClick, sidebarCollapsed, onToggleSidebar 
   const { theme, setTheme } = useTheme()
 
   return (
-    <header className="sticky top-0 z-30  flex h-16 items-center gap-4 border-b bg-background px-4 lg:px-6">
+    <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-4 lg:px-6">
       {/* Mobile menu button */}
       <Button variant="ghost" size="icon" className="lg:hidden" onClick={onMenuClick}>
         <Menu className="h-5 w-5" />
@@ -55,22 +54,31 @@ export default function Header({ onMenuClick, sidebarCollapsed, onToggleSidebar 
       {/* Right side actions */}
       <div className="flex items-center gap-2">
         {/* Messages */}
-        <Button variant="ghost" size="icon" className="relative">
+        <NavLink
+          to="/chat"
+          className="relative inline-flex items-center justify-center h-10 w-10 rounded-full hover:bg-accent hover:text-accent-foreground transition-colors"
+        >
           <MessageSquare className="h-5 w-5" />
           <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs">3</Badge>
-        </Button>
+        </NavLink>
 
         {/* Email */}
-        <Button variant="ghost" size="icon" className="relative">
+        <NavLink
+          to="/email"
+          className="relative inline-flex items-center justify-center h-10 w-10 rounded-full hover:bg-accent hover:text-accent-foreground transition-colors"
+        >
           <Mail className="h-5 w-5" />
           <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs">7</Badge>
-        </Button>
+        </NavLink>
 
         {/* Notifications */}
-        <Button variant="ghost" size="icon" className="relative">
+        <NavLink
+          to="/calls/call-history"
+          className="relative inline-flex items-center justify-center h-10 w-10 rounded-full hover:bg-accent hover:text-accent-foreground transition-colors"
+        >
           <Bell className="h-5 w-5" />
           <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs">12</Badge>
-        </Button>
+        </NavLink>
 
         {/* Theme toggle */}
         <DropdownMenu>
@@ -121,7 +129,7 @@ export default function Header({ onMenuClick, sidebarCollapsed, onToggleSidebar 
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link to="/settings">
+              <Link to="/settings/website/appearance">
                 <Settings className="mr-2 h-4 w-4" />
                 Settings
               </Link>
