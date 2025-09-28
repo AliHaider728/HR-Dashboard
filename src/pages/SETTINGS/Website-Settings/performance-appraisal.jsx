@@ -227,7 +227,7 @@ const PerformanceAppraisal = () => {
           <div className="mb-8">
             <div className="flex items-center space-x-3 mb-4">
               <button 
-                onClick={() => navigate('/dashboard')}
+                onClick={() => navigate('/')}
                 className="text-gray-500 hover:text-gray-700"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
