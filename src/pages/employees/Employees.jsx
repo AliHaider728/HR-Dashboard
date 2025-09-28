@@ -147,9 +147,9 @@ export default function Employees() {
   const paginatedEmployees = filteredEmployees.slice(startIndex, startIndex + itemsPerPage)
 
   return (
-    <div className="space-y-6">
+    <div className="min-h-screen  p-3 sm:p-6">
       {/* Page Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mb-9">
         <div>
           <h1 className="text-2xl font-bold">Employee</h1>
           <p className="text-gray-600">Employee / Employee List</p>

@@ -739,14 +739,14 @@ export default function AdminDashboard() {
               <CardTitle className="text-xl font-bold text-gray-900">Employee Status</CardTitle>
               <CardDescription className="text-gray-600 mt-1">Current workforce distribution</CardDescription>
             </div>
-            <Link to="/employees">
+            <Link to="/EmployeesGrid">
               <Button variant="outline" size="sm" className="rounded-xl">
                 View All
               </Button>
             </Link>
           </CardHeader>
           <CardContent>
-            <div className="h-[200px] mb-6">
+            <div className="h-[260px] mb-6">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -1591,7 +1591,7 @@ export default function AdminDashboard() {
               <CardTitle className="text-xl font-bold text-gray-900">Schedules</CardTitle>
               <CardDescription className="text-gray-600 mt-1">Upcoming interviews</CardDescription>
             </div>
-            <Link to="/schedules">
+            <Link to="/shift-schedule">
               <Button variant="outline" size="sm" className="rounded-xl">
                 View All
               </Button>
@@ -1655,7 +1655,7 @@ export default function AdminDashboard() {
               <CardTitle className="text-xl font-bold text-gray-900">Recent Activities</CardTitle>
               <CardDescription className="text-gray-600 mt-1">Latest updates</CardDescription>
             </div>
-            <Link to="/activities">
+            <Link to="/help/activities">
               <Button variant="outline" size="sm" className="rounded-xl">
                 View All
               </Button>
@@ -1700,11 +1700,7 @@ export default function AdminDashboard() {
               <CardTitle className="text-xl font-bold text-gray-900">Birthdays</CardTitle>
               <CardDescription className="text-gray-600 mt-1">Upcoming celebrations</CardDescription>
             </div>
-            <Link to="/birthdays">
-              <Button variant="outline" size="sm" className="rounded-xl">
-                View All
-              </Button>
-            </Link>
+            
           </CardHeader>
           <CardContent>
             <div className="space-y-3">

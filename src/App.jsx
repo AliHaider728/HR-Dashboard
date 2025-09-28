@@ -120,7 +120,7 @@ import NotesApp from "./pages/applications/NotesApp.jsx";
 import AnalyticsDashboard from "./pages/applications/Analytics.jsx";
 import { useEffect } from "react";
 import ScheduleTiming from "./pages/HRM/ScheduleTiming.jsx";
-import LeavesEmployee from "./pages/HRM/leaveRequests.jsx";
+import LeaveManagement from "./pages/HRM/leaveRequests.jsx";
 
 
 function App() {
@@ -187,7 +187,7 @@ function App() {
           <Route path="/training/trainers" element={<Trainers/>} />
           <Route path="/training/types" element={<TrainingType/>} />
           <Route path="/shift-schedule" element={<ScheduleTiming/>} />
-          <Route path="/attendance/leaves/employee" element={<LeavesEmployee />} />
+          <Route path="/attendance/leaves/employee" element={<LeaveManagement />} />
           
 
 
