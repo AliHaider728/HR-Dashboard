@@ -1,4 +1,4 @@
- import { useState } from "react"
+import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -70,7 +70,7 @@ const initialTodos = [
 
 const statuses = ["All", "Completed", "Inprogress", "Pending", "Onhold"]
 const categories = ["All", "Projects", "Internal", "Reminder", "Social"]
-const priorities = ["", "Low", "Medium", "High"]
+const priorities = ["None", "Low", "Medium", "High"]
 
 export default function Todo() {
   const [todos, setTodos] = useState(initialTodos)
@@ -84,7 +84,7 @@ export default function Todo() {
     dueDate: "",
     category: "",
     status: "",
-    priority: "",
+    priority: "None",
     priorityCount: "",
   })
   const [editingTodo, setEditingTodo] = useState(null)
@@ -95,7 +95,7 @@ export default function Todo() {
       case "Completed":
         return "bg-green-100 text-green-800"
       case "Inprogress":
-        return "bg-blue-100 text-blue-800"
+        return "bg-orange-100 text-orange-800"
       case "Pending":
         return "bg-yellow-100 text-yellow-800"
       case "Onhold":
@@ -130,6 +130,8 @@ export default function Todo() {
     const todo = {
       id: Date.now(),
       ...newTodo,
+      priority: newTodo.priority === "None" ? undefined : newTodo.priority,
+      priorityCount: newTodo.priorityCount || undefined,
     }
     setTodos([...todos, todo])
     setNewTodo({
@@ -137,7 +139,7 @@ export default function Todo() {
       dueDate: "",
       category: "",
       status: "",
-      priority: "",
+      priority: "None",
       priorityCount: "",
     })
     setError("")
@@ -175,16 +177,29 @@ export default function Todo() {
   const completedTasks = todos.filter((t) => t.status === "Completed").length
 
   return (
-    <div className="min-h-screen  p-4 sm:p-6">
+    <div className="min-h-screen p-4 sm:p-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Todo</h1>
           <p className="text-sm text-gray-600">Manage your tasks and reminders</p>
         </div>
-        <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
+        <Dialog open={isAddDialogOpen} onOpenChange={(open) => {
+          setIsAddDialogOpen(open)
+          if (!open) {
+            setError("")
+            setNewTodo({
+              title: "",
+              dueDate: "",
+              category: "",
+              status: "",
+              priority: "None",
+              priorityCount: "",
+            })
+          }
+        }}>
           <DialogTrigger asChild>
-            <Button className="bg-blue-600 hover:bg-blue-700">
+            <Button className="bg-orange-600 hover:bg-orange-700">
               <Plus className="mr-2 h-4 w-4" />
               Add Todo
             </Button>
@@ -279,7 +294,7 @@ export default function Todo() {
                   <SelectContent>
                     {priorities.map((priority) => (
                       <SelectItem key={priority} value={priority}>
-                        {priority || "None"}
+                        {priority}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -299,7 +314,7 @@ export default function Todo() {
               </div>
             </div>
             <DialogFooter>
-              <Button onClick={handleAddTodo} className="bg-blue-600 hover:bg-blue-700">
+              <Button onClick={handleAddTodo} className="bg-orange-600 hover:bg-orange-700">
                 Add Todo
               </Button>
             </DialogFooter>
@@ -312,7 +327,7 @@ export default function Todo() {
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-lg font-semibold text-gray-800 flex items-center">
             Total Todo
-            <Badge className="ml-2 bg-blue-600 hover:bg-blue-600">+1</Badge>
+            <Badge className="ml-2 bg-orange-600 hover:bg-orange-600">+1</Badge>
           </CardTitle>
           <CheckCircle className="h-6 w-6 text-gray-500" />
         </CardHeader>
@@ -419,6 +434,7 @@ export default function Todo() {
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem onClick={() => {
                         setEditingTodo({ ...todo })
+                        setError("")
                         setIsEditDialogOpen(true)
                       }}>
                         <Edit className="mr-2 h-4 w-4" />
@@ -444,7 +460,13 @@ export default function Todo() {
       </div>
 
       {/* Edit Dialog */}
-      <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+      <Dialog open={isEditDialogOpen} onOpenChange={(open) => {
+        setIsEditDialogOpen(open)
+        if (!open) {
+          setError("")
+          setEditingTodo(null)
+        }
+      }}>
         <DialogContent className="max-w-[90vw] sm:max-w-lg">
           <DialogHeader>
             <DialogTitle>Edit Todo</DialogTitle>
@@ -557,7 +579,7 @@ export default function Todo() {
             </div>
           )}
           <DialogFooter>
-            <Button onClick={handleEditTodo} className="bg-blue-600 hover:bg-blue-700">
+            <Button onClick={handleEditTodo} className="bg-orange-600 hover:bg-orange-700">
               Update Todo
             </Button>
           </DialogFooter>

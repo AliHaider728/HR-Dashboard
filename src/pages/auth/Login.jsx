@@ -129,12 +129,9 @@ const Login = ({ setIsAuthenticated }) => {
       <div className="flex-1 flex flex-col justify-center px-8 sm:px-12 lg:px-16 bg-white">
         <div className="w-full max-w-md mx-auto">
           {/* Logo */}
-          <div className="flex items-center justify-center mb-8 lg:hidden">
+          <div className="lg:flex md:flex items-center justify-center mb-8 mt-3 hidden">
             <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold">S</span>
-              </div>
-              <span className="text-2xl font-bold text-gray-800">SmartHR</span>
+               <img src="https://smarthr.co.in/demo/html/template/assets/img/logo.svg" alt="" className="logo " />
             </div>
           </div>
 
@@ -354,7 +351,7 @@ const Login = ({ setIsAuthenticated }) => {
         </div>
         
         {/* Shiny Text */}
-        <div className="flex justify-center">
+        <div className="flex justify-center mb-3">
           <span className="text-center mt-9 items-center shiny-text">
             Powered By TecnoSphere
           </span>

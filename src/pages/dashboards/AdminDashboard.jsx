@@ -604,7 +604,7 @@ export default function AdminDashboard() {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mt-4 lg:mt-0">
           <Button
             variant="outline"
-            className="flex items-center justify-center gap-2 h-12 px-6 rounded-xl border-gray-200 hover:bg-gray-50 transition-all duration-300"
+            className="flex items-center justify-center gap-2 h-12 px-6 rounded-xl border-gray-200 hover:text-black hover:bg-gray-50 transition-all duration-300"
             onClick={() => setShowAddProject(true)}
           >
             <Plus className="h-4 w-4" />
