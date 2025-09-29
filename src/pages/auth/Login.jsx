@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import SplashCursor from "../../components/layout/SplashCursor";
 
 const Login = ({ setIsAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const Login = ({ setIsAuthenticated }) => {
   });
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -40,6 +42,9 @@ const Login = ({ setIsAuthenticated }) => {
   };
 
   return (
+
+    <>
+    <SplashCursor/>
     <div className="min-h-screen flex">
       {/* Left Side - Enhanced Branding with Animated Balls */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-orange-500 to-red-600 relative overflow-hidden">
@@ -519,6 +524,7 @@ const Login = ({ setIsAuthenticated }) => {
         </style>
       </div>
     </div>
+    </>
   );
 };
 

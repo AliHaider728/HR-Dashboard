@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import SplashCursor from "../../components/layout/SplashCursor"
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -43,6 +44,8 @@ const Register = () => {
   }
 
   return (
+    <>
+    <SplashCursor/>
     <div className="min-h-screen flex">
       {/* Left Side - Branding */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-orange-500 to-red-600 relative overflow-hidden">
@@ -438,6 +441,7 @@ const Register = () => {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

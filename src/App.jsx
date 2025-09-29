@@ -128,6 +128,7 @@ import NotesApp from "./pages/applications/NotesApp.jsx";
 import AnalyticsDashboard from "./pages/applications/Analytics.jsx";
 import ScheduleTiming from "./pages/HRM/ScheduleTiming.jsx";
 import LeaveManagement from "./pages/HRM/leaveRequests.jsx";
+ 
 
 function App() {
   const location = useLocation();
@@ -159,6 +160,7 @@ function App() {
     <ThemeProvider defaultTheme="light">
       <Routes>
         {/* Authentication Routes */}
+        
         <Route
           path="/login"
           element={
