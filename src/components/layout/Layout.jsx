@@ -1,18 +1,17 @@
- 
-import { useState } from "react"
-import Sidebar from "./Sidebar"
-import Header from "./Header"
-import { cn } from "../../lib/utils"
+import { useState } from "react";
+import Sidebar from "./Sidebar";
+import Header from "./Header";
+import { cn } from "../../lib/utils";
 
-export default function Layout({ children }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+export default function Layout({ children, setIsAuthenticated }) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
-    <div className="min-h-screen  bg-background">
+    <div className="min-h-screen bg-background">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
-        <div className="fixed   inset-0 z-40 bg-black/50 lg:hidden" onClick={() => setSidebarOpen(false)} />
+        <div className="fixed inset-0 z-40 bg-black/50 lg:hidden" onClick={() => setSidebarOpen(false)} />
       )}
 
       {/* Sidebar */}
@@ -29,9 +28,10 @@ export default function Layout({ children }) {
           onMenuClick={() => setSidebarOpen(true)}
           sidebarCollapsed={sidebarCollapsed}
           onToggleSidebar={() => setSidebarCollapsed(!sidebarCollapsed)}
+          setIsAuthenticated={setIsAuthenticated}
         />
-        <main className="flex-1 p-0 lg:p-0  ">{children}</main>
+        <main className="flex-1 p-0 lg:p-0">{children}</main>
       </div>
     </div>
-  )
+  );
 }

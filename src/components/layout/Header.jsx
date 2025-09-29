@@ -1,7 +1,7 @@
-import { Link, NavLink } from "react-router-dom"
-import { Button } from "../ui/button"
-import { Input } from "../ui/input"
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
+import { Link, NavLink } from "react-router-dom";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,9 +9,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu"
-import { Badge } from "../ui/badge"
-import { useTheme } from "../layout/theme-provider"
+} from "../ui/dropdown-menu";
+import { Badge } from "../ui/badge";
+import { useTheme } from "../layout/theme-provider";
 import {
   Menu,
   Search,
@@ -26,10 +26,26 @@ import {
   ChevronRight,
   MessageSquare,
   Mail,
-} from "lucide-react"
+} from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-export default function Header({ onMenuClick, sidebarCollapsed, onToggleSidebar }) {
-  const { theme, setTheme } = useTheme()
+export default function Header({ onMenuClick, sidebarCollapsed, onToggleSidebar, setIsAuthenticated }) {
+  const { theme, setTheme } = useTheme();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    try {
+      console.log("Logging out..."); // Debug
+      localStorage.removeItem("authToken");
+      console.log("authToken removed:", localStorage.getItem("authToken")); // Debug
+      setIsAuthenticated(false);
+      console.log("isAuthenticated set to false"); // Debug
+      navigate("/login", { replace: true });
+      console.log("Navigated to /login"); // Debug
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
 
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-4 lg:px-6">
@@ -43,7 +59,7 @@ export default function Header({ onMenuClick, sidebarCollapsed, onToggleSidebar 
         {sidebarCollapsed ? <ChevronRight className="h-5 w-5" /> : <ChevronLeft className="h-5 w-5" />}
       </Button>
 
-      {/* Search */}
+     <div className="  flex md:justify-between md:w-full w-auto"> {/* Search */}
       <div className="flex-1 max-w-md">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -135,13 +151,13 @@ export default function Header({ onMenuClick, sidebarCollapsed, onToggleSidebar 
               </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>
               <LogOut className="mr-2 h-4 w-4" />
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      </div>
+      </div></div>
     </header>
-  )
+  );
 }
