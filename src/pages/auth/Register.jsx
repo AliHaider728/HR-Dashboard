@@ -13,7 +13,6 @@ const Register = () => {
     company: "",
     phone: "",
     agreeToTerms: false,
-    
   })
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
@@ -47,14 +46,68 @@ const Register = () => {
     <div className="min-h-screen flex">
       {/* Left Side - Branding */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-orange-500 to-red-600 relative overflow-hidden">
-        <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url("https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg")',
+          }}
+        ></div>
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/80 to-red-600/80"></div>
+
+        {/* Additional Dark Overlay */}
+        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+
+        {/* Animated Elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Bouncing Balls */}
+          <div className="absolute top-10 right-20 w-32 h-32 bg-red-400 rounded-full opacity-30 animate-bouncing-ball-1"></div>
+          <div className="absolute bottom-20 left-10 w-24 h-24 bg-orange-300 rounded-full opacity-40 animate-bouncing-ball-2"></div>
+          <div className="absolute top-1/2 right-16 w-20 h-20 bg-white rounded-full opacity-25 animate-bouncing-ball-3"></div>
+          <div className="absolute top-16 left-20 w-16 h-16 bg-orange-400 rounded-full opacity-35 animate-bouncing-ball-4"></div>
+          <div className="absolute bottom-24 right-1/4 w-28 h-28 bg-purple-400 rounded-full opacity-30 animate-bouncing-ball-5"></div>
+
+          {/* Rain Effects */}
+          <div
+            className="absolute top-0 left-1/5 w-px h-20 bg-gradient-to-b from-transparent via-white/40 to-transparent animate-rain"
+          ></div>
+          <div
+            className="absolute top-0 left-2/5 w-px h-24 bg-gradient-to-b from-transparent via-white/30 to-transparent animate-rain"
+            style={{ animationDelay: "0.2s" }}
+          ></div>
+          <div
+            className="absolute top-0 left-3/5 w-px h-16 bg-gradient-to-b from-transparent via-white/35 to-transparent animate-rain"
+            style={{ animationDelay: "0.4s" }}
+          ></div>
+          <div
+            className="absolute top-0 right-2/5 w-px h-20 bg-gradient-to-b from-transparent via-white/40 to-transparent animate-rain"
+            style={{ animationDelay: "0.6s" }}
+          ></div>
+          <div
+            className="absolute top-0 right-1/5 w-px h-18 bg-gradient-to-b from-transparent via-white/30 to-transparent animate-rain"
+            style={{ animationDelay: "0.8s" }}
+          ></div>
+          <div
+            className="absolute top-0 left-1/3 w-px h-22 bg-gradient-to-b from-transparent via-white/35 to-transparent animate-rain"
+            style={{ animationDelay: "1.0s" }}
+          ></div>
+          <div
+            className="absolute top-0 right-1/3 w-px h-20 bg-gradient-to-b from-transparent via-white/40 to-transparent animate-rain"
+            style={{ animationDelay: "1.2s" }}
+          ></div>
+        </div>
+
+        {/* Branding Content */}
         <div className="relative z-10 flex flex-col justify-center px-12 text-white">
           <div className="max-w-md">
-            <h1 className="text-4xl font-bold mb-6 text-balance">Join thousands of companies using SmartHR</h1>
+            <h1 className="text-4xl font-bold mb-6 text-balance">
+              Join thousands of companies using SmartHR
+            </h1>
             <p className="text-xl mb-8 text-orange-100 text-pretty">
               Start managing your workforce efficiently with our comprehensive HR solution.
             </p>
-
             <div className="bg-white bg-opacity-10 rounded-2xl p-8 backdrop-blur-sm border border-white border-opacity-20">
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
@@ -63,6 +116,7 @@ const Register = () => {
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
                       />
                     </svg>
                   </div>
@@ -74,6 +128,7 @@ const Register = () => {
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
                       />
                     </svg>
                   </div>
@@ -85,6 +140,7 @@ const Register = () => {
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
                       />
                     </svg>
                   </div>
@@ -94,6 +150,61 @@ const Register = () => {
             </div>
           </div>
         </div>
+
+        {/* CSS Animations */}
+        <style jsx>{`
+          @keyframes bouncing-ball-1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -30px); }
+          }
+          @keyframes bouncing-ball-2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-15px, 25px); }
+          }
+          @keyframes bouncing-ball-3 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(10px, -20px); }
+          }
+          @keyframes bouncing-ball-4 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-25px, 15px); }
+          }
+          @keyframes bouncing-ball-5 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -25px); }
+          }
+          @keyframes rain {
+            0% {
+              transform: translateY(-100%);
+              opacity: 0;
+            }
+            50% {
+              opacity: 1;
+            }
+            100% {
+              transform: translateY(100vh);
+              opacity: 0;
+            }
+          }
+          .animate-bouncing-ball-1 {
+            animation: bouncing-ball-1 6s ease-in-out infinite;
+          }
+          .animate-bouncing-ball-2 {
+            animation: bouncing-ball-2 5s ease-in-out infinite;
+          }
+          .animate-bouncing-ball-3 {
+            animation: bouncing-ball-3 7s ease-in-out infinite;
+          }
+          .animate-bouncing-ball-4 {
+            animation: bouncing-ball-4 4.5s ease-in-out infinite;
+          }
+          .animate-bouncing-ball-5 {
+            animation: bouncing-ball-5 5.5s ease-in-out infinite;
+          }
+          .animate-rain {
+            animation: rain 2s linear infinite;
+          }
+        `}</style>
       </div>
 
       {/* Right Side - Register Form */}

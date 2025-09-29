@@ -60,7 +60,7 @@ const Login = ({ setIsAuthenticated }) => {
         {/* Animated Bouncing Balls */}
         <div className="absolute inset-0">
           {/* Ball 1 - Top Right */}
-          <div className="absolute w-32 h-32 bg-yellow-400 rounded-full opacity-30 bouncing-ball-1"></div>
+          <div className="absolute w-32 h-32 bg-red-400 rounded-full opacity-30 bouncing-ball-1"></div>
           
           {/* Ball 2 - Bottom Left */}
           <div className="absolute w-24 h-24 bg-orange-300 rounded-full opacity-40 bouncing-ball-2"></div>
@@ -69,7 +69,7 @@ const Login = ({ setIsAuthenticated }) => {
           <div className="absolute w-20 h-20 bg-white rounded-full opacity-25 bouncing-ball-3"></div>
           
           {/* Ball 4 - Top Left */}
-          <div className="absolute w-16 h-16 bg-pink-400 rounded-full opacity-35 bouncing-ball-4"></div>
+          <div className="absolute w-16 h-16 bg-orange-400 rounded-full opacity-35 bouncing-ball-4"></div>
           
           {/* Ball 5 - Bottom Right */}
           <div className="absolute w-28 h-28 bg-purple-400 rounded-full opacity-30 bouncing-ball-5"></div>
@@ -130,7 +130,7 @@ const Login = ({ setIsAuthenticated }) => {
         <div className="w-full max-w-md mx-auto">
           {/* Logo */}
           <div className="lg:flex md:flex items-center justify-center mb-8 mt-3 hidden">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center ">
                <img src="https://smarthr.co.in/demo/html/template/assets/img/logo.svg" alt="" className="logo " />
             </div>
           </div>

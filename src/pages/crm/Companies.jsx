@@ -239,7 +239,7 @@ export default function Companies() {
   const totalEmployees = companies.reduce((sum, c) => sum + c.employees, 0)
 
   return (
-    <div className="mt-3 space-y-6 px-4 sm:px-6 lg:px-8 max-w-8xl mx-auto">
+    <div className="mt-3 space-y-6 px-4 sm:px-6 lg:px-8 max-w-full mx-auto">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
