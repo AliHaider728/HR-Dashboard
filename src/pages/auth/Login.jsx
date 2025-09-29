@@ -27,7 +27,7 @@ const Login = ({ setIsAuthenticated }) => {
 
     // Simulate API call
     setTimeout(() => {
-      localStorage.setItem("authToken", "dummy-token");
+      // localStorage.setItem("authToken", "dummy-token");
       setIsAuthenticated(true);
       navigate("/dashboard");
       setLoading(false);
@@ -41,9 +41,40 @@ const Login = ({ setIsAuthenticated }) => {
 
   return (
     <div className="min-h-screen flex">
-      {/* Left Side - Branding */}
+      {/* Left Side - Enhanced Branding with Animated Balls */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-orange-500 to-red-600 relative overflow-hidden">
-        <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url("https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg")'
+          }}
+        ></div>
+        
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/80 to-red-600/80"></div>
+        
+        {/* Additional Dark Overlay */}
+        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+
+        {/* Animated Bouncing Balls */}
+        <div className="absolute inset-0">
+          {/* Ball 1 - Top Right */}
+          <div className="absolute w-32 h-32 bg-yellow-400 rounded-full opacity-30 bouncing-ball-1"></div>
+          
+          {/* Ball 2 - Bottom Left */}
+          <div className="absolute w-24 h-24 bg-orange-300 rounded-full opacity-40 bouncing-ball-2"></div>
+          
+          {/* Ball 3 - Middle Right */}
+          <div className="absolute w-20 h-20 bg-white rounded-full opacity-25 bouncing-ball-3"></div>
+          
+          {/* Ball 4 - Top Left */}
+          <div className="absolute w-16 h-16 bg-pink-400 rounded-full opacity-35 bouncing-ball-4"></div>
+          
+          {/* Ball 5 - Bottom Right */}
+          <div className="absolute w-28 h-28 bg-purple-400 rounded-full opacity-30 bouncing-ball-5"></div>
+        </div>
+
         <div className="relative z-10 flex flex-col justify-center px-12 text-white">
           <div className="max-w-md ">
             <h1 className="text-4xl font-bold mb-6 text-balance">
@@ -92,10 +123,6 @@ const Login = ({ setIsAuthenticated }) => {
             </div>
           </div>
         </div>
-
-        {/* Decorative elements */}
-        <div className="absolute top-20 right-20 w-32 h-32 bg-yellow-400 rounded-full opacity-20"></div>
-        <div className="absolute bottom-20 left-20 w-24 h-24 bg-orange-300 rounded-full opacity-30"></div>
       </div>
 
       {/* Right Side - Login Form */}
@@ -325,29 +352,30 @@ const Login = ({ setIsAuthenticated }) => {
             </div>
           </form>
         </div>
+        
         {/* Shiny Text */}
         <div className="flex justify-center">
-          <span className="text-center   mt-9 items-center shiny-text">
+          <span className="text-center mt-9 items-center shiny-text">
             Powered By TecnoSphere
           </span>
         </div>
-        {/* CSS for scrollbar and shiny text animation */}
+        
+        {/* CSS for animations */}
         <style>
-          
-          {`/* Base black text */
+          {`
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Emilys+Candy&family=Gravitas+One&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
+/* Shiny text animation */
 .shiny-text {
   position: relative;
   display: inline-block;
-    font-family: "Josefin Sans", sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   font-optical-sizing: auto;
-  font-weight: <weight>;
+  font-weight: 400;
   font-style: normal;   
   overflow: hidden;
 }
 
-/* moving white gradient overlay */
 .shiny-text::after {
   content: "";
   position: absolute;
@@ -369,17 +397,122 @@ const Login = ({ setIsAuthenticated }) => {
   100% { left: 150%; }
 }
 
-/* Optional dark mode tweak */
-.dark .shiny-text::after {
-  background: linear-gradient(
-    90deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.5) 50%,
-    rgba(255,255,255,0) 100%
-  );
+/* Bouncing Ball Animations */
+.bouncing-ball-1 {
+  top: 10%;
+  right: 10%;
+  animation: bounce1 4s ease-in-out infinite;
 }
 
-/* Responsive font size */
+.bouncing-ball-2 {
+  bottom: 15%;
+  left: 15%;
+  animation: bounce2 3.5s ease-in-out infinite;
+}
+
+.bouncing-ball-3 {
+  top: 45%;
+  right: 5%;
+  animation: bounce3 5s ease-in-out infinite;
+}
+
+.bouncing-ball-4 {
+  top: 20%;
+  left: 10%;
+  animation: bounce4 3s ease-in-out infinite;
+}
+
+.bouncing-ball-5 {
+  bottom: 10%;
+  right: 20%;
+  animation: bounce5 4.5s ease-in-out infinite;
+}
+
+/* Bounce animations with opacity changes */
+@keyframes bounce1 {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px); 
+    opacity: 0.3;
+  }
+  25% { 
+    transform: translateY(-30px) translateX(-20px); 
+    opacity: 0.6;
+  }
+  50% { 
+    transform: translateY(0px) translateX(-40px); 
+    opacity: 0.3;
+  }
+  75% { 
+    transform: translateY(-20px) translateX(-20px); 
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce2 {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px); 
+    opacity: 0.4;
+  }
+  30% { 
+    transform: translateY(-40px) translateX(30px); 
+    opacity: 0.7;
+  }
+  60% { 
+    transform: translateY(-10px) translateX(50px); 
+    opacity: 0.4;
+  }
+  80% { 
+    transform: translateY(-25px) translateX(25px); 
+    opacity: 0.6;
+  }
+}
+
+@keyframes bounce3 {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px); 
+    opacity: 0.25;
+  }
+  40% { 
+    transform: translateY(-50px) translateX(-30px); 
+    opacity: 0.55;
+  }
+  70% { 
+    transform: translateY(-20px) translateX(-60px); 
+    opacity: 0.25;
+  }
+}
+
+@keyframes bounce4 {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px); 
+    opacity: 0.35;
+  }
+  50% { 
+    transform: translateY(-35px) translateX(40px); 
+    opacity: 0.65;
+  }
+}
+
+@keyframes bounce5 {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px); 
+    opacity: 0.3;
+  }
+  20% { 
+    transform: translateY(-25px) translateX(-35px); 
+    opacity: 0.6;
+  }
+  60% { 
+    transform: translateY(-45px) translateX(-15px); 
+    opacity: 0.3;
+  }
+  85% { 
+    transform: translateY(-15px) translateX(-25px); 
+    opacity: 0.5;
+  }
+}
+
+/* Responsive adjustments */
 @media (max-width: 640px) {
   .shiny-text {
     font-size: 0.9rem;
