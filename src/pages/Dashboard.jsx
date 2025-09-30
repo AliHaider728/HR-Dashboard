@@ -238,7 +238,7 @@ export default function Dashboard() {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{stat.value}</div>
+                  <div className="text-2xl font-bold">{stat.value}</div>
                 <div className="flex items-center text-xs text-muted-foreground">
                   {stat.trend === "up" ? (
                     <TrendingUp className="mr-1 h-3 w-3 text-green-500" />

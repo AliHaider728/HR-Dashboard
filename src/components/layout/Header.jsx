@@ -75,7 +75,7 @@ export default function Header({ onMenuClick, sidebarCollapsed, onToggleSidebar,
           className="relative inline-flex items-center justify-center h-10 w-10 rounded-full hover:bg-accent hover:text-accent-foreground transition-colors"
         >
           <MessageSquare className="h-5 w-5" />
-          <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs">3</Badge>
+          <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs"><span className="ml-1">3</span></Badge>
         </NavLink>
 
         {/* Email */}
@@ -84,7 +84,7 @@ export default function Header({ onMenuClick, sidebarCollapsed, onToggleSidebar,
           className="relative inline-flex items-center justify-center h-10 w-10 rounded-full hover:bg-accent hover:text-accent-foreground transition-colors"
         >
           <Mail className="h-5 w-5" />
-          <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs">7</Badge>
+          <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs"><span className="ml-1" >7</span></Badge>
         </NavLink>
 
         {/* Notifications */}
@@ -93,7 +93,7 @@ export default function Header({ onMenuClick, sidebarCollapsed, onToggleSidebar,
           className="relative inline-flex items-center justify-center h-10 w-10 rounded-full hover:bg-accent hover:text-accent-foreground transition-colors"
         >
           <Bell className="h-5 w-5" />
-          <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs">12</Badge>
+          <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs"><span className="ml-0.7 " >13</span></Badge>
         </NavLink>
 
         {/* Theme toggle */}
