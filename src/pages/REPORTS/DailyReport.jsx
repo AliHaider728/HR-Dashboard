@@ -413,7 +413,7 @@ const DailyReport = () => {
                   <Activity className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-blue-600" />
                   Task Progress Overview
                 </CardTitle>
- Eighth
+               Eighth
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={250} className="min-h-[200px] sm:min-h-[300px]">
