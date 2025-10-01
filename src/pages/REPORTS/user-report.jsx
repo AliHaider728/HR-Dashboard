@@ -122,7 +122,7 @@ const UserReportDashboard = () => {
   const getRoleColor = (role) => {
     switch (role) {
       case 'Admin': return 'text-purple-600 bg-purple-100';
-      case 'Manager': return 'text-blue-600 bg-blue-100';
+      case 'Manager': return 'text-orange-600 bg-orange-100';
       case 'HR': return 'text-green-600 bg-green-100';
       case 'Team Lead': return 'text-orange-600 bg-orange-100';
       case 'Employee': return 'text-gray-600 bg-gray-100';
@@ -379,7 +379,7 @@ const UserReportDashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-7xl mx-auto space-y-6">
+      <div className="max-w-full mx-auto space-y-6">
         {/* Header with Actions */}
         <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
@@ -388,18 +388,10 @@ const UserReportDashboard = () => {
               <p className="text-gray-600">Monitor user activities, registrations, and system usage</p>
             </div>
             <div className="flex space-x-3">
-              <button
-                onClick={handleRefresh}
-                disabled={refreshing}
-                className="flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 disabled:opacity-50"
-              >
-                <RefreshCw className={`w-4 h-4 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
-                Refresh
-              </button>
-              <div className="relative">
+               <div className="relative">
                 <button
                   onClick={() => setShowBulkActions(!showBulkActions)}
-                  className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                  className="flex items-center px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
                 >
                   <Download className="w-4 h-4 mr-2" />
                   Export
@@ -480,7 +472,7 @@ const UserReportDashboard = () => {
                       onClick={() => setSelectedChart(type)}
                       className={`px-3 py-1 text-sm rounded-md capitalize transition-colors ${
                         selectedChart === type
-                          ? 'bg-blue-500 text-white'
+                          ? 'bg-orange-500 text-white'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
@@ -554,7 +546,7 @@ const UserReportDashboard = () => {
                 <input
                   type="text"
                   placeholder="Search users..."
-                  className="pl-10 pr-4 py-2 border rounded-lg text-sm w-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="pl-10 pr-4 py-2 border rounded-lg text-sm w-full focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   value={searchTerm}
                   onChange={(e) => {
                     setSearchTerm(e.target.value);
@@ -564,7 +556,7 @@ const UserReportDashboard = () => {
               </div>
               
               <select 
-                className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 value={statusFilter}
                 onChange={(e) => {
                   setStatusFilter(e.target.value);
@@ -578,7 +570,7 @@ const UserReportDashboard = () => {
               </select>
 
               <select 
-                className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 value={roleFilter}
                 onChange={(e) => {
                   setRoleFilter(e.target.value);
@@ -594,7 +586,7 @@ const UserReportDashboard = () => {
               </select>
 
               <select 
-                className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 value={departmentFilter}
                 onChange={(e) => {
                   setDepartmentFilter(e.target.value);
@@ -612,7 +604,7 @@ const UserReportDashboard = () => {
               </select>
 
               <select 
-                className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 value={dateFilter}
                 onChange={(e) => {
                   setDateFilter(e.target.value);
@@ -651,10 +643,10 @@ const UserReportDashboard = () => {
 
         {/* Bulk Actions */}
         {selectedUsers.length > 0 && (
-          <Card className="bg-blue-50 border-blue-200">
+          <Card className="bg-orange-50 border-orange-200">
             <CardContent className="py-4">
               <div className="flex items-center justify-between">
-                <div className="flex items-center text-blue-700">
+                <div className="flex items-center text-orange-700">
                   <CheckCircle className="w-5 h-5 mr-2" />
                   <span className="font-medium">{selectedUsers.length} user(s) selected</span>
                 </div>
@@ -697,7 +689,7 @@ const UserReportDashboard = () => {
               <div className="flex items-center space-x-2">
                 <span className="text-sm text-gray-600">Rows Per Page:</span>
                 <select 
-                  className="border rounded px-2 py-1 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="border rounded px-2 py-1 text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   value={rowsPerPage}
                   onChange={(e) => {
                     setRowsPerPage(Number(e.target.value));
@@ -722,7 +714,7 @@ const UserReportDashboard = () => {
                         type="checkbox"
                         checked={selectedUsers.length === currentUsers.length && currentUsers.length > 0}
                         onChange={handleSelectAll}
-                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        className="rounded border-gray-300 text-orange-600 focus:ring-orange-500"
                       />
                     </th>
                     <th 
@@ -732,7 +724,7 @@ const UserReportDashboard = () => {
                       <div className="flex items-center">
                         User
                         {sortField === 'name' && (
-                          <span className="ml-1 text-blue-500">
+                          <span className="ml-1 text-orange-500">
                             {sortOrder === 'asc' ? '↑' : '↓'}
                           </span>
                         )}
@@ -746,7 +738,7 @@ const UserReportDashboard = () => {
                       <div className="flex items-center">
                         Role
                         {sortField === 'role' && (
-                          <span className="ml-1 text-blue-500">
+                          <span className="ml-1 text-orange-500">
                             {sortOrder === 'asc' ? '↑' : '↓'}
                           </span>
                         )}
@@ -759,7 +751,7 @@ const UserReportDashboard = () => {
                       <div className="flex items-center">
                         Department
                         {sortField === 'department' && (
-                          <span className="ml-1 text-blue-500">
+                          <span className="ml-1 text-orange-500">
                             {sortOrder === 'asc' ? '↑' : '↓'}
                           </span>
                         )}
@@ -772,7 +764,7 @@ const UserReportDashboard = () => {
                       <div className="flex items-center">
                         Status
                         {sortField === 'status' && (
-                          <span className="ml-1 text-blue-500">
+                          <span className="ml-1 text-orange-500">
                             {sortOrder === 'asc' ? '↑' : '↓'}
                           </span>
                         )}
@@ -785,7 +777,7 @@ const UserReportDashboard = () => {
                       <div className="flex items-center">
                         Created Date
                         {sortField === 'createdDate' && (
-                          <span className="ml-1 text-blue-500">
+                          <span className="ml-1 text-orange-500">
                             {sortOrder === 'asc' ? '↑' : '↓'}
                           </span>
                         )}
@@ -803,12 +795,12 @@ const UserReportDashboard = () => {
                           type="checkbox"
                           checked={selectedUsers.includes(user.id)}
                           onChange={() => handleSelectUser(user.id)}
-                          className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                          className="rounded border-gray-300 text-orange-600 focus:ring-orange-500"
                         />
                       </td>
                       <td className="py-3 px-4">
                         <div className="flex items-center">
-                          <div className="w-8 h-8 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full flex items-center justify-center mr-3">
+                          <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full flex items-center justify-center mr-3">
                             <span className="text-xs font-bold text-white">{user.avatar}</span>
                           </div>
                           <div>
@@ -845,7 +837,7 @@ const UserReportDashboard = () => {
                       <td className="py-3 px-4 text-gray-600">{new Date(user.createdDate).toLocaleDateString()}</td>
                       <td className="py-3 px-4">
                         <div className="text-xs space-y-1">
-                          <div className="text-blue-600 font-medium">Logins: {user.loginCount}</div>
+                          <div className="text-orange-600 font-medium">Logins: {user.loginCount}</div>
                           <div className="text-green-600 font-medium">Tasks: {user.tasksCompleted}</div>
                         </div>
                       </td>
@@ -853,7 +845,7 @@ const UserReportDashboard = () => {
                         <div className="flex space-x-1">
                           <button 
                             onClick={() => {/* View user details */}}
-                            className="p-1 text-blue-600 hover:bg-blue-100 rounded transition-colors"
+                            className="p-1 text-orange-600 hover:bg-orange-100 rounded transition-colors"
                             title="View Details"
                           >
                             <Eye className="w-4 h-4" />
@@ -903,7 +895,7 @@ const UserReportDashboard = () => {
                           onClick={() => setCurrentPage(pageNum)}
                           className={`px-3 py-1 text-sm border rounded transition-colors ${
                             currentPage === pageNum
-                              ? 'bg-blue-500 text-white border-blue-500'
+                              ? 'bg-orange-500 text-white border-orange-500'
                               : 'hover:bg-gray-50'
                           }`}
                         >
@@ -931,7 +923,7 @@ const UserReportDashboard = () => {
           <Card className="bg-white">
             <CardHeader>
               <CardTitle className="text-lg font-semibold flex items-center">
-                <Users className="w-5 h-5 mr-2 text-blue-500" />
+                <Users className="w-5 h-5 mr-2 text-orange-500" />
                 User Activity Summary
               </CardTitle>
             </CardHeader>
@@ -939,7 +931,7 @@ const UserReportDashboard = () => {
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Daily Active Users</span>
-                  <span className="text-lg font-bold text-blue-600">324</span>
+                  <span className="text-lg font-bold text-orange-600">324</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Monthly Active Users</span>
@@ -1009,7 +1001,7 @@ const UserReportDashboard = () => {
                 </div>
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-gray-600">Security Score</span>
-                  <span className="text-blue-600 font-medium">8.5/10</span>
+                  <span className="text-orange-600 font-medium">8.5/10</span>
                 </div>
               </div>
             </CardContent>
@@ -1034,7 +1026,7 @@ const UserReportDashboard = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
                   <input
                     type="text"
-                    className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     value={newUser.name}
                     onChange={(e) => setNewUser({...newUser, name: e.target.value})}
                   />
@@ -1043,7 +1035,7 @@ const UserReportDashboard = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                   <input
                     type="email"
-                    className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     value={newUser.email}
                     onChange={(e) => setNewUser({...newUser, email: e.target.value})}
                   />
@@ -1052,7 +1044,7 @@ const UserReportDashboard = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
                   <input
                     type="text"
-                    className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     value={newUser.phone}
                     onChange={(e) => setNewUser({...newUser, phone: e.target.value})}
                   />
@@ -1060,7 +1052,7 @@ const UserReportDashboard = () => {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
                   <select
-                    className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     value={newUser.role}
                     onChange={(e) => setNewUser({...newUser, role: e.target.value})}
                   >
@@ -1074,7 +1066,7 @@ const UserReportDashboard = () => {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Department</label>
                   <select
-                    className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     value={newUser.department}
                     onChange={(e) => setNewUser({...newUser, department: e.target.value})}
                   >
@@ -1091,7 +1083,7 @@ const UserReportDashboard = () => {
               <div className="flex space-x-3 mt-6">
                 <button
                   onClick={handleAddUser}
-                  className="flex-1 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors"
+                  className="flex-1 bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition-colors"
                 >
                   Add User
                 </button>
@@ -1107,107 +1099,131 @@ const UserReportDashboard = () => {
         )}
 
         {/* Edit User Modal */}
-        {showEditUserModal && editingUser && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 w-96 max-w-90vw">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold">Edit User</h3>
-                <button
-                  onClick={() => setShowEditUserModal(false)}
-                  className="text-gray-400 hover:text-gray-600"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                  <input
-                    type="text"
-                    className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    value={editingUser.name}
-                    onChange={(e) => setEditingUser({...editingUser, name: e.target.value})}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                  <input
-                    type="email"
-                    className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    value={editingUser.email}
-                    onChange={(e) => setEditingUser({...editingUser, email: e.target.value})}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-                  <input
-                    type="text"
-                    className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    value={editingUser.phone}
-                    onChange={(e) => setEditingUser({...editingUser, phone: e.target.value})}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
-                  <select
-                    className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    value={editingUser.role}
-                    onChange={(e) => setEditingUser({...editingUser, role: e.target.value})}
-                  >
-                    <option value="Employee">Employee</option>
-                    <option value="Team Lead">Team Lead</option>
-                    <option value="Manager">Manager</option>
-                    <option value="HR">HR</option>
-                    <option value="Admin">Admin</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Department</label>
-                  <select
-                    className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    value={editingUser.department}
-                    onChange={(e) => setEditingUser({...editingUser, department: e.target.value})}
-                  />
-                    <option value="IT">IT</option>
-                    <option value="Sales">Sales</option>
-                    <option value="Marketing">Marketing</option>
-                    <option value="HR">HR</option>
-                    <option value="Finance">Finance</option>
-                    <option value="Operations">Operations</option>
-                    <option value="Support">Support</option>
-                  
-                  <div/>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                  <select
-                    className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    value={editingUser.status}
-                    onChange={(e) => setEditingUser({...editingUser, status: e.target.value})}
-                  >
-                    <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
-                    <option value="Pending">Pending</option>
-                  </select>
-                </div>
-              </div>
-              <div className="flex space-x-3 mt-6">
-                <button
-                  onClick={handleUpdateUser}
-                  className="flex-1 bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition-colors"
-                >
-                  Update User
-                </button>
-                <button
-                  onClick={() => setShowEditUserModal(false)}
-                  className="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400 transition-colors"
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-            </div>
-        )}
+       {showEditUserModal && editingUser && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="bg-white rounded-xl shadow-2xl w-full max-w-md mx-auto">
+      {/* Header */}
+      <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
+        <h3 className="text-xl font-semibold text-gray-800">Edit User</h3>
+        <button
+          onClick={() => setShowEditUserModal(false)}
+          className="text-gray-400 hover:text-gray-600 transition-colors"
+        >
+          <X className="w-5 h-5" />
+        </button>
+      </div>
+
+      {/* Form Content */}
+      <div className="px-6 py-5 space-y-4 max-h-[calc(100vh-200px)] overflow-y-auto">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">
+            Name
+          </label>
+          <input
+            type="text"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition-all"
+            value={editingUser.name}
+            onChange={(e) => setEditingUser({...editingUser, name: e.target.value})}
+            placeholder="Enter name"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">
+            Email
+          </label>
+          <input
+            type="email"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition-all"
+            value={editingUser.email}
+            onChange={(e) => setEditingUser({...editingUser, email: e.target.value})}
+            placeholder="Enter email"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">
+            Phone
+          </label>
+          <input
+            type="text"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition-all"
+            value={editingUser.phone}
+            onChange={(e) => setEditingUser({...editingUser, phone: e.target.value})}
+            placeholder="Enter phone number"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">
+            Role
+          </label>
+          <select
+            className="w-full border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition-all bg-white"
+            value={editingUser.role}
+            onChange={(e) => setEditingUser({...editingUser, role: e.target.value})}
+          >
+            <option value="Employee">Employee</option>
+            <option value="Team Lead">Team Lead</option>
+            <option value="Manager">Manager</option>
+            <option value="HR">HR</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">
+            Department
+          </label>
+          <select
+            className="w-full border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition-all bg-white"
+            value={editingUser.department}
+            onChange={(e) => setEditingUser({...editingUser, department: e.target.value})}
+          >
+            <option value="IT">IT</option>
+            <option value="Sales">Sales</option>
+            <option value="Marketing">Marketing</option>
+            <option value="HR">HR</option>
+            <option value="Finance">Finance</option>
+            <option value="Operations">Operations</option>
+            <option value="Support">Support</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">
+            Status
+          </label>
+          <select
+            className="w-full border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition-all bg-white"
+            value={editingUser.status}
+            onChange={(e) => setEditingUser({...editingUser, status: e.target.value})}
+          >
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+            <option value="Pending">Pending</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Footer Buttons */}
+      <div className="flex gap-3 px-6 py-4 border-t border-gray-200 bg-gray-50 rounded-b-xl">
+        <button
+          onClick={() => setShowEditUserModal(false)}
+          className="flex-1 bg-white border border-gray-300 text-gray-700 py-2.5 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={handleUpdateUser}
+          className="flex-1 bg-orange-600 text-white py-2.5 rounded-lg hover:bg-orange-700 transition-colors font-medium shadow-sm"
+        >
+          Update User
+        </button>
+      </div>
+    </div>
+  </div>
+)}
       </div>
     </div>
   );

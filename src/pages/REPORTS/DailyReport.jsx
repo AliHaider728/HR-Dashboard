@@ -15,6 +15,7 @@ import {
   Clock as ClockIcon,
   ChevronLeft,
   ChevronRight,
+  ArrowUpDown,
 } from "lucide-react";
 import {
   BarChart,
@@ -34,6 +35,7 @@ const DailyReport = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortConfig, setSortConfig] = useState({ key: "name", direction: "asc" });
 
   const stats = [
     {
@@ -66,7 +68,7 @@ const DailyReport = () => {
     },
   ];
 
-  const dailyAttendance = [
+    const dailyAttendance = [
     {
       id: 1,
       image: "https://smarthr.co.in/demo/html/template/assets/img/users/user-32.jpg",
@@ -200,17 +202,33 @@ const DailyReport = () => {
     },
   ];
 
-  // Filter attendance records based on search
-  const filteredRecords = useMemo(() => 
-    dailyAttendance.filter(
+  // Sorting function
+  const sortRecords = (records, key, direction) => {
+    return [...records].sort((a, b) => {
+      if (key === "date") {
+        const dateA = new Date(a[key]);
+        const dateB = new Date(b[key]);
+        return direction === "asc" ? dateA - dateB : dateB - dateA;
+      }
+      const aValue = a[key] || "";
+      const bValue = b[key] || "";
+      return direction === "asc"
+        ? aValue.localeCompare(bValue)
+        : bValue.localeCompare(aValue);
+    });
+  };
+
+  // Filter and sort records
+  const filteredRecords = useMemo(() => {
+    let filtered = dailyAttendance.filter(
       (record) =>
         record.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         record.department.toLowerCase().includes(searchTerm.toLowerCase()) ||
         record.status.toLowerCase().includes(searchTerm.toLowerCase()) ||
         record.date.toLowerCase().includes(searchTerm.toLowerCase())
-    ),
-    [dailyAttendance, searchTerm]
-  );
+    );
+    return sortRecords(filtered, sortConfig.key, sortConfig.direction);
+  }, [dailyAttendance, searchTerm, sortConfig]);
 
   // Pagination
   const totalPages = Math.ceil(filteredRecords.length / rowsPerPage);
@@ -218,6 +236,14 @@ const DailyReport = () => {
     (currentPage - 1) * rowsPerPage,
     currentPage * rowsPerPage
   );
+
+  // Handle column sorting
+  const handleSort = (key) => {
+    setSortConfig((prev) => ({
+      key,
+      direction: prev.key === key && prev.direction === "asc" ? "desc" : "asc",
+    }));
+  };
 
   // Chart data
   const statusDistribution = [
@@ -264,18 +290,18 @@ const DailyReport = () => {
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet"
       />
-      
-      <div className="min-h-screen bg-gray-50 p-6 font-[Inter]">
-        <div className="max-w-7xl mx-auto space-y-6">
+
+      <div className="min-h-screen bg-gray-50 p-4 sm:p-6 font-[Inter]">
+        <div className="max-w-full mx-auto space-y-6">
           {/* Header */}
-          <div className="bg-white rounded-lg shadow-sm p-6">
+          <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
             <div className="flex items-center space-x-3">
-              <Calendar className="w-8 h-8 text-blue-600" />
+              <Calendar className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />
               <div>
-                <h1 className="text-2xl font-semibold text-gray-900 mb-1 font-[Poppins]">
+                <h1 className="text-lg sm:text-2xl font-semibold text-gray-900 mb-1 font-[Poppins]">
                   Daily Report
                 </h1>
-                <p className="text-gray-600 text-sm">
+                <p className="text-sm sm:text-base text-gray-600">
                   Today's attendance and task overview
                 </p>
               </div>
@@ -283,35 +309,37 @@ const DailyReport = () => {
           </div>
 
           {/* Stats Overview */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {stats.map((stat, index) => {
               const Icon = stat.icon;
               return (
                 <Card key={index} className="bg-white shadow-sm hover:shadow-md transition-shadow">
-                  <CardContent className="p-6">
+                  <CardContent className="p-4 sm:p-6">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-xs font-medium text-gray-600 uppercase tracking-wide">
+                        <p className="text-xs sm:text-sm font-medium text-gray-600 uppercase tracking-wide">
                           {stat.title}
                         </p>
-                        <p className="text-2xl font-semibold text-gray-900 mt-2 font-[Poppins]">
+                        <p className="text-xl sm:text-3xl font-semibold text-gray-900 mt-2 font-[Poppins]">
                           {stat.value}
                         </p>
                         <p
-                          className={`text-xs font-medium mt-1 flex items-center ${
+                          className={`text-xs sm:text-sm font-medium mt-1 flex items-center ${
                             stat.change.startsWith("+")
                               ? "text-green-600"
                               : "text-red-600"
                           }`}
                         >
-                          <TrendingUp 
-                            className={`w-3 h-3 mr-1 ${stat.change.startsWith("+") ? "" : "rotate-180"}`} 
+                          <TrendingUp
+                            className={`w-3 h-3 mr-1 ${
+                              stat.change.startsWith("+") ? "" : "rotate-180"
+                            }`}
                           />
                           {stat.change} from yesterday
                         </p>
                       </div>
-                      <div className={`p-3 rounded-xl ${stat.color} shadow-sm`}>
-                        <Icon className="w-6 h-6" />
+                      <div className={`p-2 sm:p-3 rounded-xl ${stat.color} shadow-sm`}>
+                        <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                       </div>
                     </div>
                   </CardContent>
@@ -321,23 +349,23 @@ const DailyReport = () => {
           </div>
 
           {/* Charts Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
             {/* Status Distribution Pie Chart */}
             <Card className="bg-white shadow-sm">
               <CardHeader>
-                <CardTitle className="text-base font-medium flex items-center font-[Poppins]">
-                  <UserCheck className="w-5 h-5 mr-2 text-green-600" />
+                <CardTitle className="text-base sm:text-lg font-medium flex items-center font-[Poppins]">
+                  <UserCheck className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-green-600" />
                   Today's Attendance Status
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
+                <ResponsiveContainer width="100%" height={250} className="min-h-[200px] sm:min-h-[300px]">
                   <PieChart>
                     <Pie
                       data={statusDistribution}
                       cx="50%"
                       cy="50%"
-                      outerRadius={100}
+                      outerRadius={80}
                       dataKey="value"
                       nameKey="name"
                       label={({ name, percent }) =>
@@ -345,15 +373,10 @@ const DailyReport = () => {
                       }
                     >
                       {statusDistribution.map((entry, index) => (
-                        <Cell
-                          key={`cell-${index}`}
-                          fill={entry.color}
-                        />
+                        <Cell key={`cell-${index}`} fill={entry.color} />
                       ))}
                     </Pie>
-                    <Tooltip 
-                      formatter={(value, name) => [value, `${name} employees`]} 
-                    />
+                    <Tooltip formatter={(value, name) => [value, `${name} employees`]} />
                     <Legend />
                   </PieChart>
                 </ResponsiveContainer>
@@ -363,21 +386,19 @@ const DailyReport = () => {
             {/* Department Distribution Bar Chart */}
             <Card className="bg-white shadow-sm">
               <CardHeader>
-                <CardTitle className="text-base font-medium flex items-center font-[Poppins]">
-                  <Building className="w-5 h-5 mr-2 text-purple-600" />
+                <CardTitle className="text-base sm:text-lg font-medium flex items-center font-[Poppins]">
+                  <Building className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-purple-600" />
                   Department Attendance
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
+                <ResponsiveContainer width="100%" height={250} className="min-h-[200px] sm:min-h-[300px]">
                   <BarChart data={departmentDistribution}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" angle={-45} textAnchor="end" height={80} />
-                    <YAxis />
-                    <Tooltip 
-                      formatter={(value) => [`${value} employees`, "Present"]} 
-                    />
                     <Bar dataKey="value" fill="#8B5CF6" radius={[4, 4, 0, 0]} />
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" angle={-45} textAnchor="end" height={80} tick={{ fontSize: 12 }} />
+                    <YAxis tick={{ fontSize: 12 }} />
+                    <Tooltip formatter={(value) => [`${value} employees`, "Present"]} />
                   </BarChart>
                 </ResponsiveContainer>
               </CardContent>
@@ -388,23 +409,24 @@ const DailyReport = () => {
           <div className="grid grid-cols-1">
             <Card className="bg-white shadow-sm">
               <CardHeader>
-                <CardTitle className="text-base font-medium flex items-center font-[Poppins]">
-                  <Activity className="w-5 h-5 mr-2 text-blue-600" />
+                <CardTitle className="text-base sm:text-lg font-medium flex items-center font-[Poppins]">
+                  <Activity className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-blue-600" />
                   Task Progress Overview
                 </CardTitle>
+ Eighth
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
+                <ResponsiveContainer width="100%" height={250} className="min-h-[200px] sm:min-h-[300px]">
                   <BarChart data={taskProgress}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="task" />
-                    <YAxis />
-                    <Tooltip 
+                    <XAxis dataKey="task" tick={{ fontSize: 12 }} />
+                    <YAxis tick={{ fontSize: 12 }} />
+                    <Tooltip
                       formatter={(value, name, props) => {
                         const total = props.payload.total;
                         const percentage = ((value / total) * 100).toFixed(1);
                         return [`${value} / ${total} (${percentage}%)`, "Tasks"];
-                      }} 
+                      }}
                     />
                     <Bar dataKey="completed" fill="#10B981" radius={[4, 4, 0, 0]} />
                   </BarChart>
@@ -418,8 +440,8 @@ const DailyReport = () => {
             <CardHeader>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                  <CardTitle className="text-lg font-semibold flex items-center font-[Poppins]">
-                    <Calendar className="w-5 h-5 mr-2 text-gray-600" />
+                  <CardTitle className="text-base sm:text-lg font-semibold flex items-center font-[Poppins]">
+                    <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-gray-600" />
                     Daily Attendance
                   </CardTitle>
                 </div>
@@ -431,15 +453,15 @@ const DailyReport = () => {
                       placeholder="Search by name, department, or status..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
                     />
                   </div>
-                  <div className="flex items-center space-x-2 text-sm text-gray-600">
+                  <div className="flex items-center space-x-2 text-xs sm:text-sm text-gray-600">
                     <span>Show:</span>
                     <select
                       value={rowsPerPage}
                       onChange={(e) => setRowsPerPage(Number(e.target.value))}
-                      className="px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-sm"
+                      className="px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-xs sm:text-sm"
                     >
                       <option value={10}>10</option>
                       <option value={25}>25</option>
@@ -453,39 +475,53 @@ const DailyReport = () => {
             <CardContent>
               {paginatedRecords.length === 0 ? (
                 <div className="text-center py-12 text-gray-500">
-                  <Search className="mx-auto h-12 w-12 mb-4 text-gray-400" />
-                  <h3 className="text-base font-medium mb-2 font-[Poppins]">No records found</h3>
-                  <p className="text-sm">Try adjusting your search criteria</p>
+                  <Search className="mx-auto h-10 w-10 sm:h-12 sm:w-12 mb-4 text-gray-400" />
+                  <h3 className="text-base sm:text-lg font-medium mb-2 font-[Poppins]">
+                    No records found
+                  </h3>
+                  <p className="text-xs sm:text-sm">Try adjusting your search criteria</p>
                 </div>
               ) : (
                 <>
                   <div className="overflow-x-auto">
-                    <table className="w-full table-auto">
+                    <table className="w-full table-auto min-w-[600px]">
                       <thead>
                         <tr className="border-b bg-gray-50">
-                          <th className="text-left py-3 px-4 font-medium text-gray-700 text-xs uppercase tracking-wider">
-                            <div className="flex items-center space-x-2">
-                              <Users className="w-4 h-4" />
+                          <th className="text-left py-3 sm:py-4 px-2 sm:px-4 font-semibold text-gray-700 text-xs sm:text-sm uppercase tracking-wider">
+                            <button
+                              onClick={() => handleSort("name")}
+                              className="flex items-center space-x-1 sm:space-x-2 hover:text-blue-600"
+                            >
                               <span>Name</span>
-                            </div>
+                              <ArrowUpDown className="w-3 h-3" />
+                            </button>
                           </th>
-                          <th className="text-left py-3 px-4 font-medium text-gray-700 text-xs uppercase tracking-wider">
-                            <div className="flex items-center space-x-2">
-                              <Calendar className="w-4 h-4" />
+                          <th className="text-left py-3 sm:py-4 px-2 sm:px-4 font-semibold text-gray-700 text-xs sm:text-sm uppercase tracking-wider">
+                            <button
+                              onClick={() => handleSort("date")}
+                              className="flex items-center space-x-1 sm:space-x-2 hover:text-blue-600"
+                            >
                               <span>Date</span>
-                            </div>
+                              <ArrowUpDown className="w-3 h-3" />
+                            </button>
                           </th>
-                          <th className="text-left py-3 px-4 font-medium text-gray-700 text-xs uppercase tracking-wider">
-                            <div className="flex items-center space-x-2">
-                              <Building className="w-4 h-4" />
+                          <th className="text-left py-3 sm:py-4 px-2 sm:px-4 font-semibold text-gray-700 text-xs sm:text-sm uppercase tracking-wider">
+                            <button
+                              onClick={() => handleSort("department")}
+                              className="flex items-center space-x-1 sm:space-x-2 hover:text-blue-600"
+                            >
                               <span>Department</span>
-                            </div>
+                              <ArrowUpDown className="w-3 h-3" />
+                            </button>
                           </th>
-                          <th className="text-left py-3 px-4 font-medium text-gray-700 text-xs uppercase tracking-wider">
-                            <div className="flex items-center space-x-2">
-                              <CheckCircle className="w-4 h-4" />
+                          <th className="text-left py-3 sm:py-4 px-2 sm:px-4 font-semibold text-gray-700 text-xs sm:text-sm uppercase tracking-wider">
+                            <button
+                              onClick={() => handleSort("status")}
+                              className="flex items-center space-x-1 sm:space-x-2 hover:text-blue-600"
+                            >
                               <span>Status</span>
-                            </div>
+                              <ArrowUpDown className="w-3 h-3" />
+                            </button>
                           </th>
                         </tr>
                       </thead>
@@ -494,18 +530,18 @@ const DailyReport = () => {
                           const StatusIcon = getStatusIcon(record.status);
                           return (
                             <tr key={record.id} className="border-b hover:bg-gray-50 transition-colors">
-                              <td className="py-3 px-4">
-                                <div className="flex items-center space-x-3">
+                              <td className="py-3 sm:py-4 px-2 sm:px-4">
+                                <div className="flex items-center space-x-2 sm:space-x-3">
                                   <img
                                     src={record.image}
                                     alt={record.name}
-                                    className="w-8 h-8 rounded-full object-cover"
+                                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover"
                                     onError={(e) => {
-                                      e.target.src = "https://via.placeholder.com/32x32/6B7280/FFFFFF?text=UA";
+                                      e.target.src = "https://via.placeholder.com/40x40/6B7280/FFFFFF?text=UA";
                                     }}
                                   />
                                   <div>
-                                    <div className="text-sm font-medium text-gray-900">
+                                    <div className="text-xs sm:text-sm font-medium text-gray-900">
                                       {record.name}
                                     </div>
                                     <div className="text-xs text-gray-500 mt-0.5">
@@ -514,18 +550,18 @@ const DailyReport = () => {
                                   </div>
                                 </div>
                               </td>
-                              <td className="py-3 px-4">
-                                <div className="flex items-center space-x-2 text-gray-600">
+                              <td className="py-3 sm:py-4 px-2 sm:px-4 text-xs sm:text-sm">
+                                <div className="flex items-center space-x-1 text-gray-600">
                                   <Calendar className="w-3 h-3 text-gray-400" />
-                                  <span className="text-sm">{record.date}</span>
+                                  <span>{record.date}</span>
                                 </div>
                               </td>
-                              <td className="py-3 px-4">
-                                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                              <td className="py-3 sm:py-4 px-2 sm:px-4 text-xs sm:text-sm">
+                                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-medium bg-gray-100 text-gray-800">
                                   {record.department}
                                 </span>
                               </td>
-                              <td className="py-3 px-4">
+                              <td className="py-3 sm:py-4 px-2 sm:px-4">
                                 <div className={`flex items-center space-x-1 px-2 py-1 rounded-full text-xs font-medium ${record.statusColor}`}>
                                   <StatusIcon className="w-3 h-3" />
                                   <span>{record.status}</span>
@@ -537,42 +573,47 @@ const DailyReport = () => {
                       </tbody>
                     </table>
                   </div>
-                  
+
                   {/* Pagination */}
                   {totalPages > 1 && (
-                    <div className="flex flex-col sm:flex-row justify-between items-center mt-6 pt-4 border-t border-gray-200">
-                      <div className="text-sm text-gray-600 mb-2 sm:mb-0">
+                    <div className="flex flex-col sm:flex-row justify-between items-center mt-4 sm:mt-6 pt-4 border-t border-gray-200">
+                      <div className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-0">
                         <span className="font-medium">
-                          Showing <span className="text-gray-900">
+                          Showing{" "}
+                          <span className="text-gray-900">
                             {(currentPage - 1) * rowsPerPage + 1}
-                          </span> to <span className="text-gray-900">
+                          </span>{" "}
+                          to{" "}
+                          <span className="text-gray-900">
                             {Math.min(currentPage * rowsPerPage, filteredRecords.length)}
-                          </span> of <span className="text-gray-900">
-                            {filteredRecords.length}
-                          </span> entries
+                          </span>{" "}
+                          of{" "}
+                          <span className="text-gray-900">{filteredRecords.length}</span>{" "}
+                          entries
                         </span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <button
                           onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                           disabled={currentPage === 1}
-                          className="px-3 py-1.5 border border-gray-300 rounded-md text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors flex items-center space-x-1"
+                          className="px-2 sm:px-3 py-1 sm:py-1.5 border border-gray-300 rounded-md text-xs sm:text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors flex items-center space-x-1"
                         >
-                          <ChevronLeft className="w-4 h-4" />
+                          <ChevronLeft className="w-3 h-3 sm:w-4 sm:h-4" />
                           <span>Previous</span>
                         </button>
-                        <span className="px-3 py-1.5 text-sm font-medium text-gray-700 bg-gray-100 rounded-md">
-                          Page <span className="text-gray-900">{currentPage}</span> of <span className="text-gray-900">{totalPages}</span>
+                        <span className="px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-medium text-gray-700 bg-gray-100 rounded-md">
+                          Page <span className="text-gray-900">{currentPage}</span> of{" "}
+                          <span className="text-gray-900">{totalPages}</span>
                         </span>
                         <button
                           onClick={() =>
                             setCurrentPage((p) => Math.min(p + 1, totalPages))
                           }
                           disabled={currentPage === totalPages}
-                          className="px-3 py-1.5 border border-gray-300 rounded-md text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors flex items-center space-x-1"
+                          className="px-2 sm:px-3 py-1 sm:py-1.5 border border-gray-300 rounded-md text-xs sm:text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors flex items-center space-x-1"
                         >
                           <span>Next</span>
-                          <ChevronRight className="w-4 h-4" />
+                          <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
                         </button>
                       </div>
                     </div>

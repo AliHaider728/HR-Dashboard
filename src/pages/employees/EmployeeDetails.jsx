@@ -1,4 +1,3 @@
- 
 import { useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card"
@@ -8,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar"
 import { Progress } from "../../components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../components/ui/table"
-import { ArrowLeft, Edit, Mail, Phone, MapPin, Calendar, DollarSign, Building, User, Award } from "lucide-react"
+import { ArrowLeft, Edit, Mail, Phone, MapPin, Calendar, DollarSign, Building, User, Award, Save, X } from "lucide-react"
 
 // Sample employee data (in real app, this would come from API)
 const employeeData = {
@@ -80,7 +79,10 @@ const performanceMetrics = [
 
 export default function EmployeeDetails() {
   const { id } = useParams()
-  const [employee] = useState(employeeData) // In real app, fetch by ID
+  const [employee, setEmployee] = useState(employeeData) // In real app, fetch by ID
+  const [isEditing, setIsEditing] = useState(false)
+  const [formData, setFormData] = useState(employeeData)
+  const [errors, setErrors] = useState({})
 
   const getStatusBadge = (status) => {
     const variants = {
@@ -93,263 +95,430 @@ export default function EmployeeDetails() {
     return <Badge variant={variants[status] || "default"}>{status}</Badge>
   }
 
-  return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center gap-4">
-        <Button variant="outline" size="sm" asChild>
-          <Link to="/employees">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Employees
-          </Link>
-        </Button>
-        <div className="flex-1">
-          <h1 className="text-3xl font-bold tracking-tight">Employee Details</h1>
-          <p className="text-muted-foreground">View and manage employee information</p>
-        </div>
-        <Button>
-          <Edit className="mr-2 h-4 w-4" />
-          Edit Employee
-        </Button>
-      </div>
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }))
+    }
+  }
 
-      {/* Employee Profile Card */}
-      <Card>
-        <CardHeader>
-          <div className="flex items-start gap-6">
-            <Avatar className="h-24 w-24">
-              <AvatarImage src={employee.avatar || "/placeholder.svg"} />
-              <AvatarFallback className="text-2xl">
-                {employee.name
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join("")}
-              </AvatarFallback>
-            </Avatar>
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-2">
-                <h2 className="text-2xl font-bold">{employee.name}</h2>
-                {getStatusBadge(employee.status)}
-              </div>
-              <p className="text-lg text-muted-foreground mb-3">{employee.position}</p>
-              <p className="text-sm text-muted-foreground mb-4">{employee.bio}</p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="flex items-center gap-2 text-sm">
-                  <Mail className="h-4 w-4 text-muted-foreground" />
-                  <span>{employee.email}</span>
+  const validateForm = () => {
+    const newErrors = {}
+    if (!formData.name.trim()) newErrors.name = "Name is required"
+    if (!formData.email.trim()) newErrors.email = "Email is required"
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Email is invalid"
+    if (!formData.phone.trim()) newErrors.phone = "Phone is required"
+    if (!formData.position.trim()) newErrors.position = "Position is required"
+    if (!formData.department.trim()) newErrors.department = "Department is required"
+    if (!formData.salary.trim()) newErrors.salary = "Salary is required"
+    if (!formData.location.trim()) newErrors.location = "Location is required"
+    if (!formData.bio.trim()) newErrors.bio = "Bio is required"
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (validateForm()) {
+      setEmployee(formData)
+      setIsEditing(false)
+      // In real app, update via API
+      console.log("Employee updated:", formData)
+    }
+  }
+
+  const handleCancel = () => {
+    setFormData(employee)
+    setIsEditing(false)
+    setErrors({})
+  }
+
+  const averageAttendance = attendanceData.reduce((acc, curr) => {
+    const total = curr.present + curr.absent
+    return acc + (curr.present / total) * 100
+  }, 0) / attendanceData.length
+
+  const averagePerformance = performanceMetrics.reduce((acc, curr) => acc + curr.score, 0) / performanceMetrics.length
+
+  return (
+    <div className="min-h-screen bg-gray-50 py-6 px-4 sm:px-6 lg:px-8 space-y-6">
+      <style>{`
+        @media (max-width: 640px) {
+          .nav-tabs {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            -webkit-overflow-scrolling: touch;
+          }
+          .nav-tabs::-webkit-scrollbar {
+            height: 6px;
+          }
+          .nav-tabs::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 3px;
+          }
+        }
+      `}</style>
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
+          <Button variant="outline" size="sm" asChild>
+            <Link to="/employees">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Employees
+            </Link>
+          </Button>
+          <div className="flex-1">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Employee Details</h1>
+            <p className="text-sm sm:text-base text-muted-foreground">View and manage employee information</p>
+          </div>
+          {isEditing ? (
+            <div className="flex items-center space-x-3">
+              <Button variant="outline" onClick={handleCancel}>
+                <X className="mr-2 h-4 w-4" />
+                Cancel
+              </Button>
+              <Button onClick={handleSubmit}>
+                <Save className="mr-2 h-4 w-4" />
+                Save Changes
+              </Button>
+            </div>
+          ) : (
+            <Button onClick={() => setIsEditing(true)}>
+              <Edit className="mr-2 h-4 w-4" />
+              Edit Employee
+            </Button>
+          )}
+        </div>
+
+        {/* Employee Profile Card */}
+        <Card className="shadow-md">
+          <CardHeader>
+            <div className="flex flex-col sm:flex-row items-start gap-6">
+              <Avatar className="h-20 w-20 sm:h-24 sm:w-24">
+                <AvatarImage src={isEditing ? formData.avatar : employee.avatar || "/placeholder.svg"} />
+                <AvatarFallback className="text-xl sm:text-2xl">
+                  {(isEditing ? formData.name : employee.name)
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")}
+                </AvatarFallback>
+              </Avatar>
+              <div className="flex-1 space-y-3">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-2">
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="text-xl sm:text-2xl font-bold border-b border-gray-300 focus:outline-none focus:border-blue-500 w-full sm:w-auto"
+                    />
+                  ) : (
+                    <h2 className="text-xl sm:text-2xl font-bold">{employee.name}</h2>
+                  )}
+                  {getStatusBadge(employee.status)}
                 </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Phone className="h-4 w-4 text-muted-foreground" />
-                  <span>{employee.phone}</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <MapPin className="h-4 w-4 text-muted-foreground" />
-                  <span>{employee.location}</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Building className="h-4 w-4 text-muted-foreground" />
-                  <span>{employee.department}</span>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="position"
+                    value={formData.position}
+                    onChange={handleInputChange}
+                    className="text-base sm:text-lg text-muted-foreground border-b border-gray-300 focus:outline-none focus:border-blue-500 w-full"
+                  />
+                ) : (
+                  <p className="text-base sm:text-lg text-muted-foreground mb-3">{employee.position}</p>
+                )}
+                {isEditing ? (
+                  <textarea
+                    name="bio"
+                    value={formData.bio}
+                    onChange={handleInputChange}
+                    rows={3}
+                    className="text-sm text-muted-foreground border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500 w-full resize-none"
+                  />
+                ) : (
+                  <p className="text-sm text-muted-foreground mb-4">{employee.bio}</p>
+                )}
+                {errors.name && <p className="text-red-500 text-xs">{errors.name}</p>}
+                {errors.position && <p className="text-red-500 text-xs">{errors.position}</p>}
+                {errors.bio && <p className="text-red-500 text-xs">{errors.bio}</p>}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="flex items-center gap-2 text-sm">
+                    <Mail className="h-4 w-4 text-muted-foreground" />
+                    {isEditing ? (
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className="border-b border-gray-300 focus:outline-none focus:border-blue-500 w-full"
+                      />
+                    ) : (
+                      <a href={`mailto:${employee.email}`} className="hover:underline">{employee.email}</a>
+                    )}
+                  </div>
+                  {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
+                  <div className="flex items-center gap-2 text-sm">
+                    <Phone className="h-4 w-4 text-muted-foreground" />
+                    {isEditing ? (
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        className="border-b border-gray-300 focus:outline-none focus:border-blue-500 w-full"
+                      />
+                    ) : (
+                      <a href={`tel:${employee.phone}`} className="hover:underline">{employee.phone}</a>
+                    )}
+                  </div>
+                  {errors.phone && <p className="text-red-500 text-xs">{errors.phone}</p>}
+                  <div className="flex items-center gap-2 text-sm">
+                    <MapPin className="h-4 w-4 text-muted-foreground" />
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="location"
+                        value={formData.location}
+                        onChange={handleInputChange}
+                        className="border-b border-gray-300 focus:outline-none focus:border-blue-500 w-full"
+                      />
+                    ) : (
+                      <span>{employee.location}</span>
+                    )}
+                  </div>
+                  {errors.location && <p className="text-red-500 text-xs">{errors.location}</p>}
+                  <div className="flex items-center gap-2 text-sm">
+                    <Building className="h-4 w-4 text-muted-foreground" />
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="department"
+                        value={formData.department}
+                        onChange={handleInputChange}
+                        className="border-b border-gray-300 focus:outline-none focus:border-blue-500 w-full"
+                      />
+                    ) : (
+                      <span>{employee.department}</span>
+                    )}
+                  </div>
+                  {errors.department && <p className="text-red-500 text-xs">{errors.department}</p>}
                 </div>
               </div>
             </div>
-          </div>
-        </CardHeader>
-      </Card>
+          </CardHeader>
+        </Card>
 
-      {/* Quick Stats */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Employee ID</CardTitle>
-            <User className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{employee.employeeId}</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Join Date</CardTitle>
-            <Calendar className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{new Date(employee.joinDate).toLocaleDateString()}</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Salary</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{employee.salary}</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Performance</CardTitle>
-            <Award className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{employee.performance}%</div>
-          </CardContent>
-        </Card>
-      </div>
+        {/* Quick Stats */}
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-6">
+          <Card className="shadow-md">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Employee ID</CardTitle>
+              <User className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-xl sm:text-2xl font-bold">{employee.employeeId}</div>
+            </CardContent>
+          </Card>
+          <Card className="shadow-md">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Join Date</CardTitle>
+              <Calendar className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-xl sm:text-2xl font-bold">{new Date(employee.joinDate).toLocaleDateString()}</div>
+            </CardContent>
+          </Card>
+          <Card className="shadow-md">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Salary</CardTitle>
+              <DollarSign className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="salary"
+                  value={formData.salary}
+                  onChange={handleInputChange}
+                  className="text-xl sm:text-2xl font-bold border-b border-gray-300 focus:outline-none focus:border-blue-500 w-full"
+                />
+              ) : (
+                <div className="text-xl sm:text-2xl font-bold">{employee.salary}</div>
+              )}
+            </CardContent>
+            {errors.salary && <p className="text-red-500 text-xs px-6 pb-4">{errors.salary}</p>}
+          </Card>
+          <Card className="shadow-md">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Performance</CardTitle>
+              <Award className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-xl sm:text-2xl font-bold">{employee.performance}%</div>
+            </CardContent>
+          </Card>
+        </div>
 
-      {/* Detailed Information Tabs */}
-      <Tabs defaultValue="overview" className="space-y-4">
-        <TabsList>
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="projects">Projects</TabsTrigger>
-          <TabsTrigger value="performance">Performance</TabsTrigger>
-          <TabsTrigger value="attendance">Attendance</TabsTrigger>
-        </TabsList>
+        {/* Detailed Information Tabs */}
+        <Tabs defaultValue="overview" className="space-y-4 mt-6">
+          <TabsList className="nav-tabs">
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="projects">Projects</TabsTrigger>
+            <TabsTrigger value="performance">Performance</TabsTrigger>
+            <TabsTrigger value="attendance">Attendance</TabsTrigger>
+          </TabsList>
 
-        <TabsContent value="overview" className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-2">
-            <Card>
+          <TabsContent value="overview" className="space-y-4">
+            <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
+              <Card className="shadow-md">
+                <CardHeader>
+                  <CardTitle>Skills & Expertise</CardTitle>
+                  <CardDescription>Technical and professional skills</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-2">
+                    {employee.skills.map((skill, index) => (
+                      <Badge key={index} variant="secondary">
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="shadow-md">
+                <CardHeader>
+                  <CardTitle>Reporting Structure</CardTitle>
+                  <CardDescription>Management hierarchy</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div>
+                    <p className="text-sm font-medium">Reports to:</p>
+                    <p className="text-sm text-muted-foreground">{employee.manager}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium">Department:</p>
+                    <p className="text-sm text-muted-foreground">{employee.department}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium">Active Projects:</p>
+                    <p className="text-sm text-muted-foreground">{employee.projects} projects</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="projects" className="space-y-4">
+            <Card className="shadow-md">
               <CardHeader>
-                <CardTitle>Skills & Expertise</CardTitle>
-                <CardDescription>Technical and professional skills</CardDescription>
+                <CardTitle>Project History</CardTitle>
+                <CardDescription>All projects this employee has worked on</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {employee.skills.map((skill, index) => (
-                    <Badge key={index} variant="secondary">
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>Reporting Structure</CardTitle>
-                <CardDescription>Management hierarchy</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div>
-                  <p className="text-sm font-medium">Reports to:</p>
-                  <p className="text-sm text-muted-foreground">{employee.manager}</p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">Department:</p>
-                  <p className="text-sm text-muted-foreground">{employee.department}</p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">Active Projects:</p>
-                  <p className="text-sm text-muted-foreground">{employee.projects} projects</p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="projects" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Project History</CardTitle>
-              <CardDescription>All projects this employee has worked on</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Project Name</TableHead>
-                    <TableHead>Role</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Duration</TableHead>
-                    <TableHead>Completion</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {projectHistory.map((project) => (
-                    <TableRow key={project.id}>
-                      <TableCell className="font-medium">{project.name}</TableCell>
-                      <TableCell>{project.role}</TableCell>
-                      <TableCell>{getStatusBadge(project.status)}</TableCell>
-                      <TableCell>
-                        {new Date(project.startDate).toLocaleDateString()} -{" "}
-                        {new Date(project.endDate).toLocaleDateString()}
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <Progress value={project.completion} className="w-16" />
-                          <span className="text-sm">{project.completion}%</span>
-                        </div>
-                      </TableCell>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Project Name</TableHead>
+                      <TableHead>Role</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Duration</TableHead>
+                      <TableHead>Completion</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="performance" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Performance Metrics</CardTitle>
-              <CardDescription>Key performance indicators and targets</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {performanceMetrics.map((metric, index) => (
-                <div key={index} className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">{metric.metric}</span>
-                    <span className="text-sm text-muted-foreground">
-                      {metric.score}% / {metric.target}%
-                    </span>
-                  </div>
-                  <Progress value={metric.score} className="h-2" />
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="attendance" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Attendance Record</CardTitle>
-              <CardDescription>Monthly attendance summary</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Month</TableHead>
-                    <TableHead>Present</TableHead>
-                    <TableHead>Absent</TableHead>
-                    <TableHead>Late</TableHead>
-                    <TableHead>Attendance Rate</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {attendanceData.map((record, index) => {
-                    const total = record.present + record.absent
-                    const rate = Math.round((record.present / total) * 100)
-                    return (
-                      <TableRow key={index}>
-                        <TableCell className="font-medium">{record.month}</TableCell>
-                        <TableCell>{record.present}</TableCell>
-                        <TableCell>{record.absent}</TableCell>
-                        <TableCell>{record.late}</TableCell>
+                  </TableHeader>
+                  <TableBody>
+                    {projectHistory.map((project) => (
+                      <TableRow key={project.id}>
+                        <TableCell className="font-medium">{project.name}</TableCell>
+                        <TableCell>{project.role}</TableCell>
+                        <TableCell>{getStatusBadge(project.status)}</TableCell>
+                        <TableCell>
+                          {new Date(project.startDate).toLocaleDateString()} -{" "}
+                          {new Date(project.endDate).toLocaleDateString()}
+                        </TableCell>
                         <TableCell>
                           <div className="flex items-center gap-2">
-                            <Progress value={rate} className="w-16" />
-                            <span className="text-sm">{rate}%</span>
+                            <Progress value={project.completion} className="w-16" />
+                            <span className="text-sm">{project.completion}%</span>
                           </div>
                         </TableCell>
                       </TableRow>
-                    )
-                  })}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="performance" className="space-y-4">
+            <Card className="shadow-md">
+              <CardHeader>
+                <CardTitle>Performance Metrics</CardTitle>
+                <CardDescription>Average Score: {Math.round(averagePerformance)}%</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {performanceMetrics.map((metric, index) => (
+                  <div key={index} className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium">{metric.metric}</span>
+                      <span className="text-sm text-muted-foreground">
+                        {metric.score}% / {metric.target}%
+                      </span>
+                    </div>
+                    <Progress value={metric.score} className="h-2" />
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="attendance" className="space-y-4">
+            <Card className="shadow-md">
+              <CardHeader>
+                <CardTitle>Attendance Record</CardTitle>
+                <CardDescription>Average Rate: {Math.round(averageAttendance)}%</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Month</TableHead>
+                      <TableHead>Present</TableHead>
+                      <TableHead>Absent</TableHead>
+                      <TableHead>Late</TableHead>
+                      <TableHead>Attendance Rate</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {attendanceData.map((record, index) => {
+                      const total = record.present + record.absent
+                      const rate = Math.round((record.present / total) * 100)
+                      return (
+                        <TableRow key={index}>
+                          <TableCell className="font-medium">{record.month}</TableCell>
+                          <TableCell>{record.present}</TableCell>
+                          <TableCell>{record.absent}</TableCell>
+                          <TableCell>{record.late}</TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              <Progress value={rate} className="w-16" />
+                              <span className="text-sm">{rate}%</span>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      )
+                    })}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   )
 }
