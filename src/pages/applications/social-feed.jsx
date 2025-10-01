@@ -19,7 +19,7 @@ const initialPosts = [
       verified: true,
     },
     content: "Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle. #MotivationMonday #Inspiration 🌟",
-    image: null, // Image ہٹائی یا valid URL ڈالیں
+    image: null, 
     timestamp: "2025-09-16T10:00:00",
     likes: 10,
     liked: false,
@@ -35,7 +35,7 @@ const initialPosts = [
       verified: true,
     },
     content: "Sharing some updates! #Tech",
-    image: "https://picsum.photos/400/200", // Valid placeholder image
+    image: "https://picsum.photos/400/200", 
     timestamp: "2025-09-16T11:00:00",
     likes: 5,
     liked: false,

@@ -160,7 +160,7 @@ const menuSections = [
                 title: "Leave (Employee)",
                 href: "/attendance/leaves/employee",
               },
-              { title: "Leave Settings", href: "/attendance/leaves/settings" },
+              
             ],
           },
           { title: "Attendance (Admin)", href: "/attendance/admin" },

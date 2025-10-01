@@ -12,6 +12,7 @@ import { Label } from "../../components/ui/label"
 import { Textarea } from "../../components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select"
 
+
 const paymentsData = [
   {
     id: 1,
@@ -115,7 +116,7 @@ export default function FiancePayments() {
   const failedAmount = payments.filter((p) => p.status === "Failed").reduce((sum, payment) => sum + payment.amount, 0)
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 px-4 sm:px-6 lg:px-8 max-w-ful mt-5">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Payments</h1>

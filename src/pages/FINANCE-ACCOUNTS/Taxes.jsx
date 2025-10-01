@@ -128,7 +128,7 @@ const Taxes = () => {
         </div>
         <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-blue-600 hover:bg-blue-700">Add Tax Record</Button>
+            <Button className="bg-orange-600 hover:bg-orange-700">Add Tax Record</Button>
           </DialogTrigger>
           <DialogContent className="max-w-md">
             <DialogHeader>
@@ -289,7 +289,7 @@ const Taxes = () => {
                         <TableCell>
                           <span className={
                             tax.status === "Paid" ? "text-green-600" :
-                            tax.status === "Pending" ? "text-blue-600" :
+                            tax.status === "Pending" ? "text-orange-600" :
                             "text-red-600"
                           }>
                             {tax.status}

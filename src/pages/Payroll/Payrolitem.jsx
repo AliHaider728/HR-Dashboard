@@ -339,7 +339,7 @@ const PayrollItem = () => {
 
   const getCategoryBadge = (category) => {
     const variants = {
-      "Monthly Remuneration": "bg-blue-100 text-blue-800",
+      "Monthly Remuneration": "bg-orange-100 text-orange-800",
       "Additional Remuneration": "bg-green-100 text-green-800",
     }
     return variants[category] || "bg-gray-100 text-gray-800"
@@ -353,8 +353,8 @@ const PayrollItem = () => {
           title: "Total Payroll Items", 
           value: total.toString(), 
           change: "+2%", 
-          color: "text-blue-600",
-          bg: "bg-blue-100"
+          color: "text-orange-600",
+          bg: "bg-orange-100"
         },
         { 
           title: "Monthly Items", 
@@ -384,8 +384,8 @@ const PayrollItem = () => {
           title: "Total OT Rates", 
           value: total.toString(), 
           change: "+1%", 
-          color: "text-blue-600",
-          bg: "bg-blue-100"
+          color: "text-orange-600",
+          bg: "bg-orange-100"
         },
         { 
           title: "Hourly Rates", 
@@ -415,8 +415,8 @@ const PayrollItem = () => {
           title: "Total Deductions", 
           value: total.toString(), 
           change: "+3%", 
-          color: "text-blue-600",
-          bg: "bg-blue-100"
+          color: "text-orange-600",
+          bg: "bg-orange-100"
         },
         { 
           title: "Penalty Items", 
@@ -599,7 +599,7 @@ const PayrollItem = () => {
       return payrollItems.map((item) => (
         <TableRow key={item.id} className="hover:bg-gray-50">
           <TableCell className="font-medium">{item.name}</TableCell>
-          <TableCell className="text-right font-medium text-blue-600">
+          <TableCell className="text-right font-medium text-orange-600">
             {item.rate}
           </TableCell>
           <TableCell className="text-right">
@@ -821,7 +821,7 @@ const PayrollItem = () => {
           <div className="flex gap-2">
             <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
               <DialogTrigger asChild>
-                <Button className="bg-blue-600 hover:bg-blue-700">
+                <Button className="bg-orange-600 hover:bg-orange-700">
                   <Plus className="w-4 h-4 mr-2" />
                   {getAddButtonText()}
                 </Button>
@@ -903,13 +903,13 @@ const PayrollItem = () => {
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="payroll" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
+            <TabsTrigger value="payroll" className="data-[state=active]:bg-orange-600 data-[state=active]:text-white">
               Payroll
             </TabsTrigger>
-            <TabsTrigger value="overtime" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
+            <TabsTrigger value="overtime" className="data-[state=active]:bg-orange-600 data-[state=active]:text-white">
               Overtime
             </TabsTrigger>
-            <TabsTrigger value="deduction" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
+            <TabsTrigger value="deduction" className="data-[state=active]:bg-orange-600 data-[state=active]:text-white">
               Deduction
             </TabsTrigger>
           </TabsList>
@@ -920,7 +920,7 @@ const PayrollItem = () => {
               <CardHeader className="pb-3">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <CardTitle className="flex items-center">
-                    <DollarSign className="w-5 h-5 mr-2 text-blue-600" />
+                    <DollarSign className="w-5 h-5 mr-2 text-orange-600" />
                     Payroll Items ({total})
                   </CardTitle>
                   <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
@@ -946,14 +946,14 @@ const PayrollItem = () => {
               <CardContent>
                 {loading ? (
                   <div className="flex items-center justify-center py-12">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600"></div>
                   </div>
                 ) : payrollItems.length === 0 ? (
                   <div className="text-center py-12">
                     <FileText className="mx-auto h-12 w-12 text-gray-400 mb-4" />
                     <h3 className="text-lg font-medium text-gray-900 mb-2">No payroll items found</h3>
                     <p className="text-gray-500 mb-6">Get started by creating your first payroll item</p>
-                    <Button onClick={() => setIsAddModalOpen(true)} className="bg-blue-600 hover:bg-blue-700">
+                    <Button onClick={() => setIsAddModalOpen(true)} className="bg-orange-600 hover:bg-orange-700">
                       <Plus className="w-4 h-4 mr-2" />
                       Create Payroll Item
                     </Button>
@@ -1012,7 +1012,7 @@ const PayrollItem = () => {
                                     <PaginationLink 
                                       isActive={isActive}
                                       onClick={() => setCurrentPage(page)}
-                                      className={isActive ? "bg-blue-600 text-white" : ""}
+                                      className={isActive ? "bg-orange-600 text-white" : ""}
                                     >
                                       {page}
                                     </PaginationLink>
@@ -1042,7 +1042,7 @@ const PayrollItem = () => {
               <CardHeader className="pb-3">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <CardTitle className="flex items-center">
-                    <DollarSign className="w-5 h-5 mr-2 text-blue-600" />
+                    <DollarSign className="w-5 h-5 mr-2 text-orange-600" />
                     Overtime Rates ({total})
                   </CardTitle>
                   <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
@@ -1068,14 +1068,14 @@ const PayrollItem = () => {
               <CardContent>
                 {loading ? (
                   <div className="flex items-center justify-center py-12">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600"></div>
                   </div>
                 ) : payrollItems.length === 0 ? (
                   <div className="text-center py-12">
                     <FileText className="mx-auto h-12 w-12 text-gray-400 mb-4" />
                     <h3 className="text-lg font-medium text-gray-900 mb-2">No overtime rates found</h3>
                     <p className="text-gray-500 mb-6">Get started by creating your first overtime rate</p>
-                    <Button onClick={() => setIsAddModalOpen(true)} className="bg-blue-600 hover:bg-blue-700">
+                    <Button onClick={() => setIsAddModalOpen(true)} className="bg-orange-600 hover:bg-orange-700">
                       <Plus className="w-4 h-4 mr-2" />
                       Create Overtime Rate
                     </Button>
@@ -1134,7 +1134,7 @@ const PayrollItem = () => {
                                     <PaginationLink 
                                       isActive={isActive}
                                       onClick={() => setCurrentPage(page)}
-                                      className={isActive ? "bg-blue-600 text-white" : ""}
+                                      className={isActive ? "bg-orange-600 text-white" : ""}
                                     >
                                       {page}
                                     </PaginationLink>
@@ -1256,7 +1256,7 @@ const PayrollItem = () => {
                                     <PaginationLink 
                                       isActive={isActive}
                                       onClick={() => setCurrentPage(page)}
-                                      className={isActive ? "bg-blue-600 text-white" : ""}
+                                      className={isActive ? "bg-orange-600 text-white" : ""}
                                     >
                                       {page}
                                     </PaginationLink>
