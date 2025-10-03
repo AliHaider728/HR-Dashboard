@@ -1,4 +1,4 @@
- import React, { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import {
@@ -139,7 +139,6 @@ const SecuritySettings = () => {
     e.preventDefault();
     if (validatePassword()) {
       setIsUpdatingPassword(true);
-      // Simulate API call
       setTimeout(() => {
         setIsUpdatingPassword(false);
         setIsEditingPassword(false);
@@ -196,7 +195,6 @@ const SecuritySettings = () => {
   };
 
   const handleConnectGoogle = () => {
-    // Simulate Google OAuth flow
     alert("Redirecting to Google authentication...");
     setIsGoogleConnected(true);
   };
@@ -248,53 +246,53 @@ const SecuritySettings = () => {
         rel="stylesheet"
       />
       
-      <div className="min-h-screen bg-gray-50 py-8 font-[Inter]">
-        <div className=" max-w-ful  mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-gray-50 py-6 sm:py-8 font-[Inter] px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="mb-8">
-            <div className="flex items-center space-x-3 mb-4">
+          <div className="mb-6 sm:mb-8">
+            <div className="flex items-center space-x-2 sm:space-x-3 mb-3 sm:mb-4">
               <button 
                 onClick={() => navigate('/profile')}
                 className="text-gray-500 hover:text-gray-700"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
               </button>
-              <h1 className="text-3xl font-bold text-gray-900 font-[Poppins]">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-[Poppins]">
                 Security Settings
               </h1>
             </div>
-            <p className="text-gray-600">
+            <p className="text-gray-600 text-sm sm:text-base">
               Manage your account security and privacy settings
             </p>
           </div>
 
           {/* Navigation Tabs */}
-          <div className="mb-8">
+          <div className="mb-6 sm:mb-8 text-center items-center">
             <div className="border-b border-gray-200">
-              <nav className="-mb-px flex space-x-8">
+              <nav className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 sm:-mb-px">
                 <button 
                   onClick={() => navigate('/profile')}
-                  className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm cursor-pointer"
+                  className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-1 sm:px-2 border-b-2 font-medium text-sm sm:text-base cursor-pointer"
                 >
                   Profile Settings
                 </button>
                 <a 
                   href="#" 
-                  className="border-blue-500 text-blue-600 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm"
+                  className="border-blue-500 text-blue-600 whitespace-nowrap py-2 px-1 sm:px-2 border-b-2 font-medium text-sm sm:text-base"
                 >
                   Security Settings
                 </a>
                 <button 
                   onClick={() => navigate('/notifications')}
-                  className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm cursor-pointer"
+                  className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-1 sm:px-2 border-b-2 font-medium text-sm sm:text-base cursor-pointer"
                 >
                   Notifications
                 </button>
                 <button 
                   onClick={() => navigate('/connected-apps')}
-                  className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm cursor-pointer"
+                  className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-1 sm:px-2 border-b-2 font-medium text-sm sm:text-base cursor-pointer"
                 >
                   Connected Apps
                 </button>
@@ -302,29 +300,29 @@ const SecuritySettings = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
             {/* Left Column - Main Security Settings */}
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {/* Password Section */}
               <Card className="bg-white shadow-sm">
-                <CardHeader>
-                  <CardTitle className="text-lg font-semibold flex items-center font-[Poppins]">
-                    <Lock className="w-5 h-5 mr-2 text-red-600" />
+                <CardHeader className="p-4 sm:p-6">
+                  <CardTitle className="text-base sm:text-lg font-semibold flex items-center font-[Poppins]">
+                    <Lock className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-red-600" />
                     Password
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-sm sm:text-base">
                     Set a unique password to protect your account
                   </CardDescription>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-xs sm:text-sm text-gray-500">
                     Last Changed: 03 Jan 2024, 09:00 AM
                   </p>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="p-4 sm:p-6 space-y-4 sm:space-y-6">
                   {isEditingPassword ? (
                     <form onSubmit={handlePasswordSubmit} className="space-y-4">
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                             Current Password <span className="text-red-500">*</span>
                           </label>
                           <div className="relative">
@@ -333,7 +331,7 @@ const SecuritySettings = () => {
                               name="currentPassword"
                               value={passwordData.currentPassword}
                               onChange={handlePasswordInputChange}
-                              className={`w-full pr-12 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                              className={`w-full pr-10 sm:pr-12 py-2 sm:py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                                 passwordErrors.currentPassword ? "border-red-300" : "border-gray-300"
                               }`}
                               placeholder="Enter current password"
@@ -347,7 +345,7 @@ const SecuritySettings = () => {
                             </button>
                           </div>
                           {passwordErrors.currentPassword && (
-                            <p className="mt-1 text-sm text-red-600 flex items-center">
+                            <p className="mt-1 text-xs sm:text-sm text-red-600 flex items-center">
                               <X className="w-4 h-4 mr-1" />
                               {passwordErrors.currentPassword}
                             </p>
@@ -355,7 +353,7 @@ const SecuritySettings = () => {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                             New Password <span className="text-red-500">*</span>
                           </label>
                           <div className="relative">
@@ -364,7 +362,7 @@ const SecuritySettings = () => {
                               name="newPassword"
                               value={passwordData.newPassword}
                               onChange={handlePasswordInputChange}
-                              className={`w-full pr-12 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                              className={`w-full pr-10 sm:pr-12 py-2 sm:py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                                 passwordErrors.newPassword ? "border-red-300" : "border-gray-300"
                               }`}
                               placeholder="Enter new password (min 8 characters)"
@@ -378,7 +376,7 @@ const SecuritySettings = () => {
                             </button>
                           </div>
                           {passwordErrors.newPassword && (
-                            <p className="mt-1 text-sm text-red-600 flex items-center">
+                            <p className="mt-1 text-xs sm:text-sm text-red-600 flex items-center">
                               <X className="w-4 h-4 mr-1" />
                               {passwordErrors.newPassword}
                             </p>
@@ -386,7 +384,7 @@ const SecuritySettings = () => {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                             Confirm New Password <span className="text-red-500">*</span>
                           </label>
                           <div className="relative">
@@ -395,7 +393,7 @@ const SecuritySettings = () => {
                               name="confirmPassword"
                               value={passwordData.confirmPassword}
                               onChange={handlePasswordInputChange}
-                              className={`w-full pr-12 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                              className={`w-full pr-10 sm:pr-12 py-2 sm:py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                                 passwordErrors.confirmPassword ? "border-red-300" : "border-gray-300"
                               }`}
                               placeholder="Confirm new password"
@@ -409,7 +407,7 @@ const SecuritySettings = () => {
                             </button>
                           </div>
                           {passwordErrors.confirmPassword && (
-                            <p className="mt-1 text-sm text-red-600 flex items-center">
+                            <p className="mt-1 text-xs sm:text-sm text-red-600 flex items-center">
                               <X className="w-4 h-4 mr-1" />
                               {passwordErrors.confirmPassword}
                             </p>
@@ -417,11 +415,11 @@ const SecuritySettings = () => {
                         </div>
                       </div>
 
-                      <div className="flex justify-end space-x-3 pt-4">
+                      <div className="flex justify-end space-x-2 sm:space-x-3 pt-4">
                         <button
                           type="button"
                           onClick={handlePasswordCancel}
-                          className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors flex items-center space-x-2"
+                          className="px-3 sm:px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors flex items-center space-x-2 w-full sm:w-auto"
                         >
                           <X className="w-4 h-4" />
                           <span>Cancel</span>
@@ -429,7 +427,7 @@ const SecuritySettings = () => {
                         <button
                           type="submit"
                           disabled={isUpdatingPassword}
-                          className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-md transition-colors flex items-center space-x-2"
+                          className="px-3 sm:px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-md transition-colors flex items-center space-x-2 w-full sm:w-auto"
                         >
                           {isUpdatingPassword ? (
                             <>
@@ -446,7 +444,7 @@ const SecuritySettings = () => {
                       </div>
                     </form>
                   ) : (
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-col sm:flex-row items-center justify-between">
                       <div>
                         <p className="text-sm text-gray-600">
                           Your password was last changed on 03 Jan 2024
@@ -454,7 +452,7 @@ const SecuritySettings = () => {
                       </div>
                       <button
                         onClick={() => setIsEditingPassword(true)}
-                        className="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors flex items-center space-x-2"
+                        className="px-3 sm:px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors flex items-center space-x-2 mt-3 sm:mt-0 w-full sm:w-auto"
                       >
                         <Edit3 className="w-4 h-4" />
                         <span>Change Password</span>
@@ -466,32 +464,32 @@ const SecuritySettings = () => {
 
               {/* Two Factor Authentication */}
               <Card className="bg-white shadow-sm">
-                <CardHeader>
-                  <CardTitle className="text-lg font-semibold flex items-center font-[Poppins]">
-                    <Shield className="w-5 h-5 mr-2 text-green-600" />
+                <CardHeader className="p-4 sm:p-6">
+                  <CardTitle className="text-base sm:text-lg font-semibold flex items-center font-[Poppins]">
+                    <Shield className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-green-600" />
                     Two Factor Authentication
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-sm sm:text-base">
                     Receive codes via SMS or email every time you login
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="flex items-center justify-between">
+                <CardContent className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+                  <div className="flex flex-col sm:flex-row items-center justify-between">
                     <div>
                       <p className="text-sm font-medium text-gray-900">{is2FAEnabled ? "Enabled" : "Disabled"}</p>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-xs sm:text-sm text-gray-500">
                         {is2FAEnabled 
                           ? `Codes are sent via ${selectedMethod.toUpperCase()}`
                           : "Add extra security to your account"
                         }
                       </p>
                     </div>
-                    <div className="flex items-center space-x-3">
+                    <div className="flex items-center space-x-2 sm:space-x-3 mt-3 sm:mt-0">
                       {is2FAEnabled ? (
                         <button
                           onClick={handleDisable2FA}
                           disabled={isEnabling2FA}
-                          className="px-4 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-md transition-colors flex items-center space-x-2"
+                          className="px-3 sm:px-4 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-md transition-colors flex items-center space-x-2 w-full sm:w-auto"
                         >
                           <X className="w-4 h-4" />
                           <span>Disable</span>
@@ -500,7 +498,7 @@ const SecuritySettings = () => {
                         <button
                           onClick={handleEnable2FA}
                           disabled={isEnabling2FA}
-                          className="px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-md transition-colors flex items-center space-x-2"
+                          className="px-3 sm:px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-md transition-colors flex items-center space-x-2 w-full sm:w-auto"
                         >
                           {isEnabling2FA ? (
                             <>
@@ -519,14 +517,14 @@ const SecuritySettings = () => {
                   </div>
 
                   {is2FAEnabled && (
-                    <div className="p-4 bg-blue-50 rounded-lg">
-                      <div className="flex items-center space-x-3">
-                        <Zap className="w-5 h-5 text-blue-600" />
+                    <div className="p-3 sm:p-4 bg-blue-50 rounded-lg">
+                      <div className="flex items-center space-x-2 sm:space-x-3">
+                        <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                         <div>
                           <p className="text-sm font-medium text-blue-900">
                             2FA is currently active
                           </p>
-                          <p className="text-sm text-blue-700">
+                          <p className="text-xs sm:text-sm text-blue-700">
                             You'll receive a code via {selectedMethod} for each login attempt.
                           </p>
                         </div>
@@ -538,98 +536,94 @@ const SecuritySettings = () => {
 
               {/* Phone Number Verification */}
               <Card className="bg-white shadow-sm">
-                <CardHeader>
-                  <CardTitle className="text-lg font-semibold flex items-center font-[Poppins]">
-                    <Phone className="w-5 h-5 mr-2 text-blue-600" />
+                <CardHeader className="p-4 sm:p-6">
+                  <CardTitle className="text-base sm:text-lg font-semibold flex items-center font-[Poppins]">
+                    <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-blue-600" />
                     Phone Number Verification
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-sm sm:text-base">
                     The phone number associated with the account
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-gray-900">
-                          Verified Mobile Number: +99264710583
-                        </p>
-                        <p className="text-sm text-green-600 flex items-center">
-                          <CheckCircle className="w-4 h-4 mr-1" />
-                          Verified
-                        </p>
-                      </div>
-                      <button className="px-3 py-1 text-xs font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors">
-                        Change Number
-                      </button>
+                <CardContent className="p-4 sm:p-6">
+                  <div className="flex flex-col sm:flex-row items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-gray-900">
+                        Verified Mobile Number: +99264710583
+                      </p>
+                      <p className="text-xs sm:text-sm text-green-600 flex items-center">
+                        <CheckCircle className="w-4 h-4 mr-1" />
+                        Verified
+                      </p>
                     </div>
+                    <button className="px-3 py-1 sm:px-3 sm:py-1 text-xs sm:text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors mt-3 sm:mt-0 w-full sm:w-auto">
+                      Change Number
+                    </button>
                   </div>
                 </CardContent>
               </Card>
 
               {/* Email Verification */}
               <Card className="bg-white shadow-sm">
-                <CardHeader>
-                  <CardTitle className="text-lg font-semibold flex items-center font-[Poppins]">
-                    <Mail className="w-5 h-5 mr-2 text-green-600" />
+                <CardHeader className="p-4 sm:p-6">
+                  <CardTitle className="text-base sm:text-lg font-semibold flex items-center font-[Poppins]">
+                    <Mail className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-green-600" />
                     Email Verification
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-sm sm:text-base">
                     The email address associated with the account
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-gray-900">
-                          Verified Email: anthony.lewis@company.com
-                        </p>
-                        <p className="text-sm text-green-600 flex items-center">
-                          <CheckCircle className="w-4 h-4 mr-1" />
-                          Verified
-                        </p>
-                      </div>
-                      <button className="px-3 py-1 text-xs font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors">
-                        Change Email
-                      </button>
+                <CardContent className="p-4 sm:p-6">
+                  <div className="flex flex-col sm:flex-row items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-gray-900 truncate">
+                        Verified Email: anthony.lewis@company.com
+                      </p>
+                      <p className="text-xs sm:text-sm text-green-600 flex items-center">
+                        <CheckCircle className="w-4 h-4 mr-1" />
+                        Verified
+                      </p>
                     </div>
+                    <button className="px-3 py-1 sm:px-3 sm:py-1 text-xs sm:text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors mt-3 sm:mt-0 w-full sm:w-auto">
+                      Change Email
+                    </button>
                   </div>
                 </CardContent>
               </Card>
             </div>
 
             {/* Right Column - Additional Settings */}
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {/* Google Authentication */}
               <Card className="bg-white shadow-sm">
-                <CardHeader>
-                  <CardTitle className="text-lg font-semibold flex items-center font-[Poppins]">
-                    <Key className="w-5 h-5 mr-2 text-orange-600" />
+                <CardHeader className="p-4 sm:p-6">
+                  <CardTitle className="text-base sm:text-lg font-semibold flex items-center font-[Poppins]">
+                    <Key className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-orange-600" />
                     Google Authentication
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-sm sm:text-base">
                     Connect your Google account for easier login
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="flex items-center justify-between">
+                <CardContent className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+                  <div className="flex flex-col sm:flex-row items-center justify-between">
                     <div>
                       <p className="text-sm font-medium text-gray-900">
                         {isGoogleConnected ? "Connected" : "Not Connected"}
                       </p>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-xs sm:text-sm text-gray-500">
                         {isGoogleConnected 
                           ? "You can sign in with your Google account"
                           : "Connect your Google account to enable single sign-on"
                         }
                       </p>
                     </div>
-                    <div className="flex items-center space-x-3">
+                    <div className="flex items-center space-x-2 sm:space-x-3 mt-3 sm:mt-0">
                       {isGoogleConnected ? (
                         <button
                           onClick={handleDisconnectGoogle}
-                          className="px-4 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-md transition-colors flex items-center space-x-2"
+                          className="px-3 sm:px-4 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-md transition-colors flex items-center space-x-2 w-full sm:w-auto"
                         >
                           <X className="w-4 h-4" />
                           <span>Disconnect</span>
@@ -637,7 +631,7 @@ const SecuritySettings = () => {
                       ) : (
                         <button
                           onClick={handleConnectGoogle}
-                          className="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-md transition-colors flex items-center space-x-2"
+                          className="px-3 sm:px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-md transition-colors flex items-center space-x-2 w-full sm:w-auto"
                         >
                           <Key className="w-4 h-4" />
                           <span>Connect Google</span>
@@ -647,10 +641,10 @@ const SecuritySettings = () => {
                   </div>
 
                   {isGoogleConnected && (
-                    <div className="p-4 bg-orange-50 rounded-lg border border-orange-200">
-                      <div className="flex items-center space-x-3">
+                    <div className="p-3 sm:p-4 bg-orange-50 rounded-lg border border-orange-200">
+                      <div className="flex items-center space-x-2 sm:space-x-3">
                         <div className="p-2 bg-orange-100 rounded-full">
-                          <svg className="w-5 h-5 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                           </svg>
                         </div>
@@ -658,7 +652,7 @@ const SecuritySettings = () => {
                           <p className="text-sm font-medium text-orange-900">
                             Google account connected
                           </p>
-                          <p className="text-sm text-orange-700">
+                          <p className="text-xs sm:text-sm text-orange-700">
                             You can now sign in with your Google account
                           </p>
                         </div>
@@ -670,36 +664,36 @@ const SecuritySettings = () => {
 
               {/* Device Management */}
               <Card className="bg-white shadow-sm">
-                <CardHeader>
-                  <CardTitle className="text-lg font-semibold flex items-center font-[Poppins]">
-                    <Smartphone className="w-5 h-5 mr-2 text-purple-600" />
+                <CardHeader className="p-4 sm:p-6">
+                  <CardTitle className="text-base sm:text-lg font-semibold flex items-center font-[Poppins]">
+                    <Smartphone className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-purple-600" />
                     Device Management
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-sm sm:text-base">
                     The devices associated with your account
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="p-4 sm:p-6 space-y-3 sm:space-y-4">
                   <div className="space-y-3">
                     {activeDevices.map((device) => (
                       <div key={device.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <div className="flex items-center space-x-3">
-                          <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                        <div className="flex items-center space-x-2 sm:space-x-3">
+                          <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center ${
                             device.type === 'mobile' 
                               ? 'bg-blue-100 text-blue-600' 
                               : 'bg-gray-100 text-gray-600'
                           }`}>
                             {device.type === 'mobile' ? (
-                              <Smartphone className="w-5 h-5" />
+                              <Smartphone className="w-4 h-4 sm:w-5 sm:h-5" />
                             ) : (
-                              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clipRule="evenodd" />
                               </svg>
                             )}
                           </div>
                           <div>
-                            <p className="text-sm font-medium text-gray-900">{device.name}</p>
-                            <p className="text-xs text-gray-500">
+                            <p className="text-sm font-medium text-gray-900 truncate">{device.name}</p>
+                            <p className="text-xs text-gray-500 truncate">
                               Last active: {device.lastActive} • {device.location}
                             </p>
                           </div>
@@ -724,7 +718,7 @@ const SecuritySettings = () => {
                   </div>
                   <button
                     onClick={handleSignOutAll}
-                    className="w-full px-4 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-md transition-colors flex items-center justify-center space-x-2"
+                    className="w-full px-3 sm:px-4 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-md transition-colors flex items-center justify-center space-x-2"
                   >
                     <X className="w-4 h-4" />
                     <span>Sign Out All Other Devices</span>
@@ -733,20 +727,20 @@ const SecuritySettings = () => {
               </Card>
 
               {/* Account Activity */}
-              <Card className="bg-white shadow-sm lg:col-span-2">
-                <CardHeader>
-                  <CardTitle className="text-lg font-semibold flex items-center font-[Poppins]">
-                    <Activity className="w-5 h-5 mr-2 text-indigo-600" />
+              <Card className="bg-white shadow-sm">
+                <CardHeader className="p-4 sm:p-6">
+                  <CardTitle className="text-base sm:text-lg font-semibold flex items-center font-[Poppins]">
+                    <Activity className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-indigo-600" />
                     Account Activity
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-sm sm:text-base">
                     Recent activities of your account
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="p-4 sm:p-6">
                   <div className="space-y-3">
                     {recentActivity.map((activity) => (
-                      <div key={activity.id} className={`flex items-center space-x-3 p-3 rounded-lg ${
+                      <div key={activity.id} className={`flex items-center space-x-2 sm:space-x-3 p-3 rounded-lg ${
                         activity.status === 'success' 
                           ? 'bg-green-50 border border-green-200' 
                           : 'bg-red-50 border border-red-200'
@@ -755,10 +749,10 @@ const SecuritySettings = () => {
                           activity.status === 'success' ? 'bg-green-500' : 'bg-red-500'
                         }`}></div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-gray-900 capitalize">
+                          <p className="text-sm font-medium text-gray-900 capitalize truncate">
                             {activity.action} from {activity.device}
                           </p>
-                          <p className="text-xs text-gray-500">
+                          <p className="text-xs text-gray-500 truncate">
                             {activity.location} • {activity.ip} • {activity.time}
                           </p>
                         </div>
@@ -778,46 +772,46 @@ const SecuritySettings = () => {
           </div>
 
           {/* Danger Zone */}
-          <div className="mt-12">
+          <div className="mt-8 sm:mt-12">
             <Card className="bg-gradient-to-r from-red-50 to-red-100 border border-red-200">
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold flex items-center font-[Poppins] text-red-800">
-                  <AlertTriangle className="w-5 h-5 mr-2" />
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-base sm:text-lg font-semibold flex items-center font-[Poppins] text-red-800">
+                  <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   Danger Zone
                 </CardTitle>
-                <CardDescription className="text-red-700">
+                <CardDescription className="text-sm sm:text-base text-red-700">
                   These actions are permanent and cannot be undone
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="flex flex-col md:flex-row items-center justify-between p-6 bg-white rounded-lg border border-gray-200">
+              <CardContent className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+                <div className="flex flex-col md:flex-row items-center justify-between p-4 sm:p-6 bg-white rounded-lg border border-gray-200">
                   <div>
                     <h3 className="text-sm font-semibold text-gray-900 mb-1">Deactivate Account</h3>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-xs sm:text-sm text-gray-600">
                       This will shutdown your account. Your account will be reactivated when you sign in again.
                     </p>
                   </div>
                   <button
                     onClick={handleDeactivateAccount}
-                    className="px-6 py-2 text-sm font-medium text-red-700 bg-red-100 hover:bg-red-200 rounded-md transition-colors mt-4 md:mt-0"
+                    className="px-4 sm:px-6 py-2 text-sm font-medium text-red-700 bg-red-100 hover:bg-red-200 rounded-md transition-colors mt-3 md:mt-0 w-full md:w-auto"
                   >
                     Deactivate Account
                   </button>
                 </div>
 
-                <div className="flex flex-col md:flex-row items-center justify-between p-6 bg-white rounded-lg border border-gray-200">
+                <div className="flex flex-col md:flex-row items-center justify-between p-4 sm:p-6 bg-white rounded-lg border border-gray-200">
                   <div>
                     <h3 className="text-sm font-semibold text-gray-900 mb-1">Delete Account</h3>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-xs sm:text-sm text-gray-600">
                       Your account will be permanently deleted. This action cannot be undone.
                     </p>
                   </div>
                   <button
                     onClick={handleDeleteAccount}
-                    className="px-6 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-md transition-colors mt-4 md:mt-0"
+                    className="px-4 sm:px-6 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-md transition-colors mt-3 md:mt-0 w-full md:w-auto flex items-center justify-center space-x-2"
                   >
-                    <Trash2 className="w-4 h-4 inline mr-2" />
-                    Delete Account
+                    <Trash2 className="w-4 h-4" />
+                    <span>Delete Account</span>
                   </button>
                 </div>
               </CardContent>

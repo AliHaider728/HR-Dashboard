@@ -138,19 +138,6 @@ const BusinessSettings = () => {
     }
   };
 
-  const getDefaultImage = (logoId) => {
-    const defaults = {
-      main: "https://via.placeholder.com/200x60/2563EB/FFFFFF?text=LOGO",
-      white: "https://via.placeholder.com/160x50/FFFFFF/000000?text=LOGO",
-      dark: "https://via.placeholder.com/160x50/1F2937/FFFFFF?text=LOGO",
-      miniWhite: "https://via.placeholder.com/80x80/FFFFFF/000000?text=SM",
-      miniDark: "https://via.placeholder.com/80x80/1F2937/FFFFFF?text=SM",
-      favicon: "https://via.placeholder.com/128x128/2563EB/FFFFFF?text=F",
-      appleIcon: "https://via.placeholder.com/180x180/2563EB/FFFFFF?text=A",
-    };
-    return defaults[logoId];
-  };
-
   const handleSaveAll = async () => {
     setIsSaving(true);
     // Simulate API call to save all logos
@@ -186,59 +173,59 @@ const BusinessSettings = () => {
         rel="stylesheet"
       />
       
-      <div className="min-h-screen bg-gray-50 py-8 font-[Inter]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-gray-50 py-4 sm:py-6 lg:py-8 font-[Inter] px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="mb-8">
-            <div className="flex items-center space-x-3 mb-4">
+          <div className="mb-4 sm:mb-6">
+            <div className="flex items-center space-x-2 sm:space-x-3 mb-2 sm:mb-3">
               <button 
                 onClick={() => navigate('/profile')}
                 className="text-gray-500 hover:text-gray-700"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
               </button>
-              <h1 className="text-3xl font-bold text-gray-900 font-[Poppins]">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 font-[Poppins]">
                 Business Settings
               </h1>
             </div>
-            <p className="text-gray-600">
+            <p className="text-gray-600 text-xs sm:text-sm">
               Configure your company's branding and visual identity
             </p>
           </div>
 
           {/* Navigation Tabs */}
-          <div className="mb-8">
-            <div className="border-b border-gray-200">
-              <nav className="-mb-px flex space-x-8">
+          <div className="mb-4 sm:mb-6">
+            <div className="border-b border-gray-200 text-center">
+              <nav className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 -mb-px overflow-x-auto">
                 <button 
                   onClick={() => navigate('/profile')}
-                  className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm cursor-pointer"
+                  className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-2 border-b-2 font-medium text-xs sm:text-sm cursor-pointer"
                 >
                   Profile Settings
                 </button>
                 <button 
                   onClick={() => navigate('/security-settings')}
-                  className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm cursor-pointer"
+                  className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-2 border-b-2 font-medium text-xs sm:text-sm cursor-pointer"
                 >
                   Security Settings
                 </button>
                 <button 
                   onClick={() => navigate('/notifications')}
-                  className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm cursor-pointer"
+                  className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-2 border-b-2 font-medium text-xs sm:text-sm cursor-pointer"
                 >
                   Notifications
                 </button>
                 <button 
                   onClick={() => navigate('/connected-apps')}
-                  className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm cursor-pointer"
+                  className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-2 border-b-2 font-medium text-xs sm:text-sm cursor-pointer"
                 >
                   Connected Apps
                 </button>
                 <a 
                   href="#" 
-                  className="border-orange-500 text-orange-600 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm"
+                  className="border-orange-500 text-orange-600 whitespace-nowrap py-2 px-2 border-b-2 font-medium text-xs sm:text-sm"
                 >
                   Business Settings
                 </a>
@@ -246,21 +233,21 @@ const BusinessSettings = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
             {/* Company Images Section */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="lg:col-span-2 space-y-4 sm:space-y-6">
               <Card className="bg-white shadow-sm">
-                <CardHeader>
-                  <CardTitle className="text-lg font-semibold flex items-center font-[Poppins]">
-                    <Image className="w-5 h-5 mr-2 text-orange-600" />
+                <CardHeader className="p-4 sm:p-6">
+                  <CardTitle className="text-base sm:text-lg font-semibold flex items-center font-[Poppins]">
+                    <Image className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-orange-600" />
                     Company Images
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-xs sm:text-sm">
                     Upload and manage your company logos and icons
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                <CardContent className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     {logoTypes.slice(0, 4).map((logo) => (
                       <LogoUploadCard
                         key={logo.id}
@@ -272,7 +259,7 @@ const BusinessSettings = () => {
                     ))}
                   </div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     {logoTypes.slice(4, 6).map((logo) => (
                       <LogoUploadCard
                         key={logo.id}
@@ -284,7 +271,7 @@ const BusinessSettings = () => {
                     ))}
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     {logoTypes.slice(6).map((logo) => (
                       <LogoUploadCard
                         key={logo.id}
@@ -297,11 +284,11 @@ const BusinessSettings = () => {
                   </div>
 
                   {/* Save Actions */}
-                  <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+                  <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-3 pt-4 sm:pt-6 border-t border-gray-200">
                     <button
                       onClick={handleCancelChanges}
                       disabled={!showUnsavedChanges}
-                      className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed rounded-md transition-colors flex items-center space-x-2"
+                      className="px-3 py-2 text-xs sm:text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed rounded-md transition-colors flex items-center justify-center space-x-1"
                     >
                       <X className="w-4 h-4" />
                       <span>Cancel Changes</span>
@@ -309,7 +296,7 @@ const BusinessSettings = () => {
                     <button
                       onClick={handleSaveAll}
                       disabled={!showUnsavedChanges || isSaving}
-                      className="px-4 py-2 text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-md transition-colors flex items-center space-x-2"
+                      className="px-3 py-2 text-xs sm:text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-md transition-colors flex items-center justify-center space-x-1"
                     >
                       {isSaving ? (
                         <>
@@ -330,47 +317,47 @@ const BusinessSettings = () => {
 
             {/* Company Information Section */}
             <Card className="bg-white shadow-sm lg:col-span-1">
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold flex items-center font-[Poppins]">
-                  <Building className="w-5 h-5 mr-2 text-green-600" />
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-base sm:text-lg font-semibold flex items-center font-[Poppins]">
+                  <Building className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-green-600" />
                   Company Information
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-xs sm:text-sm">
                   Basic company details and branding
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="space-y-4">
+              <CardContent className="p-4 sm:p-6 space-y-4">
+                <div className="space-y-3">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                       Company Name
                     </label>
                     <input
                       type="text"
                       defaultValue="Smarthr Solutions Inc."
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      className="w-full px-3 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                       placeholder="Enter company name"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                       Business Email
                     </label>
                     <input
                       type="email"
                       defaultValue="contact@smarthr.com"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      className="w-full px-3 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                       placeholder="Enter business email"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                       Website URL
                     </label>
                     <input
                       type="url"
                       defaultValue="https://smarthr.co.in"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      className="w-full px-3 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                       placeholder="Enter website URL"
                     />
                   </div>
@@ -380,49 +367,49 @@ const BusinessSettings = () => {
 
             {/* Branding Settings Section */}
             <Card className="bg-white shadow-sm lg:col-span-1">
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold flex items-center font-[Poppins]">
-                  <Palette className="w-5 h-5 mr-2 text-purple-600" />
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-base sm:text-lg font-semibold flex items-center font-[Poppins]">
+                  <Palette className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-purple-600" />
                   Branding Settings
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-xs sm:text-sm">
                   Configure your brand colors and theme
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="space-y-4">
+              <CardContent className="p-4 sm:p-6 space-y-4">
+                <div className="space-y-3">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                       Primary Color
                     </label>
-                    <div className="flex items-center space-x-3">
-                      <div className="w-12 h-8 bg-orange-600 rounded-lg border-2 border-orange-200"></div>
+                    <div className="flex items-center space-x-2 sm:space-x-3">
+                      <div className="w-8 h-6 sm:w-10 sm:h-8 bg-orange-600 rounded-lg border-2 border-orange-200"></div>
                       <input
                         type="color"
                         defaultValue="#2563EB"
-                        className="w-12 h-8 rounded-lg cursor-pointer"
+                        className="w-8 h-6 sm:w-10 sm:h-8 rounded-lg cursor-pointer"
                       />
-                      <span className="text-sm text-gray-500">#2563EB</span>
+                      <span className="text-xs sm:text-sm text-gray-500">#2563EB</span>
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                       Secondary Color
                     </label>
-                    <div className="flex items-center space-x-3">
-                      <div className="w-12 h-8 bg-purple-600 rounded-lg border-2 border-purple-200"></div>
+                    <div className="flex items-center space-x-2 sm:space-x-3">
+                      <div className="w-8 h-6 sm:w-10 sm:h-8 bg-purple-600 rounded-lg border-2 border-purple-200"></div>
                       <input
                         type="color"
                         defaultValue="#7C3AED"
-                        className="w-12 h-8 rounded-lg cursor-pointer"
+                        className="w-8 h-6 sm:w-10 sm:h-8 rounded-lg cursor-pointer"
                       />
-                      <span className="text-sm text-gray-500">#7C3AED</span>
+                      <span className="text-xs sm:text-sm text-gray-500">#7C3AED</span>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-3">
+                  <div className="flex items-center space-x-2">
                     <label className="flex items-center space-x-2">
                       <input type="checkbox" className="rounded border-gray-300 text-orange-600 focus:ring-orange-500" defaultChecked />
-                      <span className="text-sm font-medium text-gray-700">Enable Dark Mode</span>
+                      <span className="text-xs sm:text-sm font-medium text-gray-700">Enable Dark Mode</span>
                     </label>
                   </div>
                 </div>
@@ -431,62 +418,62 @@ const BusinessSettings = () => {
 
             {/* Preview Section */}
             <Card className="bg-white shadow-sm lg:col-span-2">
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold flex items-center font-[Poppins]">
-                  <Globe className="w-5 h-5 mr-2 text-indigo-600" />
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-base sm:text-lg font-semibold flex items-center font-[Poppins]">
+                  <Globe className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-indigo-600" />
                   Live Preview
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-xs sm:text-sm">
                   See how your branding will appear across the platform
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="bg-gray-900 rounded-lg p-6 text-white">
-                  <div className="flex items-center justify-between mb-6">
+              <CardContent className="p-4 sm:p-6">
+                <div className="bg-gray-900 rounded-lg p-4 sm:p-6 text-white">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6">
                     {/* Header Preview */}
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-3 sm:space-x-4 mb-4 sm:mb-0">
                       <img 
                         src={logos.main} 
                         alt="Company Logo" 
-                        className="h-12 w-auto"
+                        className="h-10 w-auto sm:h-12"
                         onError={(e) => {
                           e.target.src = 'https://via.placeholder.com/200x60/2563EB/FFFFFF?text=LOGO';
                         }}
                       />
-                      <h1 className="text-2xl font-bold">Smarthr Dashboard</h1>
+                      <h1 className="text-lg sm:text-xl lg:text-2xl font-bold">Smarthr Dashboard</h1>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <span className="px-3 py-1 bg-orange-600 text-white rounded-full text-sm">Live</span>
-                      <CheckCircle className="w-5 h-5 text-green-400" />
+                      <span className="px-2 py-1 sm:px-3 sm:py-1 bg-orange-600 text-white rounded-full text-xs sm:text-sm">Live</span>
+                      <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
                     </div>
                   </div>
 
                   {/* Navigation Preview */}
-                  <div className="bg-white rounded-lg p-4 mb-6">
-                    <nav className="flex space-x-6">
+                  <div className="bg-white rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                    <nav className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 sm:items-center">
                       <img 
                         src={logos.miniWhite} 
                         alt="Mini Logo" 
-                        className="h-8 w-auto"
+                        className="h-6 w-auto sm:h-8"
                         onError={(e) => {
                           e.target.src = 'https://via.placeholder.com/80x80/FFFFFF/000000?text=SM';
                         }}
                       />
-                      <a href="#" className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md">Dashboard</a>
-                      <a href="#" className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md">Employees</a>
-                      <a href="#" className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md">Analytics</a>
+                      <a href="#" className="text-gray-700 hover:text-orange-600 px-2 py-1 sm:px-3 sm:py-2 rounded-md text-xs sm:text-sm">Dashboard</a>
+                      <a href="#" className="text-gray-700 hover:text-orange-600 px-2 py-1 sm:px-3 sm:py-2 rounded-md text-xs sm:text-sm">Employees</a>
+                      <a href="#" className="text-gray-700 hover:text-orange-600 px-2 py-1 sm:px-3 sm:py-2 rounded-md text-xs sm:text-sm">Analytics</a>
                     </nav>
                   </div>
 
                   {/* Content Preview */}
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
-                        <Building className="w-6 h-6 text-orange-600" />
+                  <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
+                    <div className="flex items-center space-x-3 sm:space-x-4">
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                        <Building className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-900">Company Overview</h3>
-                        <p className="text-sm text-gray-600">Your business settings are looking great!</p>
+                        <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Company Overview</h3>
+                        <p className="text-xs sm:text-sm text-gray-600">Your business settings are looking great!</p>
                       </div>
                     </div>
                   </div>
@@ -504,20 +491,20 @@ const BusinessSettings = () => {
 const LogoUploadCard = ({ logo, isUploading, onUpload, onRemove }) => {
   const imageSrc = logo.preview || logo.currentImage;
   const sizes = {
-    main: "w-48 h-16",
-    white: "w-40 h-12",
-    dark: "w-40 h-12",
-    miniWhite: "w-20 h-20",
-    miniDark: "w-20 h-20",
-    favicon: "w-32 h-32",
-    appleIcon: "w-45 h-45",
+    main: "w-32 h-10 sm:w-40 sm:h-12 lg:w-48 lg:h-16",
+    white: "w-28 h-8 sm:w-32 sm:h-10 lg:w-40 lg:h-12",
+    dark: "w-28 h-8 sm:w-32 sm:h-10 lg:w-40 lg:h-12",
+    miniWhite: "w-16 h-16 sm:w-20 sm:h-20",
+    miniDark: "w-16 h-16 sm:w-20 sm:h-20",
+    favicon: "w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32",
+    appleIcon: "w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36",
   };
 
   return (
-    <div className="space-y-4">
-      <div className="space-y-2">
-        <h3 className="text-sm font-semibold text-gray-900">{logo.title}</h3>
-        <p className="text-xs text-gray-500">{logo.description}</p>
+    <div className="space-y-3">
+      <div className="space-y-1">
+        <h3 className="text-xs sm:text-sm font-semibold text-gray-900">{logo.title}</h3>
+        <p className="text-xs text-gray-500 line-clamp-2">{logo.description}</p>
         <p className="text-xs text-gray-400">Recommended: {logo.recommendedSize}</p>
       </div>
       
@@ -533,16 +520,16 @@ const LogoUploadCard = ({ logo, isUploading, onUpload, onRemove }) => {
           />
           {isUploading && (
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
-              <Loader2 className="w-6 h-6 text-white animate-spin" />
+              <Loader2 className="w-5 h-5 sm:w-6 sm:h-6 text-white animate-spin" />
             </div>
           )}
         </div>
         
         {!isUploading && (
-          <div className="absolute -inset-2 bg-black bg-opacity-0 group-hover:bg-opacity-50 rounded-lg transition-all duration-200 flex items-center justify-center opacity-0 group-hover:opacity-100">
-            <div className="flex space-x-2 bg-white bg-opacity-90 hover:bg-opacity-100 px-3 py-2 rounded-lg">
-              <label className="cursor-pointer flex items-center space-x-2 text-sm font-medium text-gray-700">
-                <Camera className="w-4 h-4" />
+          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 rounded-lg transition-all duration-200 flex items-center justify-center opacity-0 group-hover:opacity-100">
+            <div className="flex space-x-2 bg-white bg-opacity-90 hover:bg-opacity-100 px-2 sm:px-3 py-1 sm:py-2 rounded-lg">
+              <label className="cursor-pointer flex items-center space-x-1 sm:space-x-2 text-xs sm:text-sm font-medium text-gray-700">
+                <Camera className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span>Change</span>
                 <input
                   type="file"
@@ -557,7 +544,7 @@ const LogoUploadCard = ({ logo, isUploading, onUpload, onRemove }) => {
                   className="p-1 text-red-600 hover:text-red-800 rounded"
                   title="Remove image"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
               )}
             </div>
