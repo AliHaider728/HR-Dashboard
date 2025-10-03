@@ -119,8 +119,8 @@ const mockCategories = [
     icon: Zap,
     description: "Basic setup and introduction guides",
     articleCount: 12,
-    color: "bg-gradient-to-br from-blue-50 to-blue-100",
-    iconColor: "text-blue-600"
+    color: "bg-gradient-to-br from-orange-50 to-orange-100",
+    iconColor: "text-orange-600"
   },
   {
     id: 2,
@@ -340,8 +340,8 @@ const KnowledgeBase = () => {
         value: totalArticles,
         change: "+12%",
         icon: FileText,
-        color: "text-blue-600",
-        bg: "bg-gradient-to-br from-blue-50 to-blue-100"
+        color: "text-orange-600",
+        bg: "bg-gradient-to-br from-orange-50 to-orange-100"
       },
       {
         title: "Published",
@@ -394,13 +394,13 @@ const KnowledgeBase = () => {
     <>
       <Toast message={toastMessage} type={toastType} />
       
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50/30">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-orange-50/30">
         <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto">
           {/* Header */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div className="space-y-2">
               <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent flex items-center gap-3">
-                <BookOpen className="w-8 h-8 text-blue-600" />
+                <BookOpen className="w-8 h-8 text-orange-600" />
                 Knowledge Base
               </h1>
               <p className="text-gray-600 text-sm sm:text-base">Comprehensive documentation and guides for your team</p>
@@ -408,7 +408,7 @@ const KnowledgeBase = () => {
             <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
               <Button 
                 onClick={() => setIsAddModalOpen(true)} 
-                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transition-all duration-200"
+                className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white shadow-lg hover:shadow-xl transition-all duration-200"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Add Article
@@ -448,21 +448,21 @@ const KnowledgeBase = () => {
               <TabsList className="grid w-full sm:w-auto grid-cols-3 bg-white shadow-md border">
                 <TabsTrigger 
                   value="overview" 
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-blue-700 data-[state=active]:text-white"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-600 data-[state=active]:to-orange-700 data-[state=active]:text-white"
                 >
                   <Grid3x3 className="w-4 h-4 mr-2" />
                   Overview
                 </TabsTrigger>
                 <TabsTrigger 
                   value="articles"
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-blue-700 data-[state=active]:text-white"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-600 data-[state=active]:to-orange-700 data-[state=active]:text-white"
                 >
                   <FileText className="w-4 h-4 mr-2" />
                   Articles
                 </TabsTrigger>
                 <TabsTrigger 
                   value="categories"
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-blue-700 data-[state=active]:text-white"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-600 data-[state=active]:to-orange-700 data-[state=active]:text-white"
                 >
                   <Tag className="w-4 h-4 mr-2" />
                   Categories
@@ -505,7 +505,7 @@ const KnowledgeBase = () => {
                         placeholder="Search for articles, guides, and documentation..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="pl-12 pr-4 py-4 text-lg border-gray-200 focus:border-blue-400 focus:ring-blue-400 rounded-xl"
+                        className="pl-12 pr-4 py-4 text-lg border-gray-200 focus:border-orange-400 focus:ring-orange-400 rounded-xl"
                       />
                     </div>
                   </div>
@@ -580,10 +580,10 @@ const KnowledgeBase = () => {
                           
                           <div className="space-y-2">
                             <div className="flex items-center space-x-2">
-                              <TypeIcon className="w-4 h-4 text-blue-600" />
-                              <span className="text-xs font-medium text-blue-600 uppercase">{article.type}</span>
+                              <TypeIcon className="w-4 h-4 text-orange-600" />
+                              <span className="text-xs font-medium text-orange-600 uppercase">{article.type}</span>
                             </div>
-                            <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">
+                            <h3 className="font-semibold text-gray-900 group-hover:text-orange-600 transition-colors line-clamp-2">
                               {article.title}
                             </h3>
                             <p className="text-sm text-gray-600 line-clamp-3">{article.excerpt}</p>
@@ -613,9 +613,9 @@ const KnowledgeBase = () => {
                 <CardHeader className="pb-4 space-y-4">
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                     <CardTitle className="flex items-center text-xl">
-                      <FileText className="w-5 h-5 mr-2 text-blue-600" />
+                      <FileText className="w-5 h-5 mr-2 text-orange-600" />
                       All Articles
-                      <Badge variant="secondary" className="ml-2 bg-blue-100 text-blue-800">
+                      <Badge variant="secondary" className="ml-2 bg-orange-100 text-orange-800">
                         {filteredArticles.length}
                       </Badge>
                     </CardTitle>
@@ -629,14 +629,14 @@ const KnowledgeBase = () => {
                         placeholder="Search articles..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="pl-10 border-gray-200 focus:border-blue-400 focus:ring-blue-400"
+                        className="pl-10 border-gray-200 focus:border-orange-400 focus:ring-orange-400"
                       />
                     </div>
                     
                     <select 
                       value={selectedCategory} 
                       onChange={(e) => setSelectedCategory(e.target.value)}
-                      className="flex h-10 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+                      className="flex h-10 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-orange-400 focus:ring-1 focus:ring-orange-400"
                     >
                       <option value="all">All Categories</option>
                       {categories.map(cat => (
@@ -647,7 +647,7 @@ const KnowledgeBase = () => {
                     <select 
                       value={selectedDifficulty} 
                       onChange={(e) => setSelectedDifficulty(e.target.value)}
-                      className="flex h-10 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+                      className="flex h-10 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-orange-400 focus:ring-1 focus:ring-orange-400"
                     >
                       <option value="all">All Levels</option>
                       <option value="Beginner">Beginner</option>
@@ -670,7 +670,7 @@ const KnowledgeBase = () => {
                       </div>
                       <h3 className="text-xl font-semibold text-gray-900 mb-2">No articles found</h3>
                       <p className="text-gray-500 mb-8 max-w-md mx-auto">Try adjusting your search or filters, or create a new article</p>
-                      <Button onClick={() => setIsAddModalOpen(true)} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800">
+                      <Button onClick={() => setIsAddModalOpen(true)} className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800">
                         <Plus className="w-4 h-4 mr-2" />
                         Create Article
                       </Button>
@@ -686,8 +686,8 @@ const KnowledgeBase = () => {
                               <CardContent className="p-4">
                                 <div className="flex items-start justify-between gap-4">
                                   <div className="flex items-start space-x-4 flex-1">
-                                    <div className="p-2 bg-blue-100 rounded-lg">
-                                      <TypeIcon className="w-5 h-5 text-blue-600" />
+                                    <div className="p-2 bg-orange-100 rounded-lg">
+                                      <TypeIcon className="w-5 h-5 text-orange-600" />
                                     </div>
                                     <div className="space-y-2 flex-1">
                                       <div className="flex items-center gap-2 flex-wrap">
@@ -698,7 +698,7 @@ const KnowledgeBase = () => {
                                           {article.category}
                                         </Badge>
                                       </div>
-                                      <h3 className="font-semibold text-gray-900 hover:text-blue-600 transition-colors cursor-pointer">
+                                      <h3 className="font-semibold text-gray-900 hover:text-orange-600 transition-colors cursor-pointer">
                                         {article.title}
                                       </h3>
                                       <p className="text-sm text-gray-600 line-clamp-2">{article.excerpt}</p>
@@ -776,13 +776,13 @@ const KnowledgeBase = () => {
                               
                               <div className="space-y-2">
                                 <div className="flex items-center space-x-2">
-                                  <TypeIcon className="w-4 h-4 text-blue-600" />
-                                  <span className="text-xs font-medium text-blue-600 uppercase">{article.type}</span>
+                                  <TypeIcon className="w-4 h-4 text-orange-600" />
+                                  <span className="text-xs font-medium text-orange-600 uppercase">{article.type}</span>
                                   <Badge variant="outline" className="text-xs">
                                     {article.category}
                                   </Badge>
                                 </div>
-                                <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">
+                                <h3 className="font-semibold text-gray-900 group-hover:text-orange-600 transition-colors line-clamp-2">
                                   {article.title}
                                 </h3>
                                 <p className="text-sm text-gray-600 line-clamp-3">{article.excerpt}</p>
@@ -857,9 +857,9 @@ const KnowledgeBase = () => {
               <Card className="border-0 shadow-lg bg-white/60 backdrop-blur-sm">
                 <CardHeader className="pb-4">
                   <CardTitle className="flex items-center text-xl">
-                    <Tag className="w-5 h-5 mr-2 text-blue-600" />
+                    <Tag className="w-5 h-5 mr-2 text-orange-600" />
                     Categories Management
-                    <Badge variant="secondary" className="ml-2 bg-blue-100 text-blue-800">
+                    <Badge variant="secondary" className="ml-2 bg-orange-100 text-orange-800">
                       {categories.length}
                     </Badge>
                   </CardTitle>
@@ -932,7 +932,7 @@ const KnowledgeBase = () => {
             <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
               <DialogHeader className="space-y-3">
                 <DialogTitle className="text-2xl font-bold flex items-center gap-2">
-                  <Plus className="w-6 h-6 text-blue-600" />
+                  <Plus className="w-6 h-6 text-orange-600" />
                   Create New Article
                 </DialogTitle>
                 <DialogDescription className="text-gray-600">
@@ -953,7 +953,7 @@ const KnowledgeBase = () => {
                             <Input 
                               placeholder="e.g., How to setup your account" 
                               {...field} 
-                              className="border-gray-200 focus:border-blue-400 focus:ring-blue-400"
+                              className="border-gray-200 focus:border-orange-400 focus:ring-orange-400"
                             />
                           </FormControl>
                           <FormMessage />
@@ -970,7 +970,7 @@ const KnowledgeBase = () => {
                           <FormControl>
                             <select 
                               {...field} 
-                              className="flex h-11 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+                              className="flex h-11 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-orange-400 focus:ring-1 focus:ring-orange-400"
                               required
                             >
                               <option value="">Select a category</option>
@@ -993,7 +993,7 @@ const KnowledgeBase = () => {
                           <FormControl>
                             <select 
                               {...field} 
-                              className="flex h-11 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+                              className="flex h-11 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-orange-400 focus:ring-1 focus:ring-orange-400"
                             >
                               <option value="Draft">Draft</option>
                               <option value="Published">Published</option>
@@ -1015,7 +1015,7 @@ const KnowledgeBase = () => {
                             <Input 
                               placeholder="e.g., setup, tutorial, beginner" 
                               {...field} 
-                              className="border-gray-200 focus:border-blue-400 focus:ring-blue-400"
+                              className="border-gray-200 focus:border-orange-400 focus:ring-orange-400"
                             />
                           </FormControl>
                           <FormMessage />
@@ -1034,7 +1034,7 @@ const KnowledgeBase = () => {
                               {...field}
                               rows={8}
                               placeholder="Write your article content here..."
-                              className="flex w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 resize-none"
+                              className="flex w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-orange-400 focus:ring-1 focus:ring-orange-400 resize-none"
                             />
                           </FormControl>
                           <FormMessage />
@@ -1050,7 +1050,7 @@ const KnowledgeBase = () => {
                     <Button 
                       type="submit" 
                       disabled={loading}
-                      className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+                      className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800"
                     >
                       {loading ? (
                         <>
@@ -1071,7 +1071,7 @@ const KnowledgeBase = () => {
           </Dialog>
 
           {/* Quick Help Section */}
-          <Card className="border-0 shadow-lg bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+          <Card className="border-0 shadow-lg bg-gradient-to-r from-orange-600 to-orange-700 text-white">
             <CardContent className="p-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div className="space-y-4">
@@ -1079,23 +1079,23 @@ const KnowledgeBase = () => {
                     <HelpCircle className="w-6 h-6" />
                     <h3 className="text-xl font-bold">Need Help?</h3>
                   </div>
-                  <p className="text-blue-100">
+                  <p className="text-orange-100">
                     Can't find what you're looking for? Our support team is here to help you with any questions.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3">
-                    <Button variant="secondary" className="bg-white text-blue-600 hover:bg-blue-50">
+                    <Button variant="secondary" className="bg-white text-orange-600 hover:bg-orange-50">
                       <MessageCircle className="w-4 h-4 mr-2" />
                       Contact Support
                     </Button>
-                    <Button variant="outline" className="border-blue-200 text-white hover:bg-blue-600">
+                    <Button variant="outline" className="border-orange-200 text-white hover:bg-orange-600">
                       <Video className="w-4 h-4 mr-2" />
                       Video Tutorials
                     </Button>
                   </div>
                 </div>
                 <div className="hidden md:flex justify-end">
-                  <div className="w-32 h-32 bg-blue-500/20 rounded-full flex items-center justify-center">
-                    <Lightbulb className="w-16 h-16 text-blue-200" />
+                  <div className="w-32 h-32 bg-orange-500/20 rounded-full flex items-center justify-center">
+                    <Lightbulb className="w-16 h-16 text-orange-200" />
                   </div>
                 </div>
               </div>

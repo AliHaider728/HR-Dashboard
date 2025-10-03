@@ -459,7 +459,7 @@ const EmployeeSalary = () => {
           <div className="flex gap-2">
             <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
               <DialogTrigger asChild>
-                <Button className="bg-blue-600 hover:bg-blue-700">
+                <Button className="bg-orange-600 hover:bg-orange-700">
                   <Plus className="w-4 h-4 mr-2" />
                   Add Employee
                 </Button>

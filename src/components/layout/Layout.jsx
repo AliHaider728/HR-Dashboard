@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
-import Footer from "./Footer"; // Import the new Footer component
+import Footer from "./Footer";  
 import { cn } from "../../lib/utils";
 
 export default function Layout({ children, setIsAuthenticated }) {
@@ -32,7 +32,7 @@ export default function Layout({ children, setIsAuthenticated }) {
           setIsAuthenticated={setIsAuthenticated}
         />
         <main className="flex-1 p-0 lg:p-0 bg-gradient-to-br from-slate-50 via-orange-50 to-pink-50 ">{children}</main>
-        <Footer /> {/* Add the Footer component here */}
+        <Footer />  
       </div>
     </div>
   );

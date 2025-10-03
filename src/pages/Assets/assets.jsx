@@ -355,7 +355,7 @@ const AssetManagement = () => {
   const getStatusBadge = (status, type = "asset") => {
     const variants = type === "asset" ? {
       "Available": "bg-emerald-50 text-emerald-700 border border-emerald-200",
-      "In Use": "bg-blue-50 text-blue-700 border border-blue-200",
+      "In Use": "bg-orange-50 text-orange-700 border border-orange-200",
       "In Maintenance": "bg-amber-50 text-amber-700 border border-amber-200",
       "Retired": "bg-red-50 text-red-700 border border-red-200",
     } : {
@@ -377,8 +377,8 @@ const AssetManagement = () => {
           change: "+2%", 
           trend: "up",
           icon: Tag,
-          color: "text-blue-600",
-          bg: "bg-gradient-to-br from-blue-50 to-blue-100"
+          color: "text-orange-600",
+          bg: "bg-gradient-to-br from-orange-50 to-orange-100"
         },
         { 
           title: "Active Categories", 
@@ -414,8 +414,8 @@ const AssetManagement = () => {
           change: "+3%", 
           trend: "up",
           icon: Package,
-          color: "text-blue-600",
-          bg: "bg-gradient-to-br from-blue-50 to-blue-100"
+          color: "text-orange-600",
+          bg: "bg-gradient-to-br from-orange-50 to-orange-100"
         },
         { 
           title: "Available", 
@@ -463,7 +463,7 @@ const AssetManagement = () => {
     <>
       <Toast message={toastMessage} type={toastType} duration={3000} />
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50/30">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-orange-50/30">
         <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto">
           {/* Enhanced Header */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -476,7 +476,7 @@ const AssetManagement = () => {
             <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
               <Button 
                 onClick={() => setIsAddModalOpen(true)} 
-                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transition-all duration-200"
+                className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white shadow-lg hover:shadow-xl transition-all duration-200"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Add {activeTab === 'categories' ? 'Category' : 'Asset'}
@@ -516,14 +516,14 @@ const AssetManagement = () => {
               <TabsList className="grid w-full sm:w-auto grid-cols-2 bg-white shadow-md border">
                 <TabsTrigger 
                   value="assets" 
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-blue-700 data-[state=active]:text-white transition-all duration-200"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-600 data-[state=active]:to-orange-700 data-[state=active]:text-white transition-all duration-200"
                 >
                   <Package className="w-4 h-4 mr-2" />
                   Assets
                 </TabsTrigger>
                 <TabsTrigger 
                   value="categories"
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-blue-700 data-[state=active]:text-white transition-all duration-200"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-600 data-[state=active]:to-orange-700 data-[state=active]:text-white transition-all duration-200"
                 >
                   <Tag className="w-4 h-4 mr-2" />
                   Categories
@@ -556,9 +556,9 @@ const AssetManagement = () => {
                 <CardHeader className="pb-4 space-y-4">
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                     <CardTitle className="flex items-center text-xl">
-                      <Package className="w-5 h-5 mr-2 text-blue-600" />
+                      <Package className="w-5 h-5 mr-2 text-orange-600" />
                       Asset Inventory 
-                      <Badge variant="secondary" className="ml-2 bg-blue-100 text-blue-800">
+                      <Badge variant="secondary" className="ml-2 bg-orange-100 text-orange-800">
                         {total}
                       </Badge>
                     </CardTitle>
@@ -575,7 +575,7 @@ const AssetManagement = () => {
                           setSearchTerm(e.target.value)
                           setCurrentPage(1)
                         }}
-                        className="pl-10 border-gray-200 focus:border-blue-400 focus:ring-blue-400"
+                        className="pl-10 border-gray-200 focus:border-orange-400 focus:ring-orange-400"
                       />
                     </div>
                     
@@ -585,7 +585,7 @@ const AssetManagement = () => {
                         setCategoryFilter(e.target.value)
                         setCurrentPage(1)
                       }}
-                      className="flex h-10 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+                      className="flex h-10 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-orange-400 focus:ring-1 focus:ring-orange-400"
                     >
                       <option value="all">All Categories</option>
                       {categories.map(cat => (
@@ -599,7 +599,7 @@ const AssetManagement = () => {
                         setStatusFilter(e.target.value)
                         setCurrentPage(1)
                       }}
-                      className="flex h-10 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+                      className="flex h-10 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-orange-400 focus:ring-1 focus:ring-orange-400"
                     >
                       <option value="all">All Status</option>
                       <option value="Available">Available</option>
@@ -618,7 +618,7 @@ const AssetManagement = () => {
                 <CardContent className="p-0">
                   {loading ? (
                     <div className="flex flex-col items-center justify-center py-16 space-y-4">
-                      <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
+                      <div className="w-12 h-12 border-4 border-orange-200 border-t-orange-600 rounded-full animate-spin"></div>
                       <p className="text-gray-500">Loading assets...</p>
                     </div>
                   ) : items.length === 0 ? (
@@ -628,7 +628,7 @@ const AssetManagement = () => {
                       </div>
                       <h3 className="text-xl font-semibold text-gray-900 mb-2">No assets found</h3>
                       <p className="text-gray-500 mb-8 max-w-md mx-auto">Get started by adding your first asset to track and manage your inventory</p>
-                      <Button onClick={() => setIsAddModalOpen(true)} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800">
+                      <Button onClick={() => setIsAddModalOpen(true)} className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800">
                         <Plus className="w-4 h-4 mr-2" />
                         Add Your First Asset
                       </Button>
@@ -793,7 +793,7 @@ const AssetManagement = () => {
                                     variant={page === currentPage ? "default" : "outline"}
                                     size="sm"
                                     onClick={() => setCurrentPage(page)}
-                                    className={page === currentPage ? "bg-blue-600 text-white" : ""}
+                                    className={page === currentPage ? "bg-orange-600 text-white" : ""}
                                   >
                                     {page}
                                   </Button>
@@ -825,9 +825,9 @@ const AssetManagement = () => {
                 <CardHeader className="pb-4 space-y-4">
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                     <CardTitle className="flex items-center text-xl">
-                      <Tag className="w-5 h-5 mr-2 text-blue-600" />
+                      <Tag className="w-5 h-5 mr-2 text-orange-600" />
                       Asset Categories 
-                      <Badge variant="secondary" className="ml-2 bg-blue-100 text-blue-800">
+                      <Badge variant="secondary" className="ml-2 bg-orange-100 text-orange-800">
                         {total}
                       </Badge>
                     </CardTitle>
@@ -843,7 +843,7 @@ const AssetManagement = () => {
                           setSearchTerm(e.target.value)
                           setCurrentPage(1)
                         }}
-                        className="pl-10 border-gray-200 focus:border-blue-400 focus:ring-blue-400"
+                        className="pl-10 border-gray-200 focus:border-orange-400 focus:ring-orange-400"
                       />
                     </div>
                     
@@ -857,7 +857,7 @@ const AssetManagement = () => {
                 <CardContent className="p-0">
                   {loading ? (
                     <div className="flex flex-col items-center justify-center py-16 space-y-4">
-                      <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
+                      <div className="w-12 h-12 border-4 border-orange-200 border-t-orange-600 rounded-full animate-spin"></div>
                       <p className="text-gray-500">Loading categories...</p>
                     </div>
                   ) : items.length === 0 ? (
@@ -867,7 +867,7 @@ const AssetManagement = () => {
                       </div>
                       <h3 className="text-xl font-semibold text-gray-900 mb-2">No categories found</h3>
                       <p className="text-gray-500 mb-8 max-w-md mx-auto">Create categories to organize your assets efficiently</p>
-                      <Button onClick={() => setIsAddModalOpen(true)} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800">
+                      <Button onClick={() => setIsAddModalOpen(true)} className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800">
                         <Plus className="w-4 h-4 mr-2" />
                         Create First Category
                       </Button>
@@ -883,11 +883,11 @@ const AssetManagement = () => {
                               <CardContent className="p-6">
                                 <div className="flex items-start justify-between mb-4">
                                   <div className="flex items-center space-x-3">
-                                    <div className="p-2 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
-                                      <IconComponent className="w-6 h-6 text-blue-600" />
+                                    <div className="p-2 bg-orange-100 rounded-lg group-hover:bg-orange-200 transition-colors">
+                                      <IconComponent className="w-6 h-6 text-orange-600" />
                                     </div>
                                     <div>
-                                      <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                                      <h3 className="font-semibold text-gray-900 group-hover:text-orange-600 transition-colors">
                                         {item.name}
                                       </h3>
                                       <Badge className={`${getStatusBadge(item.status, 'category')} mt-1`} variant="secondary">
@@ -960,7 +960,7 @@ const AssetManagement = () => {
                                     variant={page === currentPage ? "default" : "outline"}
                                     size="sm"
                                     onClick={() => setCurrentPage(page)}
-                                    className={page === currentPage ? "bg-blue-600 text-white" : ""}
+                                    className={page === currentPage ? "bg-orange-600 text-white" : ""}
                                   >
                                     {page}
                                   </Button>
@@ -1015,7 +1015,7 @@ const AssetManagement = () => {
                               <Input 
                                 placeholder="e.g., Laptops, Office Furniture" 
                                 {...field} 
-                                className="border-gray-200 focus:border-blue-400 focus:ring-blue-400"
+                                className="border-gray-200 focus:border-orange-400 focus:ring-orange-400"
                               />
                             </FormControl>
                             <FormMessage />
@@ -1032,7 +1032,7 @@ const AssetManagement = () => {
                             <FormControl>
                               <select 
                                 {...field} 
-                                className="flex h-11 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+                                className="flex h-11 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-orange-400 focus:ring-1 focus:ring-orange-400"
                               >
                                 <option value="Active">Active</option>
                                 <option value="Inactive">Inactive</option>
@@ -1050,7 +1050,7 @@ const AssetManagement = () => {
                       </Button>
                       <Button 
                         type="submit" 
-                        className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+                        className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800"
                       >
                         Create Category
                       </Button>
@@ -1071,7 +1071,7 @@ const AssetManagement = () => {
                               <Input 
                                 placeholder="e.g., Dell Latitude 7420, iPhone 14 Pro" 
                                 {...field} 
-                                className="border-gray-200 focus:border-blue-400 focus:ring-blue-400"
+                                className="border-gray-200 focus:border-orange-400 focus:ring-orange-400"
                               />
                             </FormControl>
                             <FormMessage />
@@ -1088,7 +1088,7 @@ const AssetManagement = () => {
                             <FormControl>
                               <select 
                                 {...field} 
-                                className="flex h-11 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+                                className="flex h-11 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-orange-400 focus:ring-1 focus:ring-orange-400"
                                 required
                               >
                                 <option value="">Select a category</option>
@@ -1112,7 +1112,7 @@ const AssetManagement = () => {
                               <Input 
                                 placeholder="e.g., DLT7420-001" 
                                 {...field} 
-                                className="border-gray-200 focus:border-blue-400 focus:ring-blue-400"
+                                className="border-gray-200 focus:border-orange-400 focus:ring-orange-400"
                               />
                             </FormControl>
                             <FormMessage />
@@ -1130,7 +1130,7 @@ const AssetManagement = () => {
                               <Input 
                                 placeholder="$0.00" 
                                 {...field} 
-                                className="border-gray-200 focus:border-blue-400 focus:ring-blue-400"
+                                className="border-gray-200 focus:border-orange-400 focus:ring-orange-400"
                               />
                             </FormControl>
                             <FormMessage />
@@ -1148,7 +1148,7 @@ const AssetManagement = () => {
                               <Input 
                                 type="date" 
                                 {...field} 
-                                className="border-gray-200 focus:border-blue-400 focus:ring-blue-400"
+                                className="border-gray-200 focus:border-orange-400 focus:ring-orange-400"
                               />
                             </FormControl>
                             <FormMessage />
@@ -1165,7 +1165,7 @@ const AssetManagement = () => {
                             <FormControl>
                               <select 
                                 {...field} 
-                                className="flex h-11 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+                                className="flex h-11 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-orange-400 focus:ring-1 focus:ring-orange-400"
                               >
                                 <option value="Available">Available</option>
                                 <option value="In Use">In Use</option>
@@ -1188,7 +1188,7 @@ const AssetManagement = () => {
                               <Input 
                                 placeholder="Employee name (optional)" 
                                 {...field} 
-                                className="border-gray-200 focus:border-blue-400 focus:ring-blue-400"
+                                className="border-gray-200 focus:border-orange-400 focus:ring-orange-400"
                               />
                             </FormControl>
                             <FormMessage />
@@ -1203,7 +1203,7 @@ const AssetManagement = () => {
                       </Button>
                       <Button 
                         type="submit" 
-                        className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+                        className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800"
                       >
                         Add Asset
                       </Button>

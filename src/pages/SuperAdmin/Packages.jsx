@@ -268,7 +268,7 @@ export default function Packages() {
           </Button>
           <Button 
             onClick={() => setShowAddDialog(true)} 
-            className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto text-xs sm:text-sm"
+            className="bg-orange-500 hover:scale-x-105 duration-300 transition-all ease-in-out hover:bg-orange-600 w-full sm:w-auto text-xs sm:text-sm"
           >
             <Plus className="h-4 w-4 mr-2" />
             Add New Plan

@@ -593,7 +593,7 @@ const AppraisalModal = ({ employee, onSave, onClose, isSaving }) => {
                 </label>
                 <div className="flex items-center">
                   <input
-                    type="text"
+                    type="date"
                     name="appraisalDate"
                     value={formData.appraisalDate}
                     onChange={handleChange}
@@ -601,8 +601,7 @@ const AppraisalModal = ({ employee, onSave, onClose, isSaving }) => {
                     placeholder="dd/mm/yyyy"
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   />
-                  <Calendar className="w-5 h-5 text-gray-400 ml-2" />
-                </div>
+                 </div>
               </div>
             </div>
 

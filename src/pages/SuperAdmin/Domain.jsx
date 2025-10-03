@@ -1,5 +1,4 @@
 "use client"
-
 import { useState, useMemo } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "./../../components/ui/card"
 import { Badge } from "./../../components/ui/badge"
@@ -184,8 +183,8 @@ export default function DomainList() {
             onChange={handleRowsPerPageChange}
             className="px-2 py-1 sm:px-3 sm:py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500"
           >
+            <option value={5}>5</option>
             <option value={10}>10</option>
-            <option value={25}>25</option>
             <option value={50}>50</option>
             <option value={100}>100</option>
           </select>
@@ -245,7 +244,7 @@ export default function DomainList() {
             <Table>
               <TableHeader>
                 <TableRow className="border-b">
-                  <TableHead className="w-12">Image</TableHead>
+                  <TableHead className="w-12">Companys</TableHead>
                   <TableHead>Name</TableHead>
                   <TableHead>Domain URL</TableHead>
                   <TableHead>Plan</TableHead>

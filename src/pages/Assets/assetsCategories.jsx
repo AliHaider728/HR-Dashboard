@@ -326,8 +326,8 @@ const AssetCategories = () => {
         title: "Total Categories", 
         value: totalAmount.toString(), 
         change: "+2%", 
-        color: "text-blue-600",
-        bg: "bg-blue-100"
+        color: "text-orange-600",
+        bg: "bg-orange-100"
       },
       { 
         title: "Active Categories", 
@@ -365,7 +365,7 @@ const AssetCategories = () => {
           <div className="flex gap-2">
             <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
               <DialogTrigger asChild>
-                <Button className="bg-blue-600 hover:bg-blue-700">
+                <Button className="bg-orange-600 hover:bg-orange-700">
                   <Plus className="w-4 h-4 mr-2" />
                   Add Category
                 </Button>
@@ -443,7 +443,7 @@ const AssetCategories = () => {
           <CardHeader className="pb-3">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <CardTitle className="flex items-center">
-                <FileText className="w-5 h-5 mr-2 text-blue-600" />
+                <FileText className="w-5 h-5 mr-2 text-orange-600" />
                 Asset Category List ({total})
               </CardTitle>
               <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
@@ -469,14 +469,14 @@ const AssetCategories = () => {
           <CardContent>
             {loading ? (
               <div className="flex items-center justify-center py-12">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600"></div>
               </div>
             ) : categories.length === 0 ? (
               <div className="text-center py-12">
                 <FileText className="mx-auto h-12 w-12 text-gray-400 mb-4" />
                 <h3 className="text-lg font-medium text-gray-900 mb-2">No categories found</h3>
                 <p className="text-gray-500 mb-6">Get started by creating your first asset category</p>
-                <Button onClick={() => setIsAddModalOpen(true)} className="bg-blue-600 hover:bg-blue-700">
+                <Button onClick={() => setIsAddModalOpen(true)} className="bg-orange-600 hover:bg-orange-700">
                   <Plus className="w-4 h-4 mr-2" />
                   Create Category
                 </Button>
@@ -631,7 +631,7 @@ const AssetCategories = () => {
                                 <PaginationLink 
                                   isActive={isActive}
                                   onClick={() => setCurrentPage(page)}
-                                  className={isActive ? "bg-blue-600 text-white" : ""}
+                                  className={isActive ? "bg-orange-600 text-white" : ""}
                                 >
                                   {page}
                                 </PaginationLink>
