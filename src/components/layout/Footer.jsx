@@ -6,7 +6,7 @@ const Footer = () => {
       <p className="text-sm font-bold font-serif animate-shine bg-clip-text bg-gradient-to-r from-black via-gray-300 to-black bg-[length:200%_auto] text-transparent mb-2 sm:mb-0">
     2025 © SmartHR.
       </p>
-      <p className=" font-thin font-serif animate-shine bg-clip-text bg-gradient-to-r from-gray-800 via-gray-300 to-black bg-[length:200%_auto] text-transparent">
+      <p className=" font-thin font-serif sm:text-center animate-shine bg-clip-text bg-gradient-to-r from-gray-800 via-gray-300 to-black bg-[length:200%_auto] text-transparent">
         Designed and developed by <span className="font-bold" > TecnoSphere</span>
       </p>
       <style>{`
