@@ -1,9 +1,9 @@
-import { useState } from "react"
-import { Card, CardContent } from "../../components/ui/card"
-import { Button } from "../../components/ui/button"
-import { Input } from "../../components/ui/input"
-import { Badge } from "../../components/ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar"
+import { useState } from "react";
+import { Card, CardContent } from "../../components/ui/card";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
+import { Badge } from "../../components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
 import {
   Dialog,
   DialogContent,
@@ -12,9 +12,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../../components/ui/dialog"
-import { Label } from "../../components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select"
+} from "../../components/ui/dialog";
+import { Label } from "../../components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,7 +22,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../../components/ui/dropdown-menu"
+} from "../../components/ui/dropdown-menu";
 import {
   Search,
   Plus,
@@ -40,27 +40,346 @@ import {
   Building2,
   Calendar,
   DollarSign,
-} from "lucide-react"
-import { Textarea } from "../../components/ui/textarea"
+} from "lucide-react";
+import { Textarea } from "../../components/ui/textarea";
 
-// Contacts data (unchanged)
+// Randomly generated contacts data with avatars
 const contactsData = [
-  // ... (same as provided)
-]
+  {
+    id: 1,
+    name: "John Smith",
+    email: "john.smith@example.com",
+    phone: "+1-555-0101",
+    location: "New York, NY",
+    position: "Marketing Manager",
+    rating: 4.5,
+    status: "Active",
+    source: "LinkedIn",
+    notes: "Interested in new campaign strategies.",
+    dealValue: "$12,000",
+    tags: ["Marketing", "Lead"],
+    avatar: "https://randomuser.me/api/portraits/men/1.jpg",
+    lastContact: "2025-09-15",
+  },
+  {
+    id: 2,
+    name: "Emma Johnson",
+    email: "emma.johnson@example.com",
+    phone: "+1-555-0102",
+    location: "San Francisco, CA",
+    position: "Sales Director",
+    rating: 3.8,
+    status: "Prospect",
+    source: "Referral",
+    notes: "Referred by current client.",
+    dealValue: "$8,500",
+    tags: ["Sales", "High Priority"],
+    avatar: "https://randomuser.me/api/portraits/women/2.jpg",
+    lastContact: "2025-09-20",
+  },
+  {
+    id: 3,
+    name: "Michael Brown",
+    email: "michael.brown@example.com",
+    phone: "+1-555-0103",
+    location: "Chicago, IL",
+    position: "CEO",
+    rating: 5.0,
+    status: "Active",
+    source: "Trade Show",
+    notes: "Met at annual trade show.",
+    dealValue: "$20,000",
+    tags: ["Executive", "VIP"],
+    avatar: "https://randomuser.me/api/portraits/men/3.jpg",
+    lastContact: "2025-09-25",
+  },
+  {
+    id: 4,
+    name: "Sarah Davis",
+    email: "sarah.davis@example.com",
+    phone: "+1-555-0104",
+    location: "Boston, MA",
+    position: "HR Manager",
+    rating: 3.2,
+    status: "Inactive",
+    source: "Website",
+    notes: "Signed up via website form.",
+    dealValue: "$5,000",
+    tags: ["HR"],
+    avatar: "https://randomuser.me/api/portraits/women/4.jpg",
+    lastContact: "2025-08-10",
+  },
+  {
+    id: 5,
+    name: "David Wilson",
+    email: "david.wilson@example.com",
+    phone: "+1-555-0105",
+    location: "Austin, TX",
+    position: "Product Manager",
+    rating: 4.0,
+    status: "Prospect",
+    source: "Cold Call",
+    notes: "Reached out via cold call campaign.",
+    dealValue: "$7,500",
+    tags: ["Product", "Lead"],
+    avatar: "https://randomuser.me/api/portraits/men/5.jpg",
+    lastContact: "2025-09-30",
+  },
+  {
+    id: 6,
+    name: "Laura Martinez",
+    email: "laura.martinez@example.com",
+    phone: "+1-555-0106",
+    location: "Seattle, WA",
+    position: "CTO",
+    rating: 4.7,
+    status: "Active",
+    source: "Email Campaign",
+    notes: "Responded to recent email campaign.",
+    dealValue: "$15,000",
+    tags: ["Tech", "Executive"],
+    avatar: "https://randomuser.me/api/portraits/women/6.jpg",
+    lastContact: "2025-09-28",
+  },
+  {
+    id: 7,
+    name: "James Taylor",
+    email: "james.taylor@example.com",
+    phone: "+1-555-0107",
+    location: "Miami, FL",
+    position: "Sales Rep",
+    rating: 3.5,
+    status: "Prospect",
+    source: "LinkedIn",
+    notes: "Connected via LinkedIn outreach.",
+    dealValue: "$6,000",
+    tags: ["Sales"],
+    avatar: "https://randomuser.me/api/portraits/men/7.jpg",
+    lastContact: "2025-09-18",
+  },
+  {
+    id: 8,
+    name: "Emily Anderson",
+    email: "emily.anderson@example.com",
+    phone: "+1-555-0108",
+    location: "Denver, CO",
+    position: "Operations Manager",
+    rating: 4.2,
+    status: "Active",
+    source: "Referral",
+    notes: "Referred by industry partner.",
+    dealValue: "$10,000",
+    tags: ["Operations", "Lead"],
+    avatar: "https://randomuser.me/api/portraits/women/8.jpg",
+    lastContact: "2025-09-22",
+  },
+  {
+    id: 9,
+    name: "Robert Thomas",
+    email: "robert.thomas@example.com",
+    phone: "+1-555-0109",
+    location: "Houston, TX",
+    position: "Finance Director",
+    rating: 4.8,
+    status: "Active",
+    source: "Trade Show",
+    notes: "Met at finance expo.",
+    dealValue: "$18,000",
+    tags: ["Finance", "VIP"],
+    avatar: "https://randomuser.me/api/portraits/men/9.jpg",
+    lastContact: "2025-09-27",
+  },
+  {
+    id: 10,
+    name: "Sophia Lee",
+    email: "sophia.lee@example.com",
+    phone: "+1-555-0110",
+    location: "Los Angeles, CA",
+    position: "Marketing Coordinator",
+    rating: 3.9,
+    status: "Prospect",
+    source: "Website",
+    notes: "Signed up via landing page.",
+    dealValue: "$4,500",
+    tags: ["Marketing"],
+    avatar: "https://randomuser.me/api/portraits/women/10.jpg",
+    lastContact: "2025-09-19",
+  },
+  {
+    id: 11,
+    name: "William Clark",
+    email: "william.clark@example.com",
+    phone: "+1-555-0111",
+    location: "Phoenix, AZ",
+    position: "Project Manager",
+    rating: 4.1,
+    status: "Active",
+    source: "Cold Call",
+    notes: "Interested in project collaboration.",
+    dealValue: "$9,000",
+    tags: ["Project", "Lead"],
+    avatar: "https://randomuser.me/api/portraits/men/11.jpg",
+    lastContact: "2025-09-29",
+  },
+  {
+    id: 12,
+    name: "Olivia Walker",
+    email: "olivia.walker@example.com",
+    phone: "+1-555-0112",
+    location: "Atlanta, GA",
+    position: "HR Director",
+    rating: 4.3,
+    status: "Active",
+    source: "Referral",
+    notes: "Referred by current client.",
+    dealValue: "$11,000",
+    tags: ["HR", "VIP"],
+    avatar: "https://randomuser.me/api/portraits/women/12.jpg",
+    lastContact: "2025-09-21",
+  },
+  {
+    id: 13,
+    name: "Daniel Lewis",
+    email: "daniel.lewis@example.com",
+    phone: "+1-555-0113",
+    location: "Dallas, TX",
+    position: "Sales Manager",
+    rating: 3.7,
+    status: "Prospect",
+    source: "LinkedIn",
+    notes: "Engaged via LinkedIn campaign.",
+    dealValue: "$7,000",
+    tags: ["Sales"],
+    avatar: "https://randomuser.me/api/portraits/men/13.jpg",
+    lastContact: "2025-09-23",
+  },
+  {
+    id: 14,
+    name: "Ava Young",
+    email: "ava.young@example.com",
+    phone: "+1-555-0114",
+    location: "Portland, OR",
+    position: "Product Designer",
+    rating: 4.4,
+    status: "Active",
+    source: "Email Campaign",
+    notes: "Responded to product launch email.",
+    dealValue: "$13,000",
+    tags: ["Design", "Lead"],
+    avatar: "https://randomuser.me/api/portraits/women/14.jpg",
+    lastContact: "2025-09-26",
+  },
+  {
+    id: 15,
+    name: "Henry Harris",
+    email: "henry.harris@example.com",
+    phone: "+1-555-0115",
+    location: "Philadelphia, PA",
+    position: "Operations Director",
+    rating: 4.6,
+    status: "Active",
+    source: "Trade Show",
+    notes: "Met at operations conference.",
+    dealValue: "$16,000",
+    tags: ["Operations", "VIP"],
+    avatar: "https://randomuser.me/api/portraits/men/15.jpg",
+    lastContact: "2025-09-24",
+  },
+  {
+    id: 16,
+    name: "Mia King",
+    email: "mia.king@example.com",
+    phone: "+1-555-0116",
+    location: "San Diego, CA",
+    position: "Marketing Director",
+    rating: 3.6,
+    status: "Prospect",
+    source: "Website",
+    notes: "Signed up via website form.",
+    dealValue: "$6,500",
+    tags: ["Marketing"],
+    avatar: "https://randomuser.me/api/portraits/women/16.jpg",
+    lastContact: "2025-09-17",
+  },
+  {
+    id: 17,
+    name: "Charles Wright",
+    email: "charles.wright@example.com",
+    phone: "+1-555-0117",
+    location: "Minneapolis, MN",
+    position: "Finance Manager",
+    rating: 4.0,
+    status: "Active",
+    source: "Referral",
+    notes: "Referred by partner company.",
+    dealValue: "$10,500",
+    tags: ["Finance", "Lead"],
+    avatar: "https://randomuser.me/api/portraits/men/17.jpg",
+    lastContact: "2025-09-16",
+  },
+  {
+    id: 18,
+    name: "Isabella Scott",
+    email: "isabella.scott@example.com",
+    phone: "+1-555-0118",
+    location: "Raleigh, NC",
+    position: "Sales Coordinator",
+    rating: 3.9,
+    status: "Prospect",
+    source: "Cold Call",
+    notes: "Contacted via cold call.",
+    dealValue: "$8,000",
+    tags: ["Sales"],
+    avatar: "https://randomuser.me/api/portraits/women/18.jpg",
+    lastContact: "2025-09-14",
+  },
+  {
+    id: 19,
+    name: "Thomas Green",
+    email: "thomas.green@example.com",
+    phone: "+1-555-0119",
+    location: "Orlando, FL",
+    position: "Product Manager",
+    rating: 4.2,
+    status: "Active",
+    source: "LinkedIn",
+    notes: "Connected via LinkedIn.",
+    dealValue: "$12,500",
+    tags: ["Product", "Lead"],
+    avatar: "https://randomuser.me/api/portraits/men/19.jpg",
+    lastContact: "2025-09-13",
+  },
+  {
+    id: 20,
+    name: "Charlotte Adams",
+    email: "charlotte.adams@example.com",
+    phone: "+1-555-0120",
+    location: "Charlotte, NC",
+    position: "HR Coordinator",
+    rating: 4.1,
+    status: "Active",
+    source: "Referral",
+    notes: "Referred by existing client.",
+    dealValue: "$9,500",
+    tags: ["HR", "Lead"],
+    avatar: "https://randomuser.me/api/portraits/women/20.jpg",
+    lastContact: "2025-09-12",
+  },
+];
 
-const statuses = ["All", "Active", "Prospect", "Inactive"]
-const sources = ["All", "Website", "Referral", "LinkedIn", "Cold Call", "Trade Show", "Email Campaign"]
-const ratings = ["All", "5", "4", "3", "2", "1"]
+const statuses = ["All", "Active", "Prospect", "Inactive"];
+const sources = ["All", "Website", "Referral", "LinkedIn", "Cold Call", "Trade Show", "Email Campaign"];
+const ratings = ["All", "5", "4", "3", "2", "1"];
 
 export default function Contacts() {
-  const [contacts, setContacts] = useState(contactsData)
-  const [searchTerm, setSearchTerm] = useState("")
-  const [selectedStatus, setSelectedStatus] = useState("All")
-  const [selectedSource, setSelectedSource] = useState("All")
-  const [selectedRating, setSelectedRating] = useState("All")
-  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
-  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
-  const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
+  const [contacts, setContacts] = useState(contactsData);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("All");
+  const [selectedSource, setSelectedSource] = useState("All");
+  const [selectedRating, setSelectedRating] = useState("All");
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [isViewDialogOpen, setIsViewDialogOpen] = useState(false);
   const [newContact, setNewContact] = useState({
     name: "",
     email: "",
@@ -73,39 +392,39 @@ export default function Contacts() {
     notes: "",
     dealValue: "$0",
     tags: [],
-    avatar: "/placeholder.svg?height=80&width=80",
-  })
-  const [editingContact, setEditingContact] = useState(null)
-  const [viewingContact, setViewingContact] = useState(null)
+    avatar: "https://randomuser.me/api/portraits/lego/1.jpg",
+  });
+  const [editingContact, setEditingContact] = useState(null);
+  const [viewingContact, setViewingContact] = useState(null);
 
-  // Filter contacts (unchanged)
+  // Filter contacts
   const filteredContacts = contacts.filter((contact) => {
     const matchesSearch =
       contact.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       contact.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      contact.position.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesStatus = selectedStatus === "All" || contact.status === selectedStatus
-    const matchesSource = selectedSource === "All" || contact.source === selectedSource
-    const matchesRating = selectedRating === "All" || Math.floor(contact.rating).toString() === selectedRating
+      contact.position.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = selectedStatus === "All" || contact.status === selectedStatus;
+    const matchesSource = selectedSource === "All" || contact.source === selectedSource;
+    const matchesRating = selectedRating === "All" || Math.floor(contact.rating).toString() === selectedRating;
 
-    return matchesSearch && matchesStatus && matchesSource && matchesRating
-  })
+    return matchesSearch && matchesStatus && matchesSource && matchesRating;
+  });
 
-  // Calculate stats (unchanged)
-  const totalContacts = contacts.length
-  const activeContacts = contacts.filter(c => c.status === "Active").length
+  // Calculate stats
+  const totalContacts = contacts.length;
+  const activeContacts = contacts.filter(c => c.status === "Active").length;
   const totalDealValue = contacts.reduce((sum, contact) => {
-    const value = parseFloat(contact.dealValue.replace(/[$,]/g, ''))
-    return sum + (isNaN(value) ? 0 : value)
-  }, 0)
+    const value = parseFloat(contact.dealValue.replace(/[$,]/g, ''));
+    return sum + (isNaN(value) ? 0 : value);
+  }, 0);
 
   const handleAddContact = () => {
     const contact = {
       id: contacts.length + 1,
       ...newContact,
       lastContact: new Date().toISOString().split("T")[0],
-    }
-    setContacts([...contacts, contact])
+    };
+    setContacts([...contacts, contact]);
     setNewContact({
       name: "",
       email: "",
@@ -118,49 +437,49 @@ export default function Contacts() {
       notes: "",
       dealValue: "$0",
       tags: [],
-      avatar: "/placeholder.svg?height=80&width=80",
-    })
-    setIsAddDialogOpen(false)
-  }
+      avatar: "https://randomuser.me/api/portraits/lego/1.jpg",
+    });
+    setIsAddDialogOpen(false);
+  };
 
   const handleEditContact = () => {
     if (editingContact) {
-      setContacts(contacts.map((c) => (c.id === editingContact.id ? { ...editingContact } : c)))
-      setEditingContact(null)
-      setIsEditDialogOpen(false)
+      setContacts(contacts.map((c) => (c.id === editingContact.id ? { ...editingContact } : c)));
+      setEditingContact(null);
+      setIsEditDialogOpen(false);
     }
-  }
+  };
 
   const handleDeleteContact = (id) => {
-    setContacts(contacts.filter((contact) => contact.id !== id))
-  }
+    setContacts(contacts.filter((contact) => contact.id !== id));
+  };
 
   const handleViewContact = (contact) => {
-    setViewingContact(contact)
-    setIsViewDialogOpen(true)
-  }
+    setViewingContact(contact);
+    setIsViewDialogOpen(true);
+  };
 
   const handleEditContactOpen = (contact) => {
-    setEditingContact({ ...contact })
-    setIsEditDialogOpen(true)
-  }
+    setEditingContact({ ...contact });
+    setIsEditDialogOpen(true);
+  };
 
   const handleSendEmail = (email) => {
-    window.open(`mailto:${email}`)
-  }
+    window.open(`mailto:${email}`);
+  };
 
   const handleCall = (phone) => {
-    window.open(`tel:${phone.replace(/\D/g, '')}`)
-  }
+    window.open(`tel:${phone.replace(/\D/g, '')}`);
+  };
 
   const getStatusBadge = (status) => {
     const variants = {
       Active: "bg-emerald-50 text-emerald-700 border-emerald-200 shadow-sm",
       Prospect: "bg-orange-50 text-orange-700 border-orange-200 shadow-sm",
       Inactive: "bg-red-50 text-red-700 border-red-200 shadow-sm",
-    }
-    return <Badge className={`${variants[status] || "bg-gray-50 text-gray-700 border-gray-200"} font-medium px-3 py-1`}>{status}</Badge>
-  }
+    };
+    return <Badge className={`${variants[status] || "bg-gray-50 text-gray-700 border-gray-200"} font-medium px-3 py-1`}>{status}</Badge>;
+  };
 
   const getRatingStars = (rating) => {
     return Array.from({ length: 5 }, (_, i) => (
@@ -168,8 +487,8 @@ export default function Contacts() {
         key={i}
         className={`h-4 w-4 sm:h-5 sm:w-5 ${i < Math.round(rating) ? "fill-amber-400 text-amber-400" : "text-gray-300"}`}
       />
-    ))
-  }
+    ));
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-orange-50 to-orange-50 p-4 sm:p-6">
@@ -188,151 +507,176 @@ export default function Contacts() {
             </div>
           </div>
         </div>
-        <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
-          <DialogTrigger asChild>
-            <Button className="bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-700 hover:to-orange-500 text-white shadow-lg hover:shadow-xl transition-all duration-300 px-4 py-2 sm:px-6 sm:py-3 rounded-xl mt-4 sm:mt-0">
-              <Plus className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-              Add New Contact
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="w-full max-w-[90vw] sm:max-w-[500px] rounded-2xl border-0 shadow-2xl">
-            <DialogHeader className="space-y-3 pb-4 sm:pb-6 border-b border-gray-100">
-              <DialogTitle className="text-xl sm:text-2xl font-semibold text-gray-900">Add New Contact</DialogTitle>
-              <DialogDescription className="text-gray-600 text-sm sm:text-base">
-                Create a new contact entry for your CRM system
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4 sm:gap-6 py-4 sm:py-6 max-h-[60vh] overflow-y-auto">
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-left sm:text-right font-medium text-gray-700 sm:mb-0 mb-1">Name</Label>
-                <Input
-                  id="name"
-                  value={newContact.name}
-                  onChange={(e) => setNewContact({ ...newContact, name: e.target.value })}
-                  className="col-span-3 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500 w-full"
-                />
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-                <Label htmlFor="email" className="text-left sm:text-right font-medium text-gray-700 sm:mb-0 mb-1">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={newContact.email}
-                  onChange={(e) => setNewContact({ ...newContact, email: e.target.value })}
-                  className="col-span-3 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500 w-full"
-                />
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-                <Label htmlFor="phone" className="text-left sm:text-right font-medium text-gray-700 sm:mb-0 mb-1">Phone</Label>
-                <Input
-                  id="phone"
-                  value={newContact.phone}
-                  onChange={(e) => setNewContact({ ...newContact, phone: e.target.value })}
-                  className="col-span-3 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500 w-full"
-                />
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-                <Label htmlFor="location" className="text-left sm:text-right font-medium text-gray-700 sm:mb-0 mb-1">Location</Label>
-                <Input
-                  id="location"
-                  value={newContact.location}
-                  onChange={(e) => setNewContact({ ...newContact, location: e.target.value })}
-                  className="col-span-3 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500 w-full"
-                />
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-                <Label htmlFor="position" className="text-left sm:text-right font-medium text-gray-700 sm:mb-0 mb-1">Position</Label>
-                <Input
-                  id="position"
-                  value={newContact.position}
-                  onChange={(e) => setNewContact({ ...newContact, position: e.target.value })}
-                  className="col-span-3 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500 w-full"
-                />
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-                <Label htmlFor="source" className="text-left sm:text-right font-medium text-gray-700 sm:mb-0 mb-1">Source</Label>
-                <Select onValueChange={(value) => setNewContact({ ...newContact, source: value })}>
-                  <SelectTrigger className="col-span-3 rounded-lg border-gray-200 w-full">
-                    <SelectValue placeholder="Select source" />
-                  </SelectTrigger>
-                  <SelectContent className="rounded-lg">
-                    {sources
-                      .filter((s) => s !== "All")
-                      .map((source) => (
-                        <SelectItem key={source} value={source} className="rounded-md">
-                          {source}
-                        </SelectItem>
-                      ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-                <Label htmlFor="status" className="text-left sm:text-right font-medium text-gray-700 sm:mb-0 mb-1">Status</Label>
-                <Select onValueChange={(value) => setNewContact({ ...newContact, status: value })}>
-                  <SelectTrigger className="col-span-3 rounded-lg border-gray-200 w-full">
-                    <SelectValue placeholder="Select status" />
-                  </SelectTrigger>
-                  <SelectContent className="rounded-lg">
-                    {statuses
-                      .filter((s) => s !== "All")
-                      .map((status) => (
-                        <SelectItem key={status} value={status} className="rounded-md">
-                          {status}
-                        </SelectItem>
-                      ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-                <Label htmlFor="rating" className="text-left sm:text-right font-medium text-gray-700 sm:mb-0 mb-1">Rating</Label>
-                <Select onValueChange={(value) => setNewContact({ ...newContact, rating: parseFloat(value) })}>
-                  <SelectTrigger className="col-span-3 rounded-lg border-gray-200 w-full">
-                    <SelectValue placeholder="Select rating" />
-                  </SelectTrigger>
-                  <SelectContent className="rounded-lg">
-                    {ratings
-                      .filter((r) => r !== "All")
-                      .map((rating) => (
-                        <SelectItem key={rating} value={rating} className="rounded-md">
-                          {rating} Stars
-                        </SelectItem>
-                      ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-                <Label htmlFor="dealValue" className="text-left sm:text-right font-medium text-gray-700 sm:mb-0 mb-1">Deal Value</Label>
-                <Input
-                  id="dealValue"
-                  value={newContact.dealValue}
-                  onChange={(e) => setNewContact({ ...newContact, dealValue: e.target.value })}
-                  className="col-span-3 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500 w-full"
-                />
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-start gap-4">
-                <Label htmlFor="notes" className="text-left sm:text-right pt-2 font-medium text-gray-700 sm:mb-0 mb-1">Notes</Label>
-                <Textarea
-                  id="notes"
-                  value={newContact.notes}
-                  onChange={(e) => setNewContact({ ...newContact, notes: e.target.value })}
-                  className="col-span-3 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500 w-full"
-                  placeholder="Add notes..."
-                  rows={3}
-                />
-              </div>
+         <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
+      <DialogTrigger asChild>
+        <Button className="bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-700 hover:to-orange-500 text-white shadow-lg hover:shadow-xl transition-all duration-300 px-4 py-2 sm:px-6 sm:py-3 rounded-lg mt-4 sm:mt-0">
+          <Plus className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+          Add New Contact
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="w-full max-w-[95vw] sm:max-w-[900px] max-h-[85vh] rounded-xl border-0 shadow-xl overflow-auto p-4 sm:p-6">
+        <DialogHeader className="space-y-2 pb-4 border-b border-gray-100">
+          <DialogTitle className="text-xl sm:text-2xl font-semibold text-gray-900">Add New Contact</DialogTitle>
+          <DialogDescription className="text-gray-600 text-sm sm:text-base">
+            Create a new contact entry for your CRM system
+          </DialogDescription>
+        </DialogHeader>
+        <div className="grid gap-4 sm:gap-5 py-4 sm:py-5">
+          <div className="grid grid-cols-1 sm:grid-cols-6 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+              <Label htmlFor="name" className="text-left sm:text-right font-medium text-gray-700">Name</Label>
+              <Input
+                id="name"
+                value={newContact.name}
+                onChange={(e) => setNewContact({ ...newContact, name: e.target.value })}
+                className="col-span-2 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500"
+              />
             </div>
-            <DialogFooter className="pt-4 sm:pt-6 border-t border-gray-100">
-              <Button type="submit" onClick={handleAddContact} className="bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-700 hover:to-orange-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl shadow-lg w-full sm:w-auto">
-                Add Contact
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+            <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+              <Label htmlFor="email" className="text-left sm:text-right font-medium text-gray-700">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                value={newContact.email}
+                onChange={(e) => setNewContact({ ...newContact, email: e.target.value })}
+                className="col-span-2 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500"
+              />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-6 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+              <Label htmlFor="phone" className="text-left sm:text-right font-medium text-gray-700">Phone</Label>
+              <Input
+                id="phone"
+                value={newContact.phone}
+                onChange={(e) => setNewContact({ ...newContact, phone: e.target.value })}
+                className="col-span-2 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500"
+              />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+              <Label htmlFor="location" className="text-left sm:text-right font-medium text-gray-700">Location</Label>
+              <Input
+                id="location"
+                value={newContact.location}
+                onChange={(e) => setNewContact({ ...newContact, location: e.target.value })}
+                className="col-span-2 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500"
+              />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-6 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+              <Label htmlFor="position" className="text-left sm:text-right font-medium text-gray-700">Position</Label>
+              <Input
+                id="position"
+                value={newContact.position}
+                onChange={(e) => setNewContact({ ...newContact, position: e.target.value })}
+                className="col-span-2 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500"
+              />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+              <Label htmlFor="source" className="text-left sm:text-right font-medium text-gray-700">Source</Label>
+              <Select onValueChange={(value) => setNewContact({ ...newContact, source: value })} className="col-span-2">
+                <SelectTrigger className="rounded-lg border-gray-200">
+                  <SelectValue placeholder="Select source" />
+                </SelectTrigger>
+                <SelectContent className="rounded-lg">
+                  {sources
+                    .filter((s) => s !== "All")
+                    .map((source) => (
+                      <SelectItem key={source} value={source} className="rounded-md">
+                        {source}
+                      </SelectItem>
+                    ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-6 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+              <Label htmlFor="status" className="text-left sm:text-right font-medium text-gray-700">Status</Label>
+              <Select onValueChange={(value) => setNewContact({ ...newContact, status: value })} className="col-span-2">
+                <SelectTrigger className="rounded-lg border-gray-200">
+                  <SelectValue placeholder="Select status" />
+                </SelectTrigger>
+                <SelectContent className="rounded-lg">
+                  {statuses
+                    .filter((s) => s !== "All")
+                    .map((status) => (
+                      <SelectItem key={status} value={status} className="rounded-md">
+                        {status}
+                      </SelectItem>
+                    ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+              <Label htmlFor="rating" className="text-left sm:text-right font-medium text-gray-700">Rating</Label>
+              <Select
+                onValueChange={(value) => setNewContact({ ...newContact, rating: parseFloat(value) })}
+                className="col-span-2"
+              >
+                <SelectTrigger className="rounded-lg border-gray-200">
+                  <SelectValue placeholder="Select rating" />
+                </SelectTrigger>
+                <SelectContent className="rounded-lg">
+                  {ratings
+                    .filter((r) => r !== "All")
+                    .map((rating) => (
+                      <SelectItem key={rating} value={rating} className="rounded-md">
+                        {rating} Stars
+                      </SelectItem>
+                    ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-6 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+              <Label htmlFor="dealValue" className="text-left sm:text-right font-medium text-gray-700">Deal Value</Label>
+              <Input
+                id="dealValue"
+                value={newContact.dealValue}
+                onChange={(e) => setNewContact({ ...newContact, dealValue: e.target.value })}
+                className="col-span-2 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500"
+              />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 items-start gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+              <Label htmlFor="notes" className="text-left sm:text-right font-medium text-gray-700 pt-2">Notes</Label>
+              <Textarea
+                id="notes"
+                value={newContact.notes}
+                onChange={(e) => setNewContact({ ...newContact, notes: e.target.value })}
+                className="col-span-2 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500"
+                placeholder="Add notes..."
+                rows={4}
+              />
+            </div>
+          </div>
+        </div>
+        <DialogFooter className="pt-4 border-t border-gray-100 flex flex-col sm:flex-row gap-2 sm:gap-3">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => setIsAddDialogOpen(false)}
+            className="rounded-lg border-gray-300 w-full sm:w-auto px-4 py-2"
+          >
+            Cancel
+          </Button>
+          <Button
+            type="submit"
+            onClick={handleAddContact}
+            className="bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-700 hover:to-orange-500 text-white rounded-lg w-full sm:w-auto px-4 py-2"
+          >
+            Add Contact
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
-        <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-50 to-orange-50 hover:shadow-xl transition-shadow duration-300">
+        <Card className="border-0 hover:-translate-y-2 bg-gradient-to-br from-orange-50 to-orange-50 hover:shadow-xl transittion-all ease-in-out duration-300">
           <CardContent className="p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -345,7 +689,7 @@ export default function Contacts() {
             </div>
           </CardContent>
         </Card>
-        <Card className="border-0 shadow-lg bg-gradient-to-br from-emerald-50 to-green-50 hover:shadow-xl transition-shadow duration-300">
+        <Card className="border-0 hover:-translate-y-2 bg-gradient-to-br from-emerald-50 to-green-50 hover:shadow-xl transittion-all ease-in-out duration-300">
           <CardContent className="p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -358,7 +702,7 @@ export default function Contacts() {
             </div>
           </CardContent>
         </Card>
-        <Card className="border-0 shadow-lg bg-gradient-to-br from-amber-50 to-orange-50 hover:shadow-xl transition-shadow duration-300">
+        <Card className="border-0 hover:-translate-y-2 bg-gradient-to-br from-amber-50 to-orange-50 hover:shadow-xl transittion-all ease-in-out duration-300">
           <CardContent className="p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -565,10 +909,10 @@ export default function Contacts() {
           <p className="text-gray-600 text-sm sm:text-base mb-4 sm:mb-6">Try adjusting your search or filter criteria</p>
           <Button 
             onClick={() => {
-              setSearchTerm("")
-              setSelectedStatus("All")
-              setSelectedSource("All")
-              setSelectedRating("All")
+              setSearchTerm("");
+              setSelectedStatus("All");
+              setSelectedSource("All");
+              setSelectedRating("All");
             }}
             variant="outline"
             className="rounded-xl px-4 py-2 sm:px-6 sm:py-3"
@@ -578,147 +922,172 @@ export default function Contacts() {
         </div>
       )}
 
-      {/* Edit Dialog */}
+       {/* Edit Dialog */}
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <DialogContent className="w-full max-w-[90vw] sm:max-w-[600px] rounded-2xl border-0 shadow-2xl max-h-[80vh] overflow-hidden">
-          <DialogHeader className="space-y-3 pb-4 sm:pb-6 border-b border-gray-100">
+        <DialogContent className="w-full max-w-[95vw] sm:max-w-[900px] max-h-[85vh] rounded-xl border-0 shadow-xl overflow-auto p-4 sm:p-6">
+          <DialogHeader className="space-y-2 pb-4 border-b border-gray-100">
             <DialogTitle className="text-xl sm:text-2xl font-semibold text-gray-900">Edit Contact</DialogTitle>
             <DialogDescription className="text-gray-600 text-sm sm:text-base">
               Update the contact information
             </DialogDescription>
           </DialogHeader>
           {editingContact && (
-            <div className="grid gap-4 sm:gap-6 py-4 sm:py-6 max-h-[60vh] overflow-y-auto">
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-name" className="text-left sm:text-right font-medium text-gray-700 sm:mb-0 mb-1">Name</Label>
-                <Input
-                  id="edit-name"
-                  value={editingContact.name}
-                  onChange={(e) => setEditingContact({ ...editingContact, name: e.target.value })}
-                  className="col-span-3 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500 w-full"
-                />
+            <div className="grid gap-4 sm:gap-5 py-4 sm:py-5">
+              <div className="grid grid-cols-1 sm:grid-cols-6 gap-3 sm:gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+                  <Label htmlFor="edit-name" className="text-left sm:text-right font-medium text-gray-700">Name</Label>
+                  <Input
+                    id="edit-name"
+                    value={editingContact.name}
+                    onChange={(e) => setEditingContact({ ...editingContact, name: e.target.value })}
+                    className="col-span-2 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500"
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+                  <Label htmlFor="edit-email" className="text-left sm:text-right font-medium text-gray-700">Email</Label>
+                  <Input
+                    id="edit-email"
+                    type="email"
+                    value={editingContact.email}
+                    onChange={(e) => setEditingContact({ ...editingContact, email: e.target.value })}
+                    className="col-span-2 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500"
+                  />
+                </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-email" className="text-left sm:text-right font-medium text-gray-700 sm:mb-0 mb-1">Email</Label>
-                <Input
-                  id="edit-email"
-                  type="email"
-                  value={editingContact.email}
-                  onChange={(e) => setEditingContact({ ...editingContact, email: e.target.value })}
-                  className="col-span-3 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500 w-full"
-                />
+              <div className="grid grid-cols-1 sm:grid-cols-6 gap-3 sm:gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+                  <Label htmlFor="edit-phone" className="text-left sm:text-right font-medium text-gray-700">Phone</Label>
+                  <Input
+                    id="edit-phone"
+                    value={editingContact.phone}
+                    onChange={(e) => setEditingContact({ ...editingContact, phone: e.target.value })}
+                    className="col-span-2 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500"
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+                  <Label htmlFor="edit-location" className="text-left sm:text-right font-medium text-gray-700">Location</Label>
+                  <Input
+                    id="edit-location"
+                    value={editingContact.location}
+                    onChange={(e) => setEditingContact({ ...editingContact, location: e.target.value })}
+                    className="col-span-2 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500"
+                  />
+                </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-phone" className="text-left sm:text-right font-medium text-gray-700 sm:mb-0 mb-1">Phone</Label>
-                <Input
-                  id="edit-phone"
-                  value={editingContact.phone}
-                  onChange={(e) => setEditingContact({ ...editingContact, phone: e.target.value })}
-                  className="col-span-3 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500 w-full"
-                />
+              <div className="grid grid-cols-1 sm:grid-cols-6 gap-3 sm:gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+                  <Label htmlFor="edit-position" className="text-left sm:text-right font-medium text-gray-700">Position</Label>
+                  <Input
+                    id="edit-position"
+                    value={editingContact.position}
+                    onChange={(e) => setEditingContact({ ...editingContact, position: e.target.value })}
+                    className="col-span-2 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500"
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+                  <Label htmlFor="edit-source" className="text-left sm:text-right font-medium text-gray-700">Source</Label>
+                  <Select
+                    value={editingContact.source}
+                    onValueChange={(value) => setEditingContact({ ...editingContact, source: value })}
+                    className="col-span-2"
+                  >
+                    <SelectTrigger className="rounded-lg border-gray-200">
+                      <SelectValue placeholder="Select source" />
+                    </SelectTrigger>
+                    <SelectContent className="rounded-lg">
+                      {sources
+                        .filter((s) => s !== "All")
+                        .map((source) => (
+                          <SelectItem key={source} value={source} className="rounded-md">
+                            {source}
+                          </SelectItem>
+                        ))}
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-location" className="text-left sm:text-right font-medium text-gray-700 sm:mb-0 mb-1">Location</Label>
-                <Input
-                  id="edit-location"
-                  value={editingContact.location}
-                  onChange={(e) => setEditingContact({ ...editingContact, location: e.target.value })}
-                  className="col-span-3 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500 w-full"
-                />
+              <div className="grid grid-cols-1 sm:grid-cols-6 gap-3 sm:gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+                  <Label htmlFor="edit-status" className="text-left sm:text-right font-medium text-gray-700">Status</Label>
+                  <Select
+                    value={editingContact.status}
+                    onValueChange={(value) => setEditingContact({ ...editingContact, status: value })}
+                    className="col-span-2"
+                  >
+                    <SelectTrigger className="rounded-lg border-gray-200">
+                      <SelectValue placeholder="Select status" />
+                    </SelectTrigger>
+                    <SelectContent className="rounded-lg">
+                      {statuses
+                        .filter((s) => s !== "All")
+                        .map((status) => (
+                          <SelectItem key={status} value={status} className="rounded-md">
+                            {status}
+                          </SelectItem>
+                        ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+                  <Label htmlFor="edit-rating" className="text-left sm:text-right font-medium text-gray-700">Rating</Label>
+                  <Select
+                    value={editingContact.rating.toString()}
+                    onValueChange={(value) => setEditingContact({ ...editingContact, rating: parseFloat(value) })}
+                    className="col-span-2"
+                  >
+                    <SelectTrigger className="rounded-lg border-gray-200">
+                      <SelectValue placeholder="Select rating" />
+                    </SelectTrigger>
+                    <SelectContent className="rounded-lg">
+                      {ratings
+                        .filter((r) => r !== "All")
+                        .map((rating) => (
+                          <SelectItem key={rating} value={rating} className="rounded-md">
+                            {rating} Stars
+                          </SelectItem>
+                        ))}
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-position" className="text-left sm:text-right font-medium text-gray-700 sm:mb-0 mb-1">Position</Label>
-                <Input
-                  id="edit-position"
-                  value={editingContact.position}
-                  onChange={(e) => setEditingContact({ ...editingContact, position: e.target.value })}
-                  className="col-span-3 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500 w-full"
-                />
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-source" className="text-left sm:text-right font-medium text-gray-700 sm:mb-0 mb-1">Source</Label>
-                <Select
-                  value={editingContact.source}
-                  onValueChange={(value) => setEditingContact({ ...editingContact, source: value })}
-                >
-                  <SelectTrigger className="col-span-3 rounded-lg border-gray-200 w-full">
-                    <SelectValue placeholder="Select source" />
-                  </SelectTrigger>
-                  <SelectContent className="rounded-lg">
-                    {sources
-                      .filter((s) => s !== "All")
-                      .map((source) => (
-                        <SelectItem key={source} value={source} className="rounded-md">
-                          {source}
-                        </SelectItem>
-                      ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-status" className="text-left sm:text-right font-medium text-gray-700 sm:mb-0 mb-1">Status</Label>
-                <Select
-                  value={editingContact.status}
-                  onValueChange={(value) => setEditingContact({ ...editingContact, status: value })}
-                >
-                  <SelectTrigger className="col-span-3 rounded-lg border-gray-200 w-full">
-                    <SelectValue placeholder="Select status" />
-                  </SelectTrigger>
-                  <SelectContent className="rounded-lg">
-                    {statuses
-                      .filter((s) => s !== "All")
-                      .map((status) => (
-                        <SelectItem key={status} value={status} className="rounded-md">
-                          {status}
-                        </SelectItem>
-                      ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-rating" className="text-left sm:text-right font-medium text-gray-700 sm:mb-0 mb-1">Rating</Label>
-                <Select
-                  value={editingContact.rating.toString()}
-                  onValueChange={(value) => setEditingContact({ ...editingContact, rating: parseFloat(value) })}
-                >
-                  <SelectTrigger className="col-span-3 rounded-lg border-gray-200 w-full">
-                    <SelectValue placeholder="Select rating" />
-                  </SelectTrigger>
-                  <SelectContent className="rounded-lg">
-                    {ratings
-                      .filter((r) => r !== "All")
-                      .map((rating) => (
-                        <SelectItem key={rating} value={rating} className="rounded-md">
-                          {rating} Stars
-                        </SelectItem>
-                      ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-dealValue" className="text-left sm:text-right font-medium text-gray-700 sm:mb-0 mb-1">Deal Value</Label>
-                <Input
-                  id="edit-dealValue"
-                  value={editingContact.dealValue}
-                  onChange={(e) => setEditingContact({ ...editingContact, dealValue: e.target.value })}
-                  className="col-span-3 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500 w-full"
-                />
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-4 items-start gap-4">
-                <Label htmlFor="edit-notes" className="text-left sm:text-right pt-2 font-medium text-gray-700 sm:mb-0 mb-1">Notes</Label>
-                <Textarea
-                  id="edit-notes"
-                  value={editingContact.notes}
-                  onChange={(e) => setEditingContact({ ...editingContact, notes: e.target.value })}
-                  className="col-span-3 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500 w-full"
-                  placeholder="Add notes..."
-                  rows={3}
-                />
+              <div className="grid grid-cols-1 sm:grid-cols-6 gap-3 sm:gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+                  <Label htmlFor="edit-dealValue" className="text-left sm:text-right font-medium text-gray-700">Deal Value</Label>
+                  <Input
+                    id="edit-dealValue"
+                    value={editingContact.dealValue}
+                    onChange={(e) => setEditingContact({ ...editingContact, dealValue: e.target.value })}
+                    className="col-span-2 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500"
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 items-start gap-3 sm:gap-4 col-span-1 sm:col-span-3">
+                  <Label htmlFor="edit-notes" className="text-left sm:text-right font-medium text-gray-700 pt-2">Notes</Label>
+                  <Textarea
+                    id="edit-notes"
+                    value={editingContact.notes}
+                    onChange={(e) => setEditingContact({ ...editingContact, notes: e.target.value })}
+                    className="col-span-2 rounded-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500"
+                    placeholder="Add notes..."
+                    rows={4}
+                  />
+                </div>
               </div>
             </div>
           )}
-          <DialogFooter className="pt-4 sm:pt-6 border-t border-gray-100">
-            <Button type="submit" onClick={handleEditContact} className="bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-700 hover:to-orange-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl shadow-lg w-full sm:w-auto">
+          <DialogFooter className="pt-4 border-t border-gray-100 flex flex-col sm:flex-row gap-2 sm:gap-3">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setIsEditDialogOpen(false)}
+              className="rounded-lg border-gray-300 w-full sm:w-auto px-4 py-2"
+            >
+              Cancel
+            </Button>
+            <Button
+              type="submit"
+              onClick={handleEditContact}
+              className="bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-700 hover:to-orange-500 text-white rounded-lg w-full sm:w-auto px-4 py-2"
+            >
               Update Contact
             </Button>
           </DialogFooter>
@@ -727,20 +1096,20 @@ export default function Contacts() {
 
       {/* View Dialog */}
       <Dialog open={isViewDialogOpen} onOpenChange={setIsViewDialogOpen}>
-        <DialogContent className="w-full max-w-[90vw] sm:max-w-[500px] rounded-2xl border-0 shadow-2xl">
-          <DialogHeader className="space-y-3 pb-4 sm:pb-6 border-b border-gray-100">
+        <DialogContent className="w-full max-w-[95vw] sm:max-w-[600px] max-h-[85vh] rounded-xl border-0 shadow-xl overflow-auto p-4 sm:p-6">
+          <DialogHeader className="space-y-2 pb-4 border-b border-gray-100">
             <DialogTitle className="text-xl sm:text-2xl font-semibold text-gray-900">Contact Details</DialogTitle>
             <DialogDescription className="text-gray-600 text-sm sm:text-base">
               Complete information for {viewingContact?.name}
             </DialogDescription>
           </DialogHeader>
           {viewingContact && (
-            <div className="space-y-4 sm:space-y-6 py-4 sm:py-6">
+            <div className="space-y-4 py-4 sm:py-5">
               {/* Avatar and Basic Info */}
-              <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gradient-to-r from-orange-50 to-orange-50 rounded-xl">
-                <Avatar className="h-12 w-12 sm:h-16 sm:w-16 border-2 border-white shadow-lg">
+              <div className="flex items-center gap-3 p-3 bg-orange-50 rounded-lg">
+                <Avatar className="h-12 w-12 sm:h-14 sm:w-14 border-2 border-white shadow-md">
                   <AvatarImage src={viewingContact.avatar} />
-                  <AvatarFallback className="bg-gradient-to-r from-orange-600 to-orange-500 text-white font-semibold text-base sm:text-lg">
+                  <AvatarFallback className="bg-gradient-to-r from-orange-600 to-orange-500 text-white font-semibold text-base">
                     {viewingContact.name
                       .split(" ")
                       .map((n) => n[0])
@@ -748,73 +1117,73 @@ export default function Contacts() {
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900">{viewingContact.name}</h3>
-                  <p className="text-gray-600 font-medium text-sm sm:text-base">{viewingContact.position}</p>
+                  <h3 className="text-lg font-bold text-gray-900">{viewingContact.name}</h3>
+                  <p className="text-gray-600 text-sm">{viewingContact.position}</p>
                   <div className="flex items-center gap-1 mt-1">
                     <MapPin className="h-4 w-4 text-gray-500" />
-                    <span className="text-xs sm:text-sm text-gray-600">{viewingContact.location}</span>
+                    <span className="text-xs text-gray-600">{viewingContact.location}</span>
                   </div>
                 </div>
               </div>
 
               {/* Contact Information */}
-              <div className="grid gap-3 sm:gap-4">
-                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 p-3 rounded-lg bg-gray-50">
-                  <Label className="font-medium text-gray-700 text-sm sm:text-base">Email</Label>
+              <div className="grid gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 p-3 rounded-lg bg-gray-50">
+                  <Label className="font-medium text-gray-700 text-sm">Email</Label>
                   <div className="col-span-2 flex items-center gap-2">
                     <Mail className="h-4 w-4 text-green-500" />
-                    <span className="text-gray-900 text-xs sm:text-sm truncate">{viewingContact.email}</span>
+                    <span className="text-gray-900 text-sm truncate">{viewingContact.email}</span>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 p-3 rounded-lg bg-gray-50">
-                  <Label className="font-medium text-gray-700 text-sm sm:text-base">Phone</Label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 p-3 rounded-lg bg-gray-50">
+                  <Label className="font-medium text-gray-700 text-sm">Phone</Label>
                   <div className="col-span-2 flex items-center gap-2">
                     <Phone className="h-4 w-4 text-purple-500" />
-                    <span className="text-gray-900 font-mono text-xs sm:text-sm">{viewingContact.phone}</span>
+                    <span className="text-gray-900 font-mono text-sm">{viewingContact.phone}</span>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 p-3 rounded-lg bg-gray-50">
-                  <Label className="font-medium text-gray-700 text-sm sm:text-base">Source</Label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 p-3 rounded-lg bg-gray-50">
+                  <Label className="font-medium text-gray-700 text-sm">Source</Label>
                   <div className="col-span-2">
-                    <Badge className="bg-orange-100 text-orange-700 border-orange-200">{viewingContact.source}</Badge>
+                    <Badge className="bg-orange-100 text-orange-700 border-orange-200 text-sm">{viewingContact.source}</Badge>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 p-3 rounded-lg bg-gray-50">
-                  <Label className="font-medium text-gray-700 text-sm sm:text-base">Status</Label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 p-3 rounded-lg bg-gray-50">
+                  <Label className="font-medium text-gray-700 text-sm">Status</Label>
                   <div className="col-span-2">{getStatusBadge(viewingContact.status)}</div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 p-3 rounded-lg bg-gray-50">
-                  <Label className="font-medium text-gray-700 text-sm sm:text-base">Rating</Label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 p-3 rounded-lg bg-gray-50">
+                  <Label className="font-medium text-gray-700 text-sm">Rating</Label>
                   <div className="col-span-2 flex items-center gap-2">
                     <div className="flex items-center gap-1">{getRatingStars(viewingContact.rating)}</div>
-                    <span className="text-gray-600 text-xs sm:text-sm">({viewingContact.rating}/5)</span>
+                    <span className="text-gray-600 text-sm">({viewingContact.rating}/5)</span>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 p-3 rounded-lg bg-gray-50">
-                  <Label className="font-medium text-gray-700 text-sm sm:text-base">Deal Value</Label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 p-3 rounded-lg bg-gray-50">
+                  <Label className="font-medium text-gray-700 text-sm">Deal Value</Label>
                   <div className="col-span-2">
-                    <span className="text-lg sm:text-xl font-bold text-green-600">{viewingContact.dealValue}</span>
+                    <span className="text-lg font-bold text-green-600">{viewingContact.dealValue}</span>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 sm:gap-4 p-3 rounded-lg bg-gray-50">
-                  <Label className="font-medium text-gray-700 text-sm sm:text-base">Last Contact</Label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 p-3 rounded-lg bg-gray-50">
+                  <Label className="font-medium text-gray-700 text-sm">Last Contact</Label>
                   <div className="col-span-2 flex items-center gap-2">
                     <Calendar className="h-4 w-4 text-gray-500" />
-                    <span className="text-gray-900 text-xs sm:text-sm">{new Date(viewingContact.lastContact).toLocaleDateString()}</span>
+                    <span className="text-gray-900 text-sm">{new Date(viewingContact.lastContact).toLocaleDateString()}</span>
                   </div>
                 </div>
                 {viewingContact.notes && (
                   <div className="p-3 rounded-lg bg-gray-50">
-                    <Label className="font-medium text-gray-700 block mb-2 text-sm sm:text-base">Notes</Label>
-                    <p className="text-gray-900 text-xs sm:text-sm">{viewingContact.notes}</p>
+                    <Label className="font-medium text-gray-700 block mb-2 text-sm">Notes</Label>
+                    <p className="text-gray-900 text-sm">{viewingContact.notes}</p>
                   </div>
                 )}
                 {viewingContact.tags && viewingContact.tags.length > 0 && (
                   <div className="p-3 rounded-lg bg-gray-50">
-                    <Label className="font-medium text-gray-700 block mb-2 sm:mb-3 text-sm sm:text-base">Tags</Label>
+                    <Label className="font-medium text-gray-700 block mb-2 text-sm">Tags</Label>
                     <div className="flex flex-wrap gap-2">
                       {viewingContact.tags.map((tag, index) => (
-                        <Badge key={index} className="bg-orange-100 text-orange-700 border-orange-200 px-3 py-1 text-xs sm:text-sm">
+                        <Badge key={index} className="bg-orange-100 text-orange-700 border-orange-200 px-2 py-1 text-sm">
                           {tag}
                         </Badge>
                       ))}
@@ -824,22 +1193,22 @@ export default function Contacts() {
               </div>
             </div>
           )}
-          <DialogFooter className="pt-4 sm:pt-6 border-t border-gray-100 gap-2 sm:gap-3 flex-col sm:flex-row">
+          <DialogFooter className="pt-4 border-t border-gray-100 flex flex-col sm:flex-row gap-2 sm:gap-3">
             <Button
               type="button"
               variant="outline"
               onClick={() => setIsViewDialogOpen(false)}
-              className="rounded-xl border-gray-300 w-full sm:w-auto px-4 py-2 sm:px-6 sm:py-3"
+              className="rounded-lg border-gray-300 w-full sm:w-auto px-4 py-2"
             >
               Close
             </Button>
             <Button
               type="button"
               onClick={() => {
-                setIsViewDialogOpen(false)
-                handleEditContactOpen(viewingContact)
+                setIsViewDialogOpen(false);
+                handleEditContactOpen(viewingContact);
               }}
-              className="bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-700 hover:to-orange-500 text-white rounded-xl w-full sm:w-auto px-4 py-2 sm:px-6 sm:py-3"
+              className="bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-700 hover:to-orange-500 text-white rounded-lg w-full sm:w-auto px-4 py-2"
             >
               Edit Contact
             </Button>
@@ -847,5 +1216,5 @@ export default function Contacts() {
         </DialogContent>
       </Dialog>
     </div>
-  )
-}
+  );
+} 

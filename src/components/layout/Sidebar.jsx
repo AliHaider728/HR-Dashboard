@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 import { Badge } from "../ui/badge";
 import { cn } from "../../lib/utils";
-import { LayoutDashboard, Users, Briefcase, DollarSign, MessageSquare, Settings, X, ChevronDown, Target, TrendingUp, BarChart3, Building2, CreditCard, Package, Globe, ShoppingCart, TimerResetIcon, Calendar, Mail, FileText, List, File, Kanban, FileSpreadsheet, Clock, Award, Shield, Lock, Bell, Palette, Code, Map, HelpCircle, UserCheck, BookOpen, Tags, MessageCircle, Activity, Share2, FileBarChart, } from "lucide-react";
+import { LayoutDashboard, Users, Briefcase, DollarSign, MessageSquare, Settings, X, ChevronDown, Target, TrendingUp, BarChart3, Building2, CreditCard, Package, Globe, ShoppingCart, TimerResetIcon, Calendar, Mail, FileText, List, File, Kanban, FileSpreadsheet, Clock, Award, Shield, Lock, Bell, Palette, Code, Map, HelpCircle, UserCheck, BookOpen, Tags, MessageCircle, Activity, Share2, FileBarChart, LockIcon, } from "lucide-react";
 const menuSections = [
   {
     sectionTitle: "MAIN MENU",
@@ -329,6 +329,7 @@ const menuSections = [
         icon: MessageSquare,
       },
       { title: "FAQ's", href: "/content/faqs", icon: HelpCircle },
+      { title: "LockScreen", href: "/LockScreen", icon: LockIcon },
     ],
   },
 ];

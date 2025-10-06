@@ -395,7 +395,7 @@ const KnowledgeBase = () => {
       <Toast message={toastMessage} type={toastType} />
       
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-orange-50/30">
-        <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto">
+        <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-full mx-auto">
           {/* Header */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div className="space-y-2">
@@ -1087,7 +1087,7 @@ const KnowledgeBase = () => {
                       <MessageCircle className="w-4 h-4 mr-2" />
                       Contact Support
                     </Button>
-                    <Button variant="outline" className="border-orange-200 text-white hover:bg-orange-600">
+                    <Button variant="outline" className="border-orange-200 text-orange-600 hover:text-white hover:bg-orange-600">
                       <Video className="w-4 h-4 mr-2" />
                       Video Tutorials
                     </Button>

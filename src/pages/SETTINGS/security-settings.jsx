@@ -247,7 +247,7 @@ const SecuritySettings = () => {
       />
       
       <div className="min-h-screen bg-gray-50 py-6 sm:py-8 font-[Inter] px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-full mx-auto">
           {/* Header */}
           <div className="mb-6 sm:mb-8">
             <div className="flex items-center space-x-2 sm:space-x-3 mb-3 sm:mb-4">

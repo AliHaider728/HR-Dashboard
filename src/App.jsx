@@ -127,8 +127,7 @@ import TaskBoard from "./pages/projects/TaskBoard.jsx";
 import NotesApp from "./pages/applications/NotesApp.jsx";
 import AnalyticsDashboard from "./pages/applications/Analytics.jsx";
 import ScheduleTiming from "./pages/HRM/ScheduleTiming.jsx";
-import LeaveManagement from "./pages/HRM/leaveRequests.jsx";
- 
+import LeaveManagement from "./pages/HRM/leaveRequests.jsx"; 
 
 function App() {
   const location = useLocation();
@@ -197,6 +196,8 @@ function App() {
                   <Route path="/DealsDasboard" element={<DealsDashboard />} />
                   <Route path="/EmployeeDashboard" element={<EmployeeDashboard />} />
                   <Route path="/LeadsDashboard" element={<LeadsDashboard />} />
+
+                  <Route path="/LockScreen" element={<LockScreen />} />
                   {/* Super Admin Dashboard */}
                   <Route path="/super-admin/companies" element={<SupersCompanies />} />
                   <Route path="/super-admin/packages" element={<Packages />} />

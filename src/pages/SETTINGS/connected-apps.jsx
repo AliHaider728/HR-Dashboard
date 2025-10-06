@@ -37,7 +37,7 @@ const ConnectedApps = () => {
       id: "slack",
       title: "Slack",
       description: "Team communication platform with channels for group discussions and direct messaging.",
-      image: "https://smarthr.co.in/demo/html/template/assets/img/apps/slack.png",
+      image: "https://cdn-icons-png.flaticon.com/128/3800/3800024.png",
       icon: MessageSquare,
       color: "text-orange-600",
       connected: () => connectedApps.slack,
@@ -46,7 +46,7 @@ const ConnectedApps = () => {
       id: "googleCalendar",
       title: "Google Calendar",
       description: "Google Calendar is a web-based scheduling tool that allows users to create, manage, and share events.",
-      image: "https://smarthr.co.in/demo/html/template/assets/img/apps/google-calendar.png",
+      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Calendar_icon_%282020%29.svg/512px-Google_Calendar_icon_%282020%29.svg.png",
       icon: Calendar,
       color: "text-red-600",
       connected: () => connectedApps.googleCalendar,
@@ -55,7 +55,7 @@ const ConnectedApps = () => {
       id: "gmail",
       title: "Gmail",
       description: "Gmail is a free email service by Google that offers robust spam protection & 15GB of storage.",
-      image: "https://smarthr.co.in/demo/html/template/assets/img/apps/gmail.png",
+      image: "https://cdn-icons-png.flaticon.com/128/16509/16509529.png",
       icon: Mail,
       color: "text-red-600",
       connected: () => connectedApps.gmail,
@@ -64,7 +64,7 @@ const ConnectedApps = () => {
       id: "github",
       title: "Github",
       description: "Github is a web-based platform for version control and collaboration, allowing developers to host & review code.",
-      image: "https://smarthr.co.in/demo/html/template/assets/img/apps/github.png",
+      image: "https://cdn-icons-png.flaticon.com/128/25/25657.png",
       icon: Code2,
       color: "text-gray-800",
       connected: () => connectedApps.github,
@@ -102,7 +102,7 @@ const ConnectedApps = () => {
       />
       
       <div className="min-h-screen bg-gray-50 py-4 sm:py-6 lg:py-8 font-[Inter] px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-full mx-auto">
           {/* Header */}
           <div className="mb-4 sm:mb-6">
             <div className="flex items-center space-x-2 mb-2 sm:mb-3">
