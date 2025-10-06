@@ -151,7 +151,7 @@ export default function Employees() {
   }).length
 
   const employeeStats = [
-    { title: "Total Employees", value: totalEmployees.toString(), change: "+19.01%", icon: Users, gradient: "from-blue-500 to-blue-600" },
+    { title: "Total Employees", value: totalEmployees.toString(), change: "+19.01%", icon: Users, gradient: "from-orange-500 to-orange-600" },
     { title: "Active", value: activeEmployees.toString(), change: "+19.01%", icon: UserCheck, gradient: "from-green-500 to-green-600" },
     { title: "Inactive", value: inactiveEmployees.toString(), change: "+19.01%", icon: UserX, gradient: "from-red-500 to-red-600" },
     { title: "New This Month", value: newThisMonth.toString(), change: "+19.01%", icon: UserPlus, gradient: "from-purple-500 to-purple-600" },
@@ -320,7 +320,7 @@ export default function Employees() {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-2">
           <div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold ">
               Employee Management
             </h1>
             <p className="text-gray-600 mt-2">Manage and monitor your workforce</p>
@@ -339,7 +339,7 @@ export default function Employees() {
               <DialogTrigger asChild>
                 <Button 
                   size="default" 
-                  className="shadow-lg bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-200"
+                  className="shadow-lg bg-gradient-to-r from-orange-600 via-orange-600 to-orange-600 hover:from-orange-700 hover:via-orange-700 hover:to-orange-700 transform hover:scale-105 transition-all duration-200"
                 >
                   <Plus className="h-4 w-4 mr-2" />
                   Add Employee
@@ -415,7 +415,7 @@ export default function Employees() {
                   <Button 
                     onClick={handleAddEmployee}
                     disabled={!formData.firstName || !formData.lastName || !formData.email}
-                    className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                    className="bg-gradient-to-r from-orange-600 to-orange-600 hover:from-orange-700 hover:to-orange-700"
                   >
                     Add Employee
                   </Button>
