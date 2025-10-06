@@ -187,7 +187,7 @@ const ProfileSettings = () => {
         }
       `}</style>
       <div className="min-h-screen bg-gray-50 py-6 font-[Inter] px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto space-y-6">
+        <div className="max-w-full mx-auto space-y-6">
           {/* Header */}
           <div className="mb-6">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-[Poppins] mb-2">

@@ -174,7 +174,7 @@ const BusinessSettings = () => {
       />
       
       <div className="min-h-screen bg-gray-50 py-4 sm:py-6 lg:py-8 font-[Inter] px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-full mx-auto">
           {/* Header */}
           <div className="mb-4 sm:mb-6">
             <div className="flex items-center space-x-2 sm:space-x-3 mb-2 sm:mb-3">

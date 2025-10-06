@@ -335,7 +335,7 @@ const ApprovalSettings = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 font-sans">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header with Random Celebrity Image */}
         <div className="mb-8">
           <div className="flex items-center space-x-3 mb-4">

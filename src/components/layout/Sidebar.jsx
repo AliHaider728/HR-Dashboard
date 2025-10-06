@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 import { Badge } from "../ui/badge";
 import { cn } from "../../lib/utils";
-import { LayoutDashboard, Users, Briefcase, DollarSign, MessageSquare, Settings, X, ChevronDown, Target, TrendingUp, BarChart3, Building2, CreditCard, Package, Globe, ShoppingCart, TimerResetIcon, Calendar, Mail, FileText, List, File, Kanban, FileSpreadsheet, Clock, Award, Shield, Lock, Bell, Palette, Code, Map, HelpCircle, UserCheck, BookOpen, Tags, MessageCircle, Activity, Share2, FileBarChart, LockIcon, } from "lucide-react";
-const menuSections = [
+import { LayoutDashboard, Users, Briefcase, DollarSign, MessageSquare, Settings, X, ChevronDown, Target, TrendingUp, BarChart3, Building2, CreditCard, Package, Globe, ShoppingCart, TimerResetIcon, Calendar, Mail, FileText, List, File, Kanban, FileSpreadsheet, Clock, Award, Shield, Lock, Bell, Palette, Code, Map, HelpCircle, UserCheck, BookOpen, Tags, MessageCircle, Activity, Share2, FileBarChart, LockIcon } from "lucide-react";
+
+ const menuSections = [
   {
     sectionTitle: "MAIN MENU",
     items: [
@@ -333,15 +334,23 @@ const menuSections = [
     ],
   },
 ];
-
-export default function Sidebar({
-  open,
-  collapsed,
-  onClose,
-  onToggleCollapse,
-}) {
+export default function Sidebar({ open, collapsed, onClose, onToggleCollapse }) {
   const location = useLocation();
-  const [expandedItems, setExpandedItems] = React.useState(new Set());
+  const [expandedItems, setExpandedItems] = useState(new Set());
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Auto-expand menus with active children
+  useEffect(() => {
+    const newExpanded = new Set();
+    menuSections.forEach((section) => {
+      section.items.forEach((item) => {
+        if (item.items && hasActiveChild(item.items)) {
+          newExpanded.add(item.title);
+        }
+      });
+    });
+    setExpandedItems(newExpanded);
+  }, [location.pathname]);
 
   const toggleExpanded = (title) => {
     setExpandedItems((prev) => {
@@ -356,19 +365,13 @@ export default function Sidebar({
   };
 
   const isActive = (href) => {
-    return (
-      location.pathname === href || location.pathname.startsWith(href + "/")
-    );
+    return location.pathname === href || location.pathname.startsWith(href + "/");
   };
 
   const hasActiveChild = (items) => {
     return items?.some((item) => {
-      if (item.href) {
-        return isActive(item.href);
-      }
-      if (item.items) {
-        return hasActiveChild(item.items);
-      }
+      if (item.href) return isActive(item.href);
+      if (item.items) return hasActiveChild(item.items);
       return false;
     });
   };
@@ -382,7 +385,7 @@ export default function Sidebar({
             variant={isActive(subItem.href) ? "secondary" : "ghost"}
             size="sm"
             className={cn(
-              "w-full justify-start gap-2 h-9 font-normal text-sm rounded-md",
+              "w-full justify-start gap-2 h-9 font-normal text-sm rounded-md transition-colors duration-200",
               level > 0 && "ml-4",
               isActive(subItem.href) && "bg-primary/10 text-primary font-medium"
             )}
@@ -414,7 +417,7 @@ export default function Sidebar({
             variant={hasActiveNestedChild ? "secondary" : "ghost"}
             size="sm"
             className={cn(
-              "w-full justify-start gap-2 h-9 font-normal text-sm rounded-md",
+              "w-full justify-start gap-2 h-9 font-normal text-sm rounded-md transition-colors duration-200",
               level > 0 && "ml-4",
               hasActiveNestedChild && "bg-primary/10 text-primary"
             )}
@@ -429,12 +432,14 @@ export default function Sidebar({
               )}
             />
           </Button>
-
-          {isSubExpanded && (
-            <div className="ml-3 border-l border-border pl-3 space-y-1">
-              {renderSubItems(subItem.items, level + 1, isMobile)}
-            </div>
-          )}
+          <div
+            className={cn(
+              "ml-3 border-l border-border pl-3 space-y-1 transition-all duration-300",
+              isSubExpanded ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+            )}
+          >
+            {renderSubItems(subItem.items, level + 1, isMobile)}
+          </div>
         </div>
       );
     });
@@ -445,27 +450,30 @@ export default function Sidebar({
       {/* Desktop Sidebar */}
       <div
         className={cn(
-          "fixed left-0 top-0 z-50 h-full bg-sidebar border-r border-sidebar-border transition-all duration-300",
-          collapsed ? "w-16" : "w-[270px]",
+          "fixed left-0 top-0 z-50 h-full bg-sidebar border-r border-sidebar-border transition-all duration-300 ease-in-out",
+          collapsed && !isHovered ? "w-16" : "w-[270px]",
           "hidden lg:block"
         )}
+        onMouseEnter={() => collapsed && setIsHovered(true)}
+        onMouseLeave={() => collapsed && setIsHovered(false)}
       >
         <div className="flex h-16 items-center border-b border-sidebar-border px-4">
-          {!collapsed && (
-            <Link to="/" className="flex items-center gap-2">
-              <img
-                src="https://smarthr.co.in/demo/html/template/assets/img/logo.svg"
-                alt="SmartHR"
-                className="h-8 w-auto"
-              />
-            </Link>
-          )}
-          {collapsed && (
+          <Link to="/" className="flex items-center gap-2">
             <img
               src="https://smarthr.co.in/demo/html/template/assets/img/logo.svg"
               alt="SmartHR"
-              className="h-8 w-8 mx-auto"
+              className={cn("h-8 w-auto transition-all duration-300", collapsed && !isHovered && "h-8 w-8 mx-auto")}
             />
+          </Link>
+          {(!collapsed || isHovered) && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onToggleCollapse}
+              className="ml-auto h-9 w-9"
+            >
+              <X className="h-5 w-5" />
+            </Button>
           )}
         </div>
 
@@ -473,7 +481,7 @@ export default function Sidebar({
           <nav className="space-y-6">
             {menuSections.map((section, sectionIndex) => (
               <div key={sectionIndex} className="space-y-3">
-                {!collapsed && (
+                {(!collapsed || isHovered) && (
                   <div className="px-2">
                     <h3 className="text-xs font-semibold text-muted-foreground tracking-wider uppercase">
                       {section.sectionTitle}
@@ -485,9 +493,7 @@ export default function Sidebar({
                     const Icon = item.icon;
                     const isExpanded = expandedItems.has(item.title);
                     const hasChildren = item.items && item.items.length > 0;
-                    const isItemActive = hasChildren
-                      ? hasActiveChild(item.items)
-                      : isActive(item.href);
+                    const isItemActive = hasChildren ? hasActiveChild(item.items) : isActive(item.href);
 
                     if (!hasChildren) {
                       return (
@@ -495,18 +501,15 @@ export default function Sidebar({
                           key={item.title}
                           variant={isItemActive ? "secondary" : "ghost"}
                           className={cn(
-                            "w-full justify-start gap-3 h-10 font-medium text-sm rounded-lg",
-                            collapsed && "px-2 justify-center",
-                            isItemActive &&
-                              "bg-primary/10 text-primary border-r-2 border-primary"
+                            "w-full justify-start gap-3 h-10 font-medium text-sm rounded-lg transition-colors duration-200",
+                            collapsed && !isHovered && "px-2 justify-center",
+                            isItemActive && "bg-primary/10 text-primary border-r-2 border-primary"
                           )}
                           asChild
                         >
                           <Link to={item.href}>
                             <Icon className="h-5 w-5 shrink-0" />
-                            {!collapsed && (
-                              <span className="truncate">{item.title}</span>
-                            )}
+                            {(!collapsed || isHovered) && <span className="truncate">{item.title}</span>}
                           </Link>
                         </Button>
                       );
@@ -517,20 +520,16 @@ export default function Sidebar({
                         <Button
                           variant={isItemActive ? "secondary" : "ghost"}
                           className={cn(
-                            "w-full justify-start gap-3 h-10 font-medium text-sm rounded-lg",
-                            collapsed && "px-2 justify-center",
+                            "w-full justify-start gap-3 h-10 font-medium text-sm rounded-lg transition-colors duration-200",
+                            collapsed && !isHovered && "px-2 justify-center",
                             isItemActive && "bg-primary/10 text-primary"
                           )}
-                          onClick={() =>
-                            !collapsed && toggleExpanded(item.title)
-                          }
+                          onClick={() => (!collapsed || isHovered) && toggleExpanded(item.title)}
                         >
                           <Icon className="h-5 w-5 shrink-0" />
-                          {!collapsed && (
+                          {(!collapsed || isHovered) && (
                             <>
-                              <span className="flex-1 text-left truncate">
-                                {item.title}
-                              </span>
+                              <span className="flex-1 text-left truncate">{item.title}</span>
                               {hasChildren && (
                                 <ChevronDown
                                   className={cn(
@@ -542,9 +541,8 @@ export default function Sidebar({
                             </>
                           )}
                         </Button>
-
-                        {!collapsed && hasChildren && isExpanded && (
-                          <div className="ml-3 border-l border-border pl-3 space-y-1">
+                        {(!collapsed || isHovered) && hasChildren && isExpanded && (
+                          <div className="ml-3 border-l border-border pl-3 space-y-1 transition-all duration-300">
                             {renderSubItems(item.items)}
                           </div>
                         )}
@@ -552,7 +550,7 @@ export default function Sidebar({
                     );
                   })}
                 </div>
-                {!collapsed && sectionIndex < menuSections.length - 1 && (
+                {(!collapsed || isHovered) && sectionIndex < menuSections.length - 1 && (
                   <div className="border-t border-border/50 pt-1" />
                 )}
               </div>
@@ -564,7 +562,7 @@ export default function Sidebar({
       {/* Mobile Sidebar */}
       <div
         className={cn(
-          "fixed left-0 top-0 z-50 h-full w-72 bg-sidebar border-r border-sidebar-border transition-transform duration-300 lg:hidden",
+          "fixed left-0 top-0 z-50 h-full w-72 bg-sidebar border-r border-sidebar-border transition-transform duration-300 ease-in-out lg:hidden",
           open ? "translate-x-0" : "-translate-x-full"
         )}
       >
@@ -600,9 +598,7 @@ export default function Sidebar({
                     const Icon = item.icon;
                     const isExpanded = expandedItems.has(item.title);
                     const hasChildren = item.items && item.items.length > 0;
-                    const isItemActive = hasChildren
-                      ? hasActiveChild(item.items)
-                      : isActive(item.href);
+                    const isItemActive = hasChildren ? hasActiveChild(item.items) : isActive(item.href);
 
                     if (!hasChildren) {
                       return (
@@ -610,9 +606,8 @@ export default function Sidebar({
                           key={item.title}
                           variant={isItemActive ? "secondary" : "ghost"}
                           className={cn(
-                            "w-full justify-start gap-3 h-10 font-medium text-sm rounded-lg",
-                            isItemActive &&
-                              "bg-primary/10 text-primary border-r-2 border-primary"
+                            "w-full justify-start gap-3 h-10 font-medium text-sm rounded-lg transition-colors duration-200",
+                            isItemActive && "bg-primary/10 text-primary border-r-2 border-primary"
                           )}
                           asChild
                           onClick={onClose}
@@ -630,15 +625,13 @@ export default function Sidebar({
                         <Button
                           variant={isItemActive ? "secondary" : "ghost"}
                           className={cn(
-                            "w-full justify-start gap-3 h-10 font-medium text-sm rounded-lg",
+                            "w-full justify-start gap-3 h-10 font-medium text-sm rounded-lg transition-colors duration-200",
                             isItemActive && "bg-primary/10 text-primary"
                           )}
                           onClick={() => toggleExpanded(item.title)}
                         >
                           <Icon className="h-5 w-5 shrink-0" />
-                          <span className="flex-1 text-left truncate">
-                            {item.title}
-                          </span>
+                          <span className="flex-1 text-left truncate">{item.title}</span>
                           {hasChildren && (
                             <ChevronDown
                               className={cn(
@@ -648,9 +641,8 @@ export default function Sidebar({
                             />
                           )}
                         </Button>
-
                         {hasChildren && isExpanded && (
-                          <div className="ml-3 border-l border-border pl-3 space-y-1">
+                          <div className="ml-3 border-l border-border pl-3 space-y-1 transition-all duration-300">
                             {renderSubItems(item.items, 0, true)}
                           </div>
                         )}
